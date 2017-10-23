@@ -4,8 +4,8 @@ import cn.com.fri.axy.common.util.DateUtil;
 import cn.com.fri.axy.common.util.SysLogger;
 import cn.com.fri.axy.sip.register.entity.Registration;
 import cn.com.fri.axy.sip.register.entity.RegistrationService;
-import commonj.timers.Timer;
-import commonj.timers.TimerListener;
+import com.git.wuqf.commonj.timers.Timer;
+import com.git.wuqf.commonj.timers.TimerListener;
 
 
 public class RegistrationTimerListener

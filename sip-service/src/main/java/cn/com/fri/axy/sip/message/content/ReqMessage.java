@@ -7,8 +7,8 @@ import cn.com.fri.axy.sip.listener.SIPTimerService;
 import cn.com.fri.axy.sip.message.entity.ResendInterface;
 import cn.com.fri.axy.sip.message.session.AppMessageManager;
 import cn.com.fri.axy.sip.util.ServletContextHelper;
-import commonj.timers.Timer;
-import commonj.timers.TimerListener;
+import com.git.wuqf.commonj.timers.Timer;
+import com.git.wuqf.commonj.timers.TimerListener;
 
 import java.util.Observer;
 

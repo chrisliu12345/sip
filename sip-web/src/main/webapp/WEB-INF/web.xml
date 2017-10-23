@@ -1,7 +1,31 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.4"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+    <!-- Define the com.git.wuqf.pushlet servlet -->
+    <servlet>
+        <servlet-name>com.git.wuqf.pushlet</servlet-name>
+        <servlet-class>com.git.wuqf.pushlet.servlet.Pushlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>ajax</servlet-name>
+        <servlet-class>cn.com.fri.axy.sip.interfaces.HttpAccessServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- The com.git.wuqf.pushlet -->
+    <servlet-mapping>
+        <servlet-name>com.git.wuqf.pushlet</servlet-name>
+        <url-pattern>/com.git.wuqf.pushlet.srv</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ajax</servlet-name>
+        <url-pattern>/ajax</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

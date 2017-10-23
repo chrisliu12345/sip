@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>视频播放</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+	<link rel="shortcut icon" type="image/ico" href="images/logo.ico" />
+  	<link href="../lib/jquery.msgbox.css" rel="stylesheet" type="text/css" />
+  	
+  	<script type="text/javascript" src="../lib/jquery-1.4.4.js"></script>
+  	<script type="text/javascript" src="../lib/js-com.git.wuqf.pushlet-client.js"></script>
+    <script type="text/javascript" src="../assets/api.js"></script>
+  	<script type="text/javascript" src="../lib/jquery.dragndrop.js"></script>
+	<script type="text/javascript" src="../lib/jquery.msgbox.js"></script>
+	<script type="text/javascript" src="../main.js"></script>
+	
+   </head>
+   
+  <body OnLoad="javascript:init();">
+    
+    <object classid="CLSID:76A64158-CB41-11D1-8B02-00600806D9B6" id="locator" style="display:none;visibility:hidden"></object>
+	<object classid="CLSID:75718C9A-F029-11d1-A1AC-00C04FB6C223" id="foo" style="display:none;visibility:hidden"></object>
+    
+	<hr>
+	<OBJECT ID="vlcplayer" CLASSID="CLSID:E6963FEA-95F6-4AA7-8C2C-44D5FB979B9A" width="704" height="576" align="500">
+  	</OBJECT>
+	<hr>
+	 
+	<!-- Embed com.git.wuqf.pushlet in page -->
+	<script type="text/javascript">p_embed()</script>
+	
+	<script language="javascript">
+  		
+		function init() {
+			
+			//单独链接打开视频播放页面时，初始化页面参数，适用于IE浏览器
+			window.resizeBy(730 - document.body.clientWidth, 640 - document.body.clientHeight);
+			
+			if(vlcplayer.url==undefined)
+			{
+				$.msgbox("您的浏览器没有安装系统所必须的ActiveX控件,<a href='../player/PMPPlayerX_setup.exe' target='_blank'>点击下载</a>,安装完毕后请重新启动IE浏览器!");
+			}
+			
+			//pushlet添加
+			initDHTML();
+			p_join_listen('/comet/play_notify');
+			
+		}
+		
+		//pushlet添加
+		// onData method called by com.git.wuqf.pushlet frame
+		function onData(pushletEvent) {
+			var play_notify_action = pushletEvent.get('play_notify_action');
+			var play_notify_ip = pushletEvent.get('play_notify_ip');
+			var play_notify_port = pushletEvent.get('play_notify_port');
+			//alert(play_notify_action);
+			//alert(play_notify_ip);
+			//alert(play_notify_port);
+			if(play_notify_ip == sIPAddr)
+			{
+				var url = "udp://@" + play_notify_ip + ":" + play_notify_port;
+				var winID = port_map.get(play_notify_port.toString());
+				vlcplayer.windowID = winID;
+				//alert(winID);
+				if(play_notify_action == "start")
+				{
+					vlcplayer.url = url;
+				}
+				else if(play_notify_action == "stop")
+				{
+					vlcplayer.StopStream(vlcplayer.windowID);
+				}
+			}
+			else
+			{
+				
+			}
+		}
+	</script>
+	
+	<script language="javascript">
+		
+		//初始化端口集合
+		var port_map = new Map();
+		port_map.put("6000","1");
+		port_map.put("6010","2");
+		port_map.put("6020","3");
+		port_map.put("6030","4");
+			
+		var sIPAddr="";
+		var service = locator.ConnectServer();
+		service.Security_.ImpersonationLevel=3;
+		service.InstancesOfAsync(foo, 'Win32_NetworkAdapterConfiguration');
+	</script>
+
+	<script FOR="foo" EVENT="OnObjectReady(objObject,objAsyncContext)" LANGUAGE="JScript">
+        if(objObject.IPEnabled != null && objObject.IPEnabled != "undefined" && objObject.IPEnabled == true){
+			if(objObject.IPEnabled && objObject.IPAddress(0) !=null && objObject.IPAddress(0) != "undefined")
+			{
+				sIPAddr = objObject.IPAddress(0);
+			}
+         }
+         
+         
+	</script>
+	
+	<script FOR="foo" EVENT="OnCompleted(hResult,pErrorObject, pAsyncContext)" LANGUAGE="JScript">
+		//alert(sIPAddr);
+         //设置4个窗口的URL
+         /*var url = "udp://@" + sIPAddr + ":" + 6000;
+         vlcplayer.windowID = 1;
+         vlcplayer.url = url;
+         url = "udp://@" + sIPAddr + ":" + 6010;
+         vlcplayer.windowID = 2;
+         vlcplayer.url = url;
+         url = "udp://@" + sIPAddr + ":" + 6020;
+         vlcplayer.windowID = 3;
+         vlcplayer.url = url;
+         url = "udp://@" + sIPAddr + ":" + 6030;
+         vlcplayer.windowID = 4;
+         vlcplayer.url = url;*/
+	</script>
+	
+	
+  </body>
+</html>

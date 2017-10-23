@@ -1,9 +1,9 @@
 package cn.com.fri.axy.sip.standarddebug.jsr289.timer;
 
 import cn.com.fri.axy.common.util.SysLogger;
-import commonj.timers.Timer;
-import commonj.timers.TimerListener;
-import commonj.timers.TimerManager;
+import com.git.wuqf.commonj.timers.Timer;
+import com.git.wuqf.commonj.timers.TimerListener;
+import com.git.wuqf.commonj.timers.TimerManager;
 import org.quartz.JobDataMap;
 import org.quartz.Scheduler;
 import org.quartz.impl.StdSchedulerFactory;

@@ -1,9 +1,9 @@
 package cn.com.fri.axy.comet.pushlet.eventsource;
 
 import cn.com.fri.axy.common.util.SysLogger;
-import pushlet.core.Event;
-import pushlet.core.EventPullSource;
-import pushlet.util.Rand;
+import com.git.wuqf.pushlet.core.Event;
+import com.git.wuqf.pushlet.core.EventPullSource;
+import com.git.wuqf.pushlet.util.Rand;
 
 import java.util.Date;
 
@@ -26,7 +26,7 @@ public class SIPEventPullSource
 }
 
 
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/comet/pushlet/eventsource/SIPEventPullSource.class
+/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/comet/com.git.wuqf.pushlet/eventsource/SIPEventPullSource.class
  * Java compiler version: 5 (49.0)
  * JD-Core Version:       0.7.1
  */

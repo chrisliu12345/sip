@@ -2,7 +2,7 @@ package cn.com.fri.axy.sip.listener;
 
 import cn.com.fri.axy.common.util.SysLogger;
 import cn.com.fri.axy.sip.standarddebug.jsr289.timer.QuarzTimerManager;
-import commonj.timers.TimerManager;
+import com.git.wuqf.commonj.timers.TimerManager;
 
 
 public class SIPTimerService {

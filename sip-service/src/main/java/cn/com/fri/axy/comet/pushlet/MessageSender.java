@@ -1,8 +1,8 @@
 package cn.com.fri.axy.comet.pushlet;
 
 import cn.com.fri.axy.common.util.SysLogger;
-import pushlet.core.Dispatcher;
-import pushlet.core.Event;
+import com.git.wuqf.pushlet.core.Dispatcher;
+import com.git.wuqf.pushlet.core.Event;
 
 public class MessageSender {
     public static final String start = "start";

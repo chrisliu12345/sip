@@ -1,12 +1,8 @@
 package cn.com.fri.axy.sip.register.entity;
 
-import cn.com.fri.axy.common.util.SysLogger;
-import cn.com.fri.axy.sip.location.LocationService;
 import cn.com.fri.axy.sip.register.security.authorizationheader.AuthorizationHeader;
-import cn.com.fri.axy.sip.register.security.authorizationheader.CapabilityAuthorizationHeader;
-import cn.com.fri.axy.sip.register.security.authorizationheader.DigestAuthorizationHeader;
 import cn.com.fri.axy.sip.util.ServletContextHelper;
-import commonj.timers.Timer;
+import com.git.wuqf.commonj.timers.Timer;
 
 import javax.servlet.sip.Address;
 import javax.servlet.sip.SipFactory;

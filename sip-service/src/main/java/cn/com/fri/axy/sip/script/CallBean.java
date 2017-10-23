@@ -3,8 +3,8 @@ package cn.com.fri.axy.sip.script;
 import cn.com.fri.axy.common.util.SysLogger;
 import cn.com.fri.axy.sip.listener.SIPTimerService;
 import cn.com.fri.axy.sip.script.invite.ScriptInviteManager;
-import commonj.timers.Timer;
-import commonj.timers.TimerListener;
+import com.git.wuqf.commonj.timers.Timer;
+import com.git.wuqf.commonj.timers.TimerListener;
 
 
 public abstract class CallBean

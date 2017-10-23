@@ -1,7 +1,7 @@
 package cn.com.fri.axy.sip.listener;
 
-import commonj.timers.Timer;
-import commonj.timers.TimerListener;
+import com.git.wuqf.commonj.timers.Timer;
+import com.git.wuqf.commonj.timers.TimerListener;
 
 import javax.servlet.sip.SipSession;
 
