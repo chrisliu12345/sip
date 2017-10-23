@@ -1,5 +1,6 @@
 package cn.com.fri.axy.sip.util;
 
+import java.io.InputStream;
 import java.util.Properties;
 
 public class Config {
@@ -8,12 +9,11 @@ public class Config {
     private static Properties b = new Properties();
 
     private Config() {
-        this =
-                getClass().getResourceAsStream("/sip_config.properties");
+       InputStream ip=getClass().getResourceAsStream("/sip_config.properties");
 
 
         try {
-            b.load(this);
+            b.load(ip);
             return;
 
         } catch (Exception localException) {
@@ -40,8 +40,3 @@ public class Config {
     }
 }
 
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/util/Config.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

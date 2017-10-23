@@ -54,7 +54,7 @@ public abstract class AbstractEvent
 
 
     public SipApplicationSession getApplicationSession() {
-        if ((this = getSession()) == null) return null;
+        if (( getSession()) == null) return null;
         return getApplicationSession();
     }
 

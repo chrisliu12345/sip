@@ -83,13 +83,11 @@ public class DecoderBasicParamConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>DeviceConfig</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><BasicParam><Name>设备名称</Name><DeviceID>编码器ID </DeviceID><Description>设备描述</Description><Outputs>接入摄像机路数</Outputs></Basicparam></Response>";
-
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>DeviceConfig</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><BasicParam><Name>设备名称</Name><DeviceID>编码器ID </DeviceID><Description>设备描述</Description><Outputs>接入摄像机路数</Outputs></Basicparam></Response>";
 
         DecoderBasicParamConfigDownloadResponse localDecoderBasicParamConfigDownloadResponse;
 
-
-        (localDecoderBasicParamConfigDownloadResponse = new DecoderBasicParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localDecoderBasicParamConfigDownloadResponse = new DecoderBasicParamConfigDownloadResponse("")).setXmlContent(s);
         localDecoderBasicParamConfigDownloadResponse.genParameters();
         System.out.println(localDecoderBasicParamConfigDownloadResponse.toString());
     }

@@ -16,13 +16,12 @@ public class SIPEventPullSource
 
 
     protected Event pullEvent() {
-        this = Event.createDataEvent("/comet/sip");
-
+        Event event= Event.createDataEvent("/comet/sip");
         String str;
         SysLogger.info(str = "test" + new Date());
-        setField("test", str);
+        event.setField("test", str);
 
-        return this;
+        return event;
     }
 }
 

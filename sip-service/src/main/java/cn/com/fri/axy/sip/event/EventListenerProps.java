@@ -27,7 +27,7 @@ public class EventListenerProps
 
 
     public boolean equals(Object paramObject) {
-        if (this == paramObject) {
+        if (this== paramObject) {
             return true;
         }
         if (paramObject == null) {

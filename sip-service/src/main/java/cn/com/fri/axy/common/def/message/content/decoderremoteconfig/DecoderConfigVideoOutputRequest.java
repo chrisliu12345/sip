@@ -54,7 +54,7 @@ public class DecoderConfigVideoOutputRequest
 
         localStringBuffer.append("<OutputParam>\n");
         for (Iterator localIterator = this.b.iterator(); localIterator.hasNext(); ) {
-            localObject = (OutputParamBean) localIterator.next();
+            OutputParamBean localObject = (OutputParamBean) localIterator.next();
             localStringBuffer.append("<Item>\n");
             localStringBuffer.append("<Channel>" + ((OutputParamBean) localObject).getChannel() + "</Channel>\n");
             localStringBuffer.append("<Name>" + ((OutputParamBean) localObject).getName() + "</Name>\n");

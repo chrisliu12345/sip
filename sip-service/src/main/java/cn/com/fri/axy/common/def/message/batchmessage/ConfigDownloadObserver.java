@@ -33,18 +33,18 @@ public class ConfigDownloadObserver
 //            }
 
 //
-//            if (!(this = new File((String) paramObject, this)).exists()) {
+//            if (!( new File((String) paramObject, this)).exists()) {
 //                try {
 //                    createNewFile();
 //
 //                } catch (IOException localIOException1) {
-//                    SysLogger.printStackTrace(this = localIOException1);
+//                    SysLogger.printStackTrace( localIOException1);
 //                    return;
 //                }
 //            }
 //
 //            try {
-//                this = new FileWriter(this, true);
+//                 new FileWriter(this, true);
 //                paramObject = DateUtil.getInstance().TGS_DateToString(new Date());
 //                paramObservable = "\n" + (String) paramObject + "\n" + paramObservable.toString();
 //                write(paramObservable);
@@ -53,7 +53,7 @@ public class ConfigDownloadObserver
 //                return;
 //
 //            } catch (IOException localIOException2) {
-//                SysLogger.printStackTrace(this = localIOException2);
+//                SysLogger.printStackTrace( localIOException2);
 //                return;
 //            }
         }

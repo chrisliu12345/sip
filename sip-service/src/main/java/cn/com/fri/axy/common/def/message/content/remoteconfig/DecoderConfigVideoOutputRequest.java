@@ -30,31 +30,32 @@ public class DecoderConfigVideoOutputRequest
 
 
     public void genXmlContent() {
-        (localObject = new StringBuffer()).append("<?xml version=\"1.0\"?>\n");
-        ((StringBuffer) localObject).append("<Query>\n");
+        StringBuffer sb = new StringBuffer();
+                sb.append("<?xml version=\"1.0\"?>\n");
+        sb.append("<Query>\n");
 
-        ((StringBuffer) localObject).append("<CmdType>" + getCmdType() + "</CmdType>\n");
+        sb.append("<CmdType>" + getCmdType() + "</CmdType>\n");
 
-        ((StringBuffer) localObject).append("<SN>" + getSn() + "</SN>\n");
+        sb.append("<SN>" + getSn() + "</SN>\n");
 
-        ((StringBuffer) localObject).append("<DeviceID>" + getDecoderID() + "</DeviceID>\n");
+        sb.append("<DeviceID>" + getDecoderID() + "</DeviceID>\n");
 
 
-        ((StringBuffer) localObject).append("<CameraParam>\n");
-        ((StringBuffer) localObject).append("<Item>\n");
+        sb.append("<CameraParam>\n");
+        sb.append("<Item>\n");
 
-        ((StringBuffer) localObject).append("<Channel>" + (getChannel() != null ? getChannel() : "") + "</Channel>\n");
+        sb.append("<Channel>" + (getChannel() != null ? getChannel() : "") + "</Channel>\n");
 
-        ((StringBuffer) localObject).append("<Name>" + (getOutdeviceName() != null ? getOutdeviceName() : "") + "</Name>\n");
+        sb.append("<Name>" + (getOutdeviceName() != null ? getOutdeviceName() : "") + "</Name>\n");
 
-        ((StringBuffer) localObject).append("<DeviceID >" + (getOutdeviceID() != null ? getOutdeviceID() : "") + "</DeviceID >\n");
+        sb.append("<DeviceID >" + (getOutdeviceID() != null ? getOutdeviceID() : "") + "</DeviceID >\n");
 
-        ((StringBuffer) localObject).append("<Description>" + (getDescription() != null ? getDescription() : "") + "</Description>\n");
-        ((StringBuffer) localObject).append("</Item>\n");
-        ((StringBuffer) localObject).append("</CameraParam>\n");
-        ((StringBuffer) localObject).append("</Query>\n");
+        sb.append("<Description>" + (getDescription() != null ? getDescription() : "") + "</Description>\n");
+        sb.append("</Item>\n");
+        sb.append("</CameraParam>\n");
+        sb.append("</Query>\n");
 
-        Object localObject = ((StringBuffer) localObject).toString();
+        Object localObject = sb.toString();
         try {
             localObject = new String(((String) localObject).getBytes(), "gb2312");
 

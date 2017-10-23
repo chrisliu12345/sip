@@ -121,13 +121,13 @@ public class DecoderNetworkParamConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><NetworkParam><IP>IP地址</IP><Port>端口</Port><Mask>子网掩码</Mask><Gateway>网关</Gateway><ProxyID>SIP服务器ID</ProxyID><ProxyIP>SIP服务器的IP</ProxyIP><ProxyPort> SIP服务器的端口</ProxyPort><ProxyName>SIP服务器域名</ProxyName></NetworkParam></Response>";
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><NetworkParam><IP>IP地址</IP><Port>端口</Port><Mask>子网掩码</Mask><Gateway>网关</Gateway><ProxyID>SIP服务器ID</ProxyID><ProxyIP>SIP服务器的IP</ProxyIP><ProxyPort> SIP服务器的端口</ProxyPort><ProxyName>SIP服务器域名</ProxyName></NetworkParam></Response>";
 
 
         DecoderNetworkParamConfigDownloadResponse localDecoderNetworkParamConfigDownloadResponse;
 
 
-        (localDecoderNetworkParamConfigDownloadResponse = new DecoderNetworkParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localDecoderNetworkParamConfigDownloadResponse = new DecoderNetworkParamConfigDownloadResponse("")).setXmlContent(s);
         localDecoderNetworkParamConfigDownloadResponse.genParameters();
         System.out.println(localDecoderNetworkParamConfigDownloadResponse.toString());
     }

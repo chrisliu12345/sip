@@ -43,7 +43,7 @@ public abstract class ReqMessage
             this.a.notifyObservers(paramNotifyObject);
             return;
         } catch (Exception localException) {
-            SysLogger.printStackTrace(this = localException);
+            SysLogger.printStackTrace(localException);
         }
     }
 
@@ -66,7 +66,7 @@ public abstract class ReqMessage
             this.b.resendMessage(this);
             return;
         } catch (Exception localException) {
-            SysLogger.printStackTrace(this = localException);
+            SysLogger.printStackTrace(localException);
         }
     }
 
@@ -90,10 +90,10 @@ public abstract class ReqMessage
 
         AppMessageManager.getInstance().reqMessageTimeout(getSn());
 
-        (
-                paramTimer = new NotifyObject()).setCode(213);
-        paramTimer.setRequset(this);
-        fire(paramTimer);
+        NotifyObject no = new NotifyObject();
+        no.setCode(213);
+        no.setRequset(this);
+        fire(no);
     }
 
 
@@ -105,9 +105,3 @@ public abstract class ReqMessage
         return "req message sn is:" + getSn();
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/message/content/ReqMessage.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

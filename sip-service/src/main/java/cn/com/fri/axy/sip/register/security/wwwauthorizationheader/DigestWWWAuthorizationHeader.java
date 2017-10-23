@@ -15,9 +15,9 @@ public class DigestWWWAuthorizationHeader
 
     public String toString() {
         String str = ((SipURI) LocationService.getInstance().getLocalAddress().getURI()).getHost();
-        this = getSeed();
+         getSeed();
 
-        return this = "Digest realm=\"" + str + "\",nonce=\"" + this + "\"";
+        return  "Digest realm=\"" + str + "\",nonce=\"" + this + "\"";
     }
 
     public static void main(String[] paramArrayOfString) {

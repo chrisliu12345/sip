@@ -114,13 +114,13 @@ public class CoderBasicParamConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>DeviceConfig</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><BasicParam><Name>设备名称</Name><DeviceID>编码器ID </DeviceID><Description>设备描述</Description><Inputs>接入摄像机路数</Inputs><Alarms>接入报警路数</Alarms></Basicparam></Response>";
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>DeviceConfig</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><BasicParam><Name>设备名称</Name><DeviceID>编码器ID </DeviceID><Description>设备描述</Description><Inputs>接入摄像机路数</Inputs><Alarms>接入报警路数</Alarms></Basicparam></Response>";
 
 
         CoderBasicParamConfigDownloadResponse localCoderBasicParamConfigDownloadResponse;
 
 
-        (localCoderBasicParamConfigDownloadResponse = new CoderBasicParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localCoderBasicParamConfigDownloadResponse = new CoderBasicParamConfigDownloadResponse("")).setXmlContent(s);
         localCoderBasicParamConfigDownloadResponse.genParameters();
         System.out.println(localCoderBasicParamConfigDownloadResponse.toString());
     }

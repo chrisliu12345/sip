@@ -211,13 +211,13 @@ public class DecoderSecurityParamConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><SecurityParam><Expiration>1</Expiration><Scert>2</Scert><UserName>3</UserName><Password>4</Password><SIPSec>5</SIPSec><MediaSec>6</MediaSec><CredibleMedia><Digest>7</Digest><Frame>8</Frame><AsyEncryption>9</AsyEncryption><SignData>0</SignData></CredibleMedia><EncryptionMedia><AlgorithmPattern>11</AlgorithmPattern><Length>111</Length><KeyAlgorithmPattern>11</KeyAlgorithmPattern><Key>1111</Key></EncryptionMedia></SecurityParam></Response>";
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><SecurityParam><Expiration>1</Expiration><Scert>2</Scert><UserName>3</UserName><Password>4</Password><SIPSec>5</SIPSec><MediaSec>6</MediaSec><CredibleMedia><Digest>7</Digest><Frame>8</Frame><AsyEncryption>9</AsyEncryption><SignData>0</SignData></CredibleMedia><EncryptionMedia><AlgorithmPattern>11</AlgorithmPattern><Length>111</Length><KeyAlgorithmPattern>11</KeyAlgorithmPattern><Key>1111</Key></EncryptionMedia></SecurityParam></Response>";
 
 
         DecoderSecurityParamConfigDownloadResponse localDecoderSecurityParamConfigDownloadResponse;
 
 
-        (localDecoderSecurityParamConfigDownloadResponse = new DecoderSecurityParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localDecoderSecurityParamConfigDownloadResponse = new DecoderSecurityParamConfigDownloadResponse("")).setXmlContent(s);
         localDecoderSecurityParamConfigDownloadResponse.genParameters();
         System.out.println(localDecoderSecurityParamConfigDownloadResponse.toString());
     }

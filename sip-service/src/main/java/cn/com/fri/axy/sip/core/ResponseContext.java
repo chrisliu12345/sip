@@ -33,22 +33,24 @@ public class ResponseContext
 
 
     public boolean isProvisionalResponse() {
-        return (this = this.response.getStatus()) < 200;
+        return ( this.response.getStatus()) < 200;
     }
 
 
     public boolean isRedirectResponse() {
-        return ((this = this.response.getStatus()) >= 300) && (this < 400);
+        int status=this.response.getStatus();
+        return (status >= 300) && (status < 400);
     }
 
 
     public boolean isErrorResponse() {
-        return (this = this.response.getStatus()) >= 400;
+        return ( this.response.getStatus()) >= 400;
     }
 
 
     public boolean isSuccessResponse() {
-        return ((this = this.response.getStatus()) >= 200) && (this < 300);
+        int status=response.getStatus();
+        return (status>= 200) && (status < 300);
     }
 
     public URI getOrigRequestURI() {
@@ -92,9 +94,3 @@ public class ResponseContext
         throw new UnsupportedOperationException();
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/core/ResponseContext.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

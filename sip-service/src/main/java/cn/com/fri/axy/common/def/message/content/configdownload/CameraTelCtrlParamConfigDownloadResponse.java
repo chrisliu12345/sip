@@ -112,20 +112,14 @@ public class CameraTelCtrlParamConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><TelCtrlParam><Company>厂家</Company><Model>型号</Model><ControlType>控制类型</ControlType><BaudRate>波特率</BaudRate><Interval>控制信令间隔时间</Interval></TelcrtlParam></Response>";
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><TelCtrlParam><Company>厂家</Company><Model>型号</Model><ControlType>控制类型</ControlType><BaudRate>波特率</BaudRate><Interval>控制信令间隔时间</Interval></TelcrtlParam></Response>";
 
 
         CameraTelCtrlParamConfigDownloadResponse localCameraTelCtrlParamConfigDownloadResponse;
 
 
-        (localCameraTelCtrlParamConfigDownloadResponse = new CameraTelCtrlParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localCameraTelCtrlParamConfigDownloadResponse = new CameraTelCtrlParamConfigDownloadResponse("")).setXmlContent(s);
         localCameraTelCtrlParamConfigDownloadResponse.genParameters();
         System.out.println(localCameraTelCtrlParamConfigDownloadResponse.toString());
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/message/content/configdownload/CameraTelCtrlParamConfigDownloadResponse.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

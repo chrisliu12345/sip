@@ -100,7 +100,6 @@ public class RequestContext
 
 
     public boolean isDialExtension() {
-        this = this;
         return 4 <= getSipUser().length();
     }
 

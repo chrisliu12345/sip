@@ -10,7 +10,7 @@ import java.util.Observer;
 public class SimpleObserver
         implements Observer {
     public void update(Observable paramObservable, Object paramObject) {
-        if ((this = ((NotifyObject) paramObject).getResponse()) != null) {
+        if (( ((NotifyObject) paramObject).getResponse()) != null) {
             SysLogger.info(((NotifyObject) paramObject).getResponse().toString());
             return;
         }

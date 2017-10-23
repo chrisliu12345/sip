@@ -35,10 +35,10 @@ public class VideoSegmentBean {
         int k = Integer.parseInt(paramString.substring(paramString.indexOf("<day>") + "<day>".length(), paramString.indexOf("</day>")));
         int m = Integer.parseInt(paramString.substring(paramString.indexOf("<hour>") + "<hour>".length(), paramString.indexOf("</hour>")));
         int n = Integer.parseInt(paramString.substring(paramString.indexOf("<minute>") + "<minute>".length(), paramString.indexOf("</minute>")));
-        paramString = Integer.parseInt(paramString.substring(paramString.indexOf("<second>") + "<second>".length(), paramString.indexOf("</second>")));
+        int s = Integer.parseInt(paramString.substring(paramString.indexOf("<second>") + "<second>".length(), paramString.indexOf("</second>")));
 
         Calendar localCalendar;
-        (localCalendar = Calendar.getInstance()).set(i, j - 1, k, m, n, paramString);
+        (localCalendar = Calendar.getInstance()).set(i, j - 1, k, m, n, s);
         return localCalendar.getTimeInMillis();
     }
 
@@ -62,14 +62,14 @@ public class VideoSegmentBean {
     }
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<hisome><file><fid>fid</fid><index>index</index><type>type</type><starttime><year>2009</year><month>1</month><day>1</day><hour>1</hour><minute>1</minute><second>1</second></starttime><endtime><year>2009</year><month>2</month><day>1</day><hour>1</hour><minute>1</minute><second>1</second></endtime><locked>locked</locked>";
+        String s = "<hisome><file><fid>fid</fid><index>index</index><type>type</type><starttime><year>2009</year><month>1</month><day>1</day><hour>1</hour><minute>1</minute><second>1</second></starttime><endtime><year>2009</year><month>2</month><day>1</day><hour>1</hour><minute>1</minute><second>1</second></endtime><locked>locked</locked>";
 
 
-        (
-                paramArrayOfString = new VideoSegmentBean(paramArrayOfString)).parseMessageSegment();
-        System.out.println(paramArrayOfString.getType());
-        System.out.println(paramArrayOfString.getStarttime());
-        System.out.println(paramArrayOfString.getEndtime());
+        VideoSegmentBean v = new VideoSegmentBean(s);
+        v.parseMessageSegment();
+        System.out.println(v.getType());
+        System.out.println(v.getStarttime());
+        System.out.println(v.getEndtime());
     }
 }
 

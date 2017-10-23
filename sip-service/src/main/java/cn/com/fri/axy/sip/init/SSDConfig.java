@@ -19,12 +19,12 @@ public class SSDConfig {
 
     private SSDConfig() {
         try {
-            InputStream io=SysLogger.class.getResourceAsStream("/SSDConfig.properties");
+            InputStream io = SysLogger.class.getResourceAsStream("/SSDConfig.properties");
             b.load(io);
 
 
             for (Iterator localIterator = b.keySet().iterator(); localIterator.hasNext(); ) {
-                 localIterator.next();
+                localIterator.next();
 
                 SysLogger.info(this + ":\t" + b.get(this));
             }
@@ -75,8 +75,8 @@ public class SSDConfig {
         Vector v = new Vector();
 
         Object localObject;
-        String[] arrayOfString;
-        int j = (arrayOfString = localObject = (localObject = b.getProperty("sipdevice_DVR_camera_id")).split(",")).length;
+        String[] arrayOfString = b.getProperty("sipdevice_DVR_camera_id").split(",");
+        int j = arrayOfString.length;
         for (int i = 0; i < j; i++) {
             localObject = arrayOfString[i];
 
@@ -91,8 +91,8 @@ public class SSDConfig {
         Vector v = new Vector();
 
         Object localObject;
-        String[] arrayOfString;
-        int j = (arrayOfString = localObject = (localObject = b.getProperty("sipdevice_DVR_alarm_id")).split(",")).length;
+        String[] arrayOfString = b.getProperty("sipdevice_DVR_alarm_id").split(",");
+        int j = arrayOfString.length;
         for (int i = 0; i < j; i++) {
             localObject = arrayOfString[i];
 
@@ -116,8 +116,9 @@ public class SSDConfig {
         Vector v = new Vector();
 
         Object localObject;
-        String[] arrayOfString;
-        int j = (arrayOfString = localObject = (localObject = b.getProperty("sipdevice_IPC_alarm_id")).split(",")).length;
+        String[] arrayOfString = b.getProperty("sipdevice_IPC_alarm_id").split(",");
+
+        int j = arrayOfString.length;
         for (int i = 0; i < j; i++) {
             localObject = arrayOfString[i];
 
@@ -141,8 +142,8 @@ public class SSDConfig {
         Vector v = new Vector();
 
         Object localObject;
-        String[] arrayOfString;
-        int j = (arrayOfString = localObject = (localObject = b.getProperty("sipdevice_decoder_monitor_id")).split(",")).length;
+        String[] arrayOfString = b.getProperty("sipdevice_decoder_monitor_id").split(",");
+        int j = arrayOfString.length;
         for (int i = 0; i < j; i++) {
             localObject = arrayOfString[i];
 

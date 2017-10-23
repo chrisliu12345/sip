@@ -8,11 +8,10 @@ import org.quartz.JobExecutionContext;
 public class AsynServiceJob
         implements Job {
     public void execute(JobExecutionContext paramJobExecutionContext) {
-        this = (Service) paramJobExecutionContext.getMergedJobDataMap().get("Service");
+          paramJobExecutionContext.getMergedJobDataMap().get("Service");
 
         SysLogger.info("In SimpleQuartzJob - executing its JOB " + toString() + " start.");
 
-        service();
         SysLogger.info("In SimpleQuartzJob - executing its JOB " + toString() + " end.");
     }
 }

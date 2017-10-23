@@ -90,22 +90,11 @@ public class CoderTimeParamConfigDownloadResponse
     public void genXmlContent() {
     }
 
-
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><TimeParam><Date>日期</Date><Time>时间</Time><AdjustTime>校时方式</AdjustTime></TimeParam></Response>";
-
-
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><TimeParam><Date>日期</Date><Time>时间</Time><AdjustTime>校时方式</AdjustTime></TimeParam></Response>";
         CoderTimeParamConfigDownloadResponse localCoderTimeParamConfigDownloadResponse;
-
-
-        (localCoderTimeParamConfigDownloadResponse = new CoderTimeParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localCoderTimeParamConfigDownloadResponse = new CoderTimeParamConfigDownloadResponse("")).setXmlContent(s);
         localCoderTimeParamConfigDownloadResponse.genParameters();
         System.out.println(localCoderTimeParamConfigDownloadResponse.toString());
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/message/content/configdownload/CoderTimeParamConfigDownloadResponse.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

@@ -20,29 +20,27 @@ public class EventFactory {
 
 
     public static Event createEvent(SipServletRequest paramSipServletRequest) {
-        Object localObject = paramSipServletRequest.getMethod();
+        String localObject = paramSipServletRequest.getMethod();
 
         if (("INVITE".equals(localObject)) && (!paramSipServletRequest.isInitial())) {
             localObject = "REINVITE";
         }
 
 
-        return paramSipServletRequest = a(localObject = (Class) a.get(localObject), SipServletRequest.class, paramSipServletRequest);
+        return a( (Class) a.get(localObject), SipServletRequest.class, paramSipServletRequest);
     }
 
     public static Event createClientEvent(SipServletRequest paramSipServletRequest) {
-        Object localObject = paramSipServletRequest.getMethod();
+        String localObject = paramSipServletRequest.getMethod();
 
 
-        return paramSipServletRequest = a(localObject = (Class) a.get(localObject), SipServletRequest.class, paramSipServletRequest);
+        return a( (Class) a.get(localObject), SipServletRequest.class, paramSipServletRequest);
     }
 
 
     public static Event createEvent(SipServletResponse paramSipServletResponse) {
         int i;
-
-
-        Object localObject;
+        String localObject;
 
         switch (i = paramSipServletResponse.getStatus()) {
 
@@ -59,15 +57,15 @@ public class EventFactory {
                 if (HeaderUtil.containsRequire100rel(paramSipServletResponse)) {
                     localObject = "183100rel";
                 } else {
-                    localObject = String.valueOf(localObject);
+                    localObject = String.valueOf(i);
                 }
                 break;
             default:
-                if (localObject < 200) {
+                if (i < 200) {
                     localObject = "Provision";
-                } else if (localObject < 300) {
+                } else if (i < 300) {
                     localObject = "Success";
-                } else if (localObject < 400) {
+                } else if (i < 400) {
                     localObject = "Redirect";
                 } else {
                     localObject = "Error";
@@ -78,7 +76,7 @@ public class EventFactory {
         }
 
 
-        return paramSipServletResponse = a(localObject = (Class) a.get(localObject), SipServletResponse.class, paramSipServletResponse);
+        return  a( (Class) a.get(localObject), SipServletResponse.class, paramSipServletResponse);
     }
 
 
@@ -91,7 +89,7 @@ public class EventFactory {
 
 
         try {
-            localEvent = (Event) (paramClass1 = paramClass1.getConstructor(new Class[]{paramClass2})).newInstance(new Object[]{paramObject});
+            localEvent = (Event) ( paramClass1.getConstructor(new Class[]{paramClass2})).newInstance(new Object[]{paramObject});
         } catch (Exception localException) {
         }
 
@@ -150,9 +148,3 @@ public class EventFactory {
                 cn.com.fri.axy.sip.event.type.ErrorResponseEvent.class);
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/event/EventFactory.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

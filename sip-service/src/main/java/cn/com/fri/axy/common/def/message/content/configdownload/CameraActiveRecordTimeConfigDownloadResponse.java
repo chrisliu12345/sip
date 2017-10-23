@@ -103,13 +103,13 @@ public class CameraActiveRecordTimeConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><ActiveRecordTime><Day>TRUE</Day><Week>TRUE</Week><Month>TRUE</Month><SpecialDate>TRUE</SpecialDate></ActiveRecordTime></Response>";
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><ActiveRecordTime><Day>TRUE</Day><Week>TRUE</Week><Month>TRUE</Month><SpecialDate>TRUE</SpecialDate></ActiveRecordTime></Response>";
 
 
         CameraActiveRecordTimeConfigDownloadResponse localCameraActiveRecordTimeConfigDownloadResponse;
 
 
-        (localCameraActiveRecordTimeConfigDownloadResponse = new CameraActiveRecordTimeConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localCameraActiveRecordTimeConfigDownloadResponse = new CameraActiveRecordTimeConfigDownloadResponse("")).setXmlContent(s);
         localCameraActiveRecordTimeConfigDownloadResponse.genParameters();
         System.out.println(localCameraActiveRecordTimeConfigDownloadResponse.toString());
     }

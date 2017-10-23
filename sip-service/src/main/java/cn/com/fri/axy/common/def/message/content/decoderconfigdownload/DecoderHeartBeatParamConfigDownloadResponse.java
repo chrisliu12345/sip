@@ -51,13 +51,9 @@ public class DecoderHeartBeatParamConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><HeartBeatParam><Interval>心跳间隔</Interval></HeartBeatParam></Response>";
-
-
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><HeartBeatParam><Interval>心跳间隔</Interval></HeartBeatParam></Response>";
         DecoderHeartBeatParamConfigDownloadResponse localDecoderHeartBeatParamConfigDownloadResponse;
-
-
-        (localDecoderHeartBeatParamConfigDownloadResponse = new DecoderHeartBeatParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localDecoderHeartBeatParamConfigDownloadResponse = new DecoderHeartBeatParamConfigDownloadResponse("")).setXmlContent(s);
         localDecoderHeartBeatParamConfigDownloadResponse.genParameters();
         System.out.println(localDecoderHeartBeatParamConfigDownloadResponse.toString());
     }

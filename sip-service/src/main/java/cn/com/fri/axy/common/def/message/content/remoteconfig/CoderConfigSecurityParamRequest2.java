@@ -52,57 +52,58 @@ public class CoderConfigSecurityParamRequest2
 
 
     public void genXmlContent() {
-        (localObject = new StringBuffer()).append("<?xml version=\"1.0\"?>\n");
-        ((StringBuffer) localObject).append("<Query>\n");
+        StringBuffer sb = new StringBuffer();
+        sb.append("<?xml version=\"1.0\"?>\n");
+        sb.append("<Query>\n");
 
-        ((StringBuffer) localObject).append("<CmdType>" + getCmdType() + "</CmdType>\n");
+        sb.append("<CmdType>" + getCmdType() + "</CmdType>\n");
 
-        ((StringBuffer) localObject).append("<SN>" + getSn() + "</SN>\n");
+        sb.append("<SN>" + getSn() + "</SN>\n");
 
-        ((StringBuffer) localObject).append("<DeviceID>" + getDeviceID() + "</DeviceID>\n");
+        sb.append("<DeviceID>" + getDeviceID() + "</DeviceID>\n");
 
 
-        ((StringBuffer) localObject).append("<SecurityParam>\n");
+        sb.append("<SecurityParam>\n");
 
-        ((StringBuffer) localObject).append("<Expiration>" + (getExpiration() != null ? getExpiration() : "") + "</Expiration>\n");
+        sb.append("<Expiration>" + (getExpiration() != null ? getExpiration() : "") + "</Expiration>\n");
 
-        ((StringBuffer) localObject).append("<Scert>" + (getScert() != null ? getScert() : "") + "</Scert>\n");
+        sb.append("<Scert>" + (getScert() != null ? getScert() : "") + "</Scert>\n");
 
-        ((StringBuffer) localObject).append("<UserName>" + (getUserName() != null ? getUserName() : "") + "</UserName>\n");
+        sb.append("<UserName>" + (getUserName() != null ? getUserName() : "") + "</UserName>\n");
 
-        ((StringBuffer) localObject).append("<Password>" + (getPassword() != null ? getPassword() : "") + "</Password>\n");
+        sb.append("<Password>" + (getPassword() != null ? getPassword() : "") + "</Password>\n");
 
-        ((StringBuffer) localObject).append("<SIPSec>" + (getlSIPSec() != null ? getlSIPSec() : "") + "</SIPSec>\n");
+        sb.append("<SIPSec>" + (getlSIPSec() != null ? getlSIPSec() : "") + "</SIPSec>\n");
 
-        ((StringBuffer) localObject).append("<MediaSec>" + (getMediaSec() != null ? getMediaSec() : "") + "</MediaSec>\n");
+        sb.append("<MediaSec>" + (getMediaSec() != null ? getMediaSec() : "") + "</MediaSec>\n");
 
-        ((StringBuffer) localObject).append("<CredibleMedia>\n");
+        sb.append("<CredibleMedia>\n");
 
-        ((StringBuffer) localObject).append("<Digest>" + (getDigest() != null ? getDigest() : "") + "</Digest>\n");
+        sb.append("<Digest>" + (getDigest() != null ? getDigest() : "") + "</Digest>\n");
 
-        ((StringBuffer) localObject).append("<Frame>" + (getFrame() != null ? getFrame() : "") + "</Frame>\n");
+        sb.append("<Frame>" + (getFrame() != null ? getFrame() : "") + "</Frame>\n");
 
-        ((StringBuffer) localObject).append("<AsyEncryption>" + (getAsyEncryption() != null ? getAsyEncryption() : "") + "</AsyEncryption>\n");
+        sb.append("<AsyEncryption>" + (getAsyEncryption() != null ? getAsyEncryption() : "") + "</AsyEncryption>\n");
 
-        ((StringBuffer) localObject).append("<SignData>" + (getMediaSec() != null ? getMediaSec() : "1") + "</SignData>\n");
+        sb.append("<SignData>" + (getMediaSec() != null ? getMediaSec() : "1") + "</SignData>\n");
 
-        ((StringBuffer) localObject).append("</CredibleMedia>\n");
+        sb.append("</CredibleMedia>\n");
 
-        ((StringBuffer) localObject).append("<EncryptionMedia>\n");
+        sb.append("<EncryptionMedia>\n");
 
-        ((StringBuffer) localObject).append("<AlgorithmPattern>" + (getAlgorithmPattern() != null ? getAlgorithmPattern() : "") + "</AlgorithmPattern>\n");
+        sb.append("<AlgorithmPattern>" + (getAlgorithmPattern() != null ? getAlgorithmPattern() : "") + "</AlgorithmPattern>\n");
 
-        ((StringBuffer) localObject).append("<Length>" + (getLength() != null ? getLength() : "") + "</Length>\n");
+        sb.append("<Length>" + (getLength() != null ? getLength() : "") + "</Length>\n");
 
-        ((StringBuffer) localObject).append("<KeyAlgorithmPattern>" + (getKeyAlgorithmPattern() != null ? getKeyAlgorithmPattern() : "") + "</KeyAlgorithmPattern>\n");
+        sb.append("<KeyAlgorithmPattern>" + (getKeyAlgorithmPattern() != null ? getKeyAlgorithmPattern() : "") + "</KeyAlgorithmPattern>\n");
 
-        ((StringBuffer) localObject).append("<Key>" + (getKey() != null ? getKey() : "") + "</Key>\n");
-        ((StringBuffer) localObject).append("</EncryptionMedia>\n");
+        sb.append("<Key>" + (getKey() != null ? getKey() : "") + "</Key>\n");
+        sb.append("</EncryptionMedia>\n");
 
-        ((StringBuffer) localObject).append("</SecurityParam>\n");
-        ((StringBuffer) localObject).append("</Query>\n");
+        sb.append("</SecurityParam>\n");
+        sb.append("</Query>\n");
 
-        Object localObject = ((StringBuffer) localObject).toString();
+        Object localObject = sb.toString();
         try {
             localObject = new String(((String) localObject).getBytes(), "gb2312");
 

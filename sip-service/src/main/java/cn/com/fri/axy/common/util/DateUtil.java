@@ -34,7 +34,7 @@ public class DateUtil {
             localDate = getDateFormat("yyyyMMddHHmmss").parse(paramString);
 
         } catch (ParseException localParseException) {
-            SysLogger.printStackTrace(this = localParseException);
+            SysLogger.printStackTrace(localParseException);
         }
 
         return localDate;
@@ -74,7 +74,7 @@ public class DateUtil {
                     localDate = getDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(paramString + ".0");
 
                 } catch (ParseException localParseException2) {
-                    SysLogger.printStackTrace(this = localParseException2);
+                    SysLogger.printStackTrace(localParseException2);
                 }
             }
         }
@@ -84,10 +84,9 @@ public class DateUtil {
 
 
     public static void main(String[] paramArrayOfString) {
-        (paramArrayOfString = new Date()).setTime(1247472699000L);
-
-
-        System.out.println(new DateUtil().ThreeInOne_DateToString(paramArrayOfString));
+        Date date = new Date();
+        date.setTime(1247472699000L);
+        System.out.println(new DateUtil().ThreeInOne_DateToString(date));
     }
 }
 

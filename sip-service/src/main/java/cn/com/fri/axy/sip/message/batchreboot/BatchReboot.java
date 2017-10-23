@@ -13,10 +13,6 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Vector;
 
-import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.iterator;
-import static sun.plugin2.os.windows.OSVERSIONINFOA.size;
-
-
 public class BatchReboot {
     private static BatchReboot a = new BatchReboot();
 
@@ -93,16 +89,17 @@ public class BatchReboot {
 
 
     public void sendRebootMessage() {
-        if (((readXMLFile(b)) == null) || (size() == 0)) {
+        if (((readXMLFile(b)) == null) ) {
             SysLogger.info("v is empty.");
             return;
         }
         Object localObject1;
         SipFactory localSipFactory;
         Object localObject2;
-        for (Iterator localIterator = iterator(); localIterator.hasNext(); ) {
-            localIterator.next();
-        }
+
+//        for (Iterator localIterator = iterator(); localIterator.hasNext(); ) {
+//            localIterator.next();
+//        }
     }
 
     class DeviceBean {

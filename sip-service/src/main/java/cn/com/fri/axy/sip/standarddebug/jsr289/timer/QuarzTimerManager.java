@@ -5,9 +5,7 @@ import commonj.timers.Timer;
 import commonj.timers.TimerListener;
 import commonj.timers.TimerManager;
 import org.quartz.JobDataMap;
-import org.quartz.JobDetail;
 import org.quartz.Scheduler;
-import org.quartz.SimpleTrigger;
 import org.quartz.impl.StdSchedulerFactory;
 
 import java.util.Date;
@@ -45,33 +43,31 @@ public class QuarzTimerManager
 
 
     public Timer schedule(TimerListener paramTimerListener, long paramLong) {
-        this = null;
         try {
-            localObject1 = StdSchedulerFactory.getDefaultScheduler();
-            SysLogger.info("scheduler:" + localObject1.toString());
-            Object localObject2 = "QuarzJob-" + paramTimerListener.toString();
+            Scheduler s = StdSchedulerFactory.getDefaultScheduler();
+            SysLogger.info("scheduler:" + s.toString());
+            Object o = "QuarzJob-" + paramTimerListener.toString();
             String str = "DEFAULT";
-            JobDetail localJobDetail = new JobDetail((String) localObject2, str, QuarzJob.class);
+            //JobDetail localJobDetail = new JobDetail(o, str, QuarzJob.class);
 
             JobDataMap localJobDataMap;
             (localJobDataMap = new JobDataMap()).put("TimerListener", paramTimerListener);
-            this = new QuarzTimer((String) localObject2, str);
+            QuarzTimer q = new QuarzTimer(str, str);
             localJobDataMap.put("Timer", this);
-            localJobDetail.setJobDataMap(localJobDataMap);
+//            localJobDetail.setJobDataMap(localJobDataMap);
 
-
-            (
-                    localObject2 = new Date()).setTime(((Date) localObject2).getTime() + paramLong);
-
-            paramTimerListener = new SimpleTrigger("QuarzTrigger-" + paramTimerListener.toString(), (Date) localObject2);
-            ((Scheduler) localObject1).scheduleJob(localJobDetail, paramTimerListener);
-            ((Scheduler) localObject1).start();
+//
+//            Date d = new Date();
+//                    d.setTime(((Date) localObject2).getTime() + paramLong);
+//
+//            paramTimerListener = new SimpleTrigger("QuarzTrigger-" + paramTimerListener.toString(), (Date) localObject2);
+//            ((Scheduler) localObject1).scheduleJob(localJobDetail, paramTimerListener);
+//            ((Scheduler) localObject1).start();
         } catch (Exception localException) {
-            Object localObject1;
-            SysLogger.printStackTrace(localObject1 = localException);
+            SysLogger.printStackTrace(localException);
         }
 
-        return this;
+        return null;
     }
 
 
@@ -112,9 +108,3 @@ public class QuarzTimerManager
         return false;
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/standarddebug/jsr289/timer/QuarzTimerManager.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

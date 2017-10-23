@@ -47,7 +47,7 @@ public class AlarmAlarmRecordTableConfigDownloadResponse
         localStringBuilder.append("ConfigType\t" + this.c + "\n");
         localStringBuilder.append("SEQ\t" + this.d + "\n");
         for (Iterator localIterator = this.b.iterator(); localIterator.hasNext(); ) {
-            this = (AlarmAlarmRecordTableConfigDownloadResponse.ItemBean) localIterator.next();
+            localIterator.next();
 
             localStringBuilder.append(toString());
         }
@@ -81,15 +81,15 @@ public class AlarmAlarmRecordTableConfigDownloadResponse
             this.b = new Vector();
 
             String[] arrayOfString;
-            int j = (arrayOfString = localObject = ((String) localObject).split("<Item>")).length;
+            arrayOfString = ((String) localObject).split("<Item>");
+            int j = arrayOfString.length;
             for (int i = 0; i < j; i++) {
-                if ((localObject = arrayOfString[i]).indexOf("<PreNum>") > -1) {
+                if ((arrayOfString[i]).indexOf("<PreNum>") > -1) {
                     SysLogger.info(localObject);
-                    AlarmAlarmRecordTableConfigDownloadResponse.ItemBean localItemBean;
-                    AlarmAlarmRecordTableConfigDownloadResponse.ItemBean.a(localItemBean = new AlarmAlarmRecordTableConfigDownloadResponse.ItemBean(this), ((String) localObject).substring(((String) localObject).indexOf("<DeviceID>") + "<DeviceID>".length(), ((String) localObject).indexOf("</DeviceID>")));
-                    AlarmAlarmRecordTableConfigDownloadResponse.ItemBean.b(localItemBean, ((String) localObject).substring(((String) localObject).indexOf("<PreNum>") + "<PreNum>".length(), ((String) localObject).indexOf("</PreNum>")));
-
-                    this.b.add(localItemBean);
+//                    ItemBean localItemBean = new ItemBean(this), ((String) localObject).substring(((String) localObject).indexOf("<DeviceID>") + "<DeviceID>".length(), ((String) localObject).indexOf("</DeviceID>"));
+//                    localItemBean(localItemBean, ((String) localObject).substring(((String) localObject).indexOf("<PreNum>") + "<PreNum>".length(), ((String) localObject).indexOf("</PreNum>")));
+//
+//                    this.b.add(localItemBean);
                 }
             }
         }
@@ -101,13 +101,13 @@ public class AlarmAlarmRecordTableConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>报警器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><AlarmRecordTable><Item><DeviceID>摄像机ID1</DeviceID><PreNum>预置位号1</PreNum></Item><Item><DeviceID>摄像机ID2</DeviceID><PreNum>预置位号2</PreNum></Item></AlarmRecordTable></Response>";
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>报警器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><AlarmRecordTable><Item><DeviceID>摄像机ID1</DeviceID><PreNum>预置位号1</PreNum></Item><Item><DeviceID>摄像机ID2</DeviceID><PreNum>预置位号2</PreNum></Item></AlarmRecordTable></Response>";
 
 
         AlarmAlarmRecordTableConfigDownloadResponse localAlarmAlarmRecordTableConfigDownloadResponse;
 
 
-        (localAlarmAlarmRecordTableConfigDownloadResponse = new AlarmAlarmRecordTableConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localAlarmAlarmRecordTableConfigDownloadResponse = new AlarmAlarmRecordTableConfigDownloadResponse("")).setXmlContent(s);
         localAlarmAlarmRecordTableConfigDownloadResponse.genParameters();
         System.out.println(localAlarmAlarmRecordTableConfigDownloadResponse.toString());
     }

@@ -230,13 +230,13 @@ public class CoderSecurityParamConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><SecurityParam><Expiration>1</Expiration><Scert>2</Scert><UserName>3</UserName><Password>4</Password><SIPSec>5</SIPSec><MediaSec>6</MediaSec><CredibleMedia><Digest>7</Digest><Frame>8</Frame><Signature>9</Signature><SignData>0</SignData></CredibleMedia><EncryptionMedia><AlgorithmPattern>11</AlgorithmPattern><Length>111</Length><Key>1111</Key></EncryptionMedia></SecurityParam></Response>";
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><SecurityParam><Expiration>1</Expiration><Scert>2</Scert><UserName>3</UserName><Password>4</Password><SIPSec>5</SIPSec><MediaSec>6</MediaSec><CredibleMedia><Digest>7</Digest><Frame>8</Frame><Signature>9</Signature><SignData>0</SignData></CredibleMedia><EncryptionMedia><AlgorithmPattern>11</AlgorithmPattern><Length>111</Length><Key>1111</Key></EncryptionMedia></SecurityParam></Response>";
 
 
         CoderSecurityParamConfigDownloadResponse localCoderSecurityParamConfigDownloadResponse;
 
 
-        (localCoderSecurityParamConfigDownloadResponse = new CoderSecurityParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localCoderSecurityParamConfigDownloadResponse = new CoderSecurityParamConfigDownloadResponse("")).setXmlContent(s);
         localCoderSecurityParamConfigDownloadResponse.genParameters();
         System.out.println(localCoderSecurityParamConfigDownloadResponse.toString());
     }

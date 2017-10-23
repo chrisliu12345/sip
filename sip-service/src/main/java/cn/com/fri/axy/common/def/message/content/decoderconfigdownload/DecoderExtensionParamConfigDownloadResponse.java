@@ -28,7 +28,7 @@ public class DecoderExtensionParamConfigDownloadResponse
         localStringBuilder.append("DeviceID\t" + this.a + "\n");
 
         for (Iterator localIterator = this.b.iterator(); localIterator.hasNext(); ) {
-            this = (DecoderExtensionParamConfigDownloadResponse.ItemBean) localIterator.next();
+//             (DecoderExtensionParamConfigDownloadResponse.ItemBean) localIterator.next();
 
             localStringBuilder.append(toString());
         }
@@ -59,15 +59,15 @@ public class DecoderExtensionParamConfigDownloadResponse
 
             this.b = new Vector();
 
-            String[] arrayOfString;
-            int j = (arrayOfString = localObject = ((String) localObject).split("<Item>")).length;
+            String[] arrayOfString=null;
+            int j = (  ((String) localObject).split("<Item>")).length;
             for (int i = 0; i < j; i++) {
-                if ((localObject = arrayOfString[i]).indexOf("<ExtensionItem>") > -1) {
+                if (( arrayOfString[i]).indexOf("<ExtensionItem>") > -1) {
                     SysLogger.info(localObject);
-                    DecoderExtensionParamConfigDownloadResponse.ItemBean localItemBean;
-                    DecoderExtensionParamConfigDownloadResponse.ItemBean.a(localItemBean = new DecoderExtensionParamConfigDownloadResponse.ItemBean(this), ((String) localObject).substring(((String) localObject).indexOf("<ExtensionItem>") + "<ExtensionItem>".length(), ((String) localObject).indexOf("</ExtensionItem>")));
+//                    DecoderExtensionParamConfigDownloadResponse.ItemBean localItemBean;
+//                    DecoderExtensionParamConfigDownloadResponse.ItemBean.a(localItemBean = new DecoderExtensionParamConfigDownloadResponse.ItemBean(this), ((String) localObject).substring(((String) localObject).indexOf("<ExtensionItem>") + "<ExtensionItem>".length(), ((String) localObject).indexOf("</ExtensionItem>")));
 
-                    this.b.add(localItemBean);
+//                    this.b.add(localItemBean);
                 }
             }
         }
@@ -77,22 +77,24 @@ public class DecoderExtensionParamConfigDownloadResponse
     public void genXmlContent() {
     }
 
+    class ItemBean {
+        private String a;
+        public ItemBean(DecoderExtensionParamConfigDownloadResponse paramDecoderExtensionParamConfigDownloadResponse) {
+        }
+        public String toString() {
+            return "ExtensionItem\t" + this.a + "\n";
+        }
+    }
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ExtensionParam><Item><ExtensionItem>扩展项1 </ExtensionItem></Item><Item><ExtensionItem>扩展项2 </ExtensionItem></Item></ExtensionParam></Response>";
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ExtensionParam><Item><ExtensionItem>扩展项1 </ExtensionItem></Item><Item><ExtensionItem>扩展项2 </ExtensionItem></Item></ExtensionParam></Response>";
 
 
         DecoderExtensionParamConfigDownloadResponse localDecoderExtensionParamConfigDownloadResponse;
 
 
-        (localDecoderExtensionParamConfigDownloadResponse = new DecoderExtensionParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localDecoderExtensionParamConfigDownloadResponse = new DecoderExtensionParamConfigDownloadResponse("")).setXmlContent(s);
         localDecoderExtensionParamConfigDownloadResponse.genParameters();
         System.out.println(localDecoderExtensionParamConfigDownloadResponse.toString());
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/message/content/decoderconfigdownload/DecoderExtensionParamConfigDownloadResponse.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

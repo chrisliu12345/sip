@@ -38,39 +38,40 @@ public class CoderConfigNetParamRequest
 
 
     public void genXmlContent() {
-        (localObject = new StringBuffer()).append("<?xml version=\"1.0\"?>\n");
-        ((StringBuffer) localObject).append("<Query>\n");
+        StringBuffer sb = new StringBuffer();
+        sb.append("<?xml version=\"1.0\"?>\n");
+        sb.append("<Query>\n");
 
-        ((StringBuffer) localObject).append("<CmdType>" + getCmdType() + "</CmdType>\n");
+        sb.append("<CmdType>" + getCmdType() + "</CmdType>\n");
 
-        ((StringBuffer) localObject).append("<SN>" + getSn() + "</SN>\n");
+        sb.append("<SN>" + getSn() + "</SN>\n");
 
-        ((StringBuffer) localObject).append("<DeviceID>" + getDeviceID() + "</DeviceID>\n");
-
-
-        ((StringBuffer) localObject).append("<NetworkParam>\n");
-
-        ((StringBuffer) localObject).append("<IP>" + (getCoderIP() != null ? getCoderIP() : "") + "</IP>\n");
-
-        ((StringBuffer) localObject).append("<Port>" + (getCoderPort() != null ? getCoderPort() : "") + "</Port>\n");
-
-        ((StringBuffer) localObject).append("<Mask>" + (getCoderMask() != null ? getCoderMask() : "") + "</Mask>\n");
-
-        ((StringBuffer) localObject).append("<Gateway>" + (getCoderGateway() != null ? getCoderGateway() : "") + "</Gateway>\n");
-
-        ((StringBuffer) localObject).append("<ProxyID>" + (getSipServerID() != null ? getSipServerID() : "") + "</ProxyID>\n");
-
-        ((StringBuffer) localObject).append("<ProxyName>" + (getSipDomainName() != null ? getSipDomainName() : "") + "</ProxyName>\n");
-
-        ((StringBuffer) localObject).append("<ProxyIP>" + (getSipserverIP() != null ? getSipserverIP() : "") + "</ProxyIP>\n");
-
-        ((StringBuffer) localObject).append("<ProxyPort>" + (getSipServerPort() != null ? getSipServerPort() : "") + "</ProxyPort>\n");
+        sb.append("<DeviceID>" + getDeviceID() + "</DeviceID>\n");
 
 
-        ((StringBuffer) localObject).append("</NetworkParam>\n");
-        ((StringBuffer) localObject).append("</Query>\n");
+        sb.append("<NetworkParam>\n");
 
-        Object localObject = ((StringBuffer) localObject).toString();
+        sb.append("<IP>" + (getCoderIP() != null ? getCoderIP() : "") + "</IP>\n");
+
+        sb.append("<Port>" + (getCoderPort() != null ? getCoderPort() : "") + "</Port>\n");
+
+        sb.append("<Mask>" + (getCoderMask() != null ? getCoderMask() : "") + "</Mask>\n");
+
+        sb.append("<Gateway>" + (getCoderGateway() != null ? getCoderGateway() : "") + "</Gateway>\n");
+
+        sb.append("<ProxyID>" + (getSipServerID() != null ? getSipServerID() : "") + "</ProxyID>\n");
+
+        sb.append("<ProxyName>" + (getSipDomainName() != null ? getSipDomainName() : "") + "</ProxyName>\n");
+
+        sb.append("<ProxyIP>" + (getSipserverIP() != null ? getSipserverIP() : "") + "</ProxyIP>\n");
+
+        sb.append("<ProxyPort>" + (getSipServerPort() != null ? getSipServerPort() : "") + "</ProxyPort>\n");
+
+
+        sb.append("</NetworkParam>\n");
+        sb.append("</Query>\n");
+
+        Object localObject = sb.toString();
         try {
             localObject = new String(((String) localObject).getBytes(), "gb2312");
 

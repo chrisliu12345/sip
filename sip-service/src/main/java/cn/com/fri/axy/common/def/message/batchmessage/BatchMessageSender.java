@@ -2,6 +2,7 @@ package cn.com.fri.axy.common.def.message.batchmessage;
 
 import cn.com.fri.axy.common.def.notify.NotifyObject;
 import cn.com.fri.axy.common.util.SysLogger;
+import cn.com.fri.axy.sip.exception.MessageException;
 import cn.com.fri.axy.sip.message.content.ReqMessage;
 import cn.com.fri.axy.sip.message.content.ResMessage;
 import cn.com.fri.axy.sip.message.entity.MessageHandler;
@@ -45,7 +46,7 @@ public class BatchMessageSender
 
 
         for (Iterator localIterator = this.a.iterator(); localIterator.hasNext(); ) {
-             ReqMessage reqMessage =(ReqMessage)localIterator.next();
+            ReqMessage reqMessage = (ReqMessage) localIterator.next();
 
             try {
                 MessageHandler.getInstance().sendMessage(reqMessage);
@@ -53,6 +54,8 @@ public class BatchMessageSender
             } catch (IllegalArgumentException localIllegalArgumentException) {
                 localIllegalArgumentException.printStackTrace();
 
+            } catch (MessageException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -65,8 +68,9 @@ public class BatchMessageSender
             observables.add(paramObservable);
             if (d.incrementAndGet() == 0) {
                 SysLogger.info("do transaction");
-                for (paramObservable = this.observables.iterator();
-                     paramObservable.hasNext(); ((ResMessage) (this = (NotifyObject) paramObservable.next()).getResponse()).dealNotify()) {
+                Iterator<Observable> s = observables.iterator();
+                for (; s.hasNext(); ) {
+//                    (( s.next()).getResponse()).dealNotify();
                 }
                 return;
             }

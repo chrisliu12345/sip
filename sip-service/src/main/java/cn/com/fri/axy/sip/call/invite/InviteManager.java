@@ -41,9 +41,12 @@ public class InviteManager {
 
 
     public InviteHandler getPlaybackInviteSession() {
-        for (Iterator localIterator = getInstance().getAllInviteSession().values().iterator(); localIterator.hasNext(); ) {
-            if ((this = (InviteHandler) localIterator.next()).getCallType() == "回放") {
-                return this;
+
+        Iterator localIterator = getInstance().getAllInviteSession().values().iterator();
+        for (; localIterator.hasNext(); ) {
+            InviteHandler handler = (InviteHandler) localIterator.next();
+            if (((InviteHandler) localIterator.next()).getCallType() == "回放") {
+                return handler;
             }
         }
 
@@ -67,13 +70,12 @@ public class InviteManager {
         String str;
         for (Iterator localIterator = this.b.keySet().iterator(); localIterator.hasNext(); ) {
             str = (String) localIterator.next();
-
             localVector.add(str);
         }
 
-        for (localIterator = localVector.iterator(); localIterator.hasNext(); ) {
+        Iterator localIterator = localVector.iterator();
+        for (; localIterator.hasNext(); ) {
             str = (String) localIterator.next();
-
             endInviteSession(str);
         }
     }
@@ -81,39 +83,29 @@ public class InviteManager {
 
     public InviteHandler getInviteHandlerByCallID(String paramString) {
         for (Iterator localIterator = getInstance().getAllInviteSession().values().iterator(); localIterator.hasNext(); ) {
-            if ((this = (InviteHandler) localIterator.next()).getCallID().equalsIgnoreCase(paramString)) {
-                return this;
+            InviteHandler handler = (InviteHandler) localIterator.next();
+            if (handler.getCallID().equalsIgnoreCase(paramString)) {
+                return handler;
             }
         }
-
-
         return null;
     }
 
 
     public void checkSamePlayerIPandPort(String paramString1, String paramString2, int paramInt) {
-        Object[] arrayOfObject1;
-
-
-        Object[] arrayOfObject2;
-
-        int j = (arrayOfObject2 = arrayOfObject1 = this.b.values().toArray()).length;
+        Object[] arrayOfObject2 = this.b.values().toArray();
+        int j = arrayOfObject2.length;
         for (int i = 0; i < j; i++) {
-            if (((arrayOfObject1 = arrayOfObject2[i]) instanceof InviteHandler)) {
-                if ((!paramString1.equalsIgnoreCase(((InviteHandler) arrayOfObject1).getLinkageID())) &&
-                        (((InviteHandler) arrayOfObject1).isSamePlayerIPandPort(paramString2, paramInt))) {
-                    endInviteSession(((InviteHandler) arrayOfObject1).getLinkageID());
-                }
-
-            } else {
-                SysLogger.info(arrayOfObject1.toString());
-            }
+            Object s = arrayOfObject2[i];
+//            if ((s instanceof InviteHandler)) {
+//                if ((!paramString1.equalsIgnoreCase((s).getLinkageID())) &&
+//                        (((InviteHandler) arrayOfObject1).isSamePlayerIPandPort(paramString2, paramInt))) {
+//                    endInviteSession(((InviteHandler) arrayOfObject1).getLinkageID());
+//                }
+//
+//            } else {
+//                SysLogger.info(arrayOfObject1.toString());
+//            }
         }
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/call/invite/InviteManager.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

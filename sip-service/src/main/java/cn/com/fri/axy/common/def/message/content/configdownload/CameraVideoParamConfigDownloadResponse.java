@@ -142,13 +142,13 @@ public class CameraVideoParamConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><VideoParam><VideoFormat>视频编码格式</VideoFormat><Resolution>分辨率</Resolution><FrameRate>帧率</FrameRate><BitRateType>码率类型</BitRateType><VideoBitRate>码率</VideoBitRate><AudioFormat>音频编码格式</AudioFormat><AudioBitRate>码率</AudioBitRate><AudioSampleRate>采样率</AudioSampleRate></VideoParam></Response>";
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><VideoParam><VideoFormat>视频编码格式</VideoFormat><Resolution>分辨率</Resolution><FrameRate>帧率</FrameRate><BitRateType>码率类型</BitRateType><VideoBitRate>码率</VideoBitRate><AudioFormat>音频编码格式</AudioFormat><AudioBitRate>码率</AudioBitRate><AudioSampleRate>采样率</AudioSampleRate></VideoParam></Response>";
 
 
         CameraVideoParamConfigDownloadResponse localCameraVideoParamConfigDownloadResponse;
 
 
-        (localCameraVideoParamConfigDownloadResponse = new CameraVideoParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localCameraVideoParamConfigDownloadResponse = new CameraVideoParamConfigDownloadResponse("")).setXmlContent(s);
         localCameraVideoParamConfigDownloadResponse.genParameters();
         System.out.println(localCameraVideoParamConfigDownloadResponse.toString());
     }

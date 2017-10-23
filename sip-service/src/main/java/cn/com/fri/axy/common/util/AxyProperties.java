@@ -2,6 +2,7 @@ package cn.com.fri.axy.common.util;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
 
 
@@ -9,16 +10,18 @@ public class AxyProperties {
     private HashMap a = new HashMap();
 
 
-    public void load(Reader paramReader) {
+    public void load(Reader paramReader) throws IOException {
         BufferedReader localBufferedReader = new BufferedReader(paramReader);
+        String line = localBufferedReader.readLine();
 
-
-        while ((paramReader = localBufferedReader.readLine()) != null) {
-            if (paramReader.indexOf("#") != 0) {
-                if ((paramReader = paramReader.split("=", 2)).length >= 2) {
-                    this.a.put(paramReader[0].trim(), paramReader[1].trim());
+        while (line != null) {
+            if (line.indexOf("#") != 0) {
+                String[] contents = line.split("=", 2);
+                if (contents.length >= 2) {
+                    this.a.put(contents[0].trim(), contents[1].trim());
                 }
             }
+            line = localBufferedReader.readLine();
         }
     }
 
@@ -33,23 +36,19 @@ public class AxyProperties {
     }
 
 
-    public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = new File("PMPlatFormenv.properties");
-        paramArrayOfString = new FileInputStream(paramArrayOfString);
+    public static void main(String[] paramArrayOfString) throws IOException {
+        File file = new File("PMPlatFormenv.properties");
+        InputStream ip = new FileInputStream(file);
 
-        paramArrayOfString = new InputStreamReader(paramArrayOfString);
-        AxyProperties localAxyProperties;
-        (localAxyProperties = new AxyProperties()).load(paramArrayOfString);
+        InputStreamReader ir = new InputStreamReader(ip);
+        AxyProperties localAxyProperties = new AxyProperties();
+        localAxyProperties.load(ir);
 
-        for (paramArrayOfString = localAxyProperties.propertyNames().iterator(); paramArrayOfString.hasNext(); ) {
-            String str = (String) paramArrayOfString.next();
+        Iterator iterator = localAxyProperties.propertyNames().iterator();
+
+        for (; iterator.hasNext(); ) {
+            String str = (String) iterator.next();
             System.out.println(str + "=" + localAxyProperties.getProperty(str));
         }
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/util/AxyProperties.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

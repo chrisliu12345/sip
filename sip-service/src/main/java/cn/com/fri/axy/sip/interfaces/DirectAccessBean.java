@@ -17,25 +17,23 @@ public class DirectAccessBean {
 
     public void sendMessage(Message paramMessage) {
         try {
-            new MessageHandler().sendMessage(paramMessage);
-            return;
+            MessageHandler handler = new MessageHandler();
+            try {
+                handler.sendMessage(paramMessage);
+            } catch (MessageException e) {
+                e.printStackTrace();
+            }
         } catch (IllegalArgumentException localIllegalArgumentException) {
-            SysLogger.printStackTrace(this = localIllegalArgumentException);
-            return;
-        } catch (MessageException localMessageException) {
-            SysLogger.printStackTrace(this = localMessageException);
+            SysLogger.printStackTrace(localIllegalArgumentException);
         }
     }
 
 
     public void deviceReboot(String paramString, Observer paramObserver) {
         SysLogger.info("deviceReboot");
-
-
-        (
-                paramObserver = new DeviceConfigTeleBootRequest(paramString, paramObserver)).setDeviceID(paramString);
-
-        sendMessage(paramObserver);
+        DeviceConfigTeleBootRequest d = new DeviceConfigTeleBootRequest(paramString, paramObserver);
+        d.setDeviceID(paramString);
+        sendMessage(d);
     }
 
 
@@ -46,26 +44,20 @@ public class DirectAccessBean {
             return;
         }
 
-        this = PurviewHelper.getInstance().getPurviewBeanFromParam(paramString1, paramString2, ((PTZDeviceControlRequest) paramMessage).getDeviceID(), "ptz", Integer.toString(paramInt));
-        paramMessage.setPurviewBean(this);
+        PurviewHelper.getInstance().getPurviewBeanFromParam(paramString1, paramString2, ((PTZDeviceControlRequest) paramMessage).getDeviceID(), "ptz", Integer.toString(paramInt));
+        paramMessage.setPurviewBean(null);
 
         try {
             MessageHandler.getInstance().sendMessage(paramMessage);
             return;
         } catch (IllegalArgumentException localIllegalArgumentException) {
-            SysLogger.printStackTrace(this = localIllegalArgumentException);
+            SysLogger.printStackTrace(localIllegalArgumentException);
             return;
-        } catch (MessageException localMessageException) {
-            SysLogger.printStackTrace(this = localMessageException);
+        } catch (MessageException e) {
+            e.printStackTrace();
         }
     }
 
     public static void main(String[] paramArrayOfString) {
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/interfaces/DirectAccessBean.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

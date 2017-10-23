@@ -132,20 +132,14 @@ public class CameraRecordParamConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><RecordParam><VideoResolution>分辨率</VideoResolution><VideoFrameRate>帧率</VideoFrameRate><VideoBitRate>视频码率</VideoBitRate><AudioBitRate>音频码率</AudioBitRate><AudioSampleRate>音频采样率</AudioSampleRate><Days>保存天数</Days><PreRecord>预录时长</PreRecord></RecordParam></Response>";
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><RecordParam><VideoResolution>分辨率</VideoResolution><VideoFrameRate>帧率</VideoFrameRate><VideoBitRate>视频码率</VideoBitRate><AudioBitRate>音频码率</AudioBitRate><AudioSampleRate>音频采样率</AudioSampleRate><Days>保存天数</Days><PreRecord>预录时长</PreRecord></RecordParam></Response>";
 
 
         CameraRecordParamConfigDownloadResponse localCameraRecordParamConfigDownloadResponse;
 
 
-        (localCameraRecordParamConfigDownloadResponse = new CameraRecordParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localCameraRecordParamConfigDownloadResponse = new CameraRecordParamConfigDownloadResponse("")).setXmlContent(s);
         localCameraRecordParamConfigDownloadResponse.genParameters();
         System.out.println(localCameraRecordParamConfigDownloadResponse.toString());
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/message/content/configdownload/CameraRecordParamConfigDownloadResponse.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

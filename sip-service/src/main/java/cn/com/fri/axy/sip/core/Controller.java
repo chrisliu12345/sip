@@ -15,7 +15,7 @@ import javax.servlet.sip.SipSession;
 public class Controller {
     public void process(SipServletRequest paramSipServletRequest, SipServletResponse paramSipServletResponse) {
         try {
-            localObject1 = new HandlerList();
+            HandlerList handlerList = new HandlerList();
             SipSession localSipSession;
             if (paramSipServletRequest != null) {
                 localSipSession = paramSipServletRequest.getSession();
@@ -51,13 +51,13 @@ public class Controller {
                 }
                 if (((MessageContext) localObject2).isMessage()) {
                     SysLogger.info(getClass() + ":\n" + "the new message session");
-                    ((HandlerList) localObject1).add(new MessageHandler());
-                    ((MessageContext) localObject2).getSession().setAttribute("handlerList", localObject1);
+                    ((HandlerList) handlerList).add(new MessageHandler());
+                    ((MessageContext) localObject2).getSession().setAttribute("handlerList", handlerList);
 
                 } else if (((MessageContext) localObject2).isRegister()) {
-                    ((HandlerList) localObject1).add(new RegisterHandler());
+                    ((HandlerList) handlerList).add(new RegisterHandler());
                     ((MessageContext) localObject2).getSession().setAttribute("handlerList",
-                            localObject1);
+                            handlerList);
                 } else {
                     SysLogger.info(
                             getClass() + ":\n" + "server do not deal the message " + ((MessageContext) localObject2).getRequest().toString());
@@ -69,17 +69,17 @@ public class Controller {
             } else {
 
 
-                localObject1 = (HandlerList) localSipSession.getAttribute("handlerList");
+                handlerList = (HandlerList) localSipSession.getAttribute("handlerList");
             }
 
-            if (localObject1 == null) {
+            if (handlerList == null) {
                 SysLogger.info(
 
                         getClass() + ":\n" + "handlist is null, can do nothing for the message" + localObject2.toString());
             }
 
 
-            execute((HandlerList) localObject1, (MessageContext) localObject2);
+            execute((HandlerList) handlerList, (MessageContext) localObject2);
             return;
         } catch (Exception localException) {
             Object localObject1;
@@ -102,7 +102,7 @@ public class Controller {
             try {
                 execute((Handler) localObject, paramMessageContext);
             } catch (Exception localException) {
-                SysLogger.printStackTrace(localObject = localException);
+                SysLogger.printStackTrace(localException);
             }
         }
     }
@@ -172,15 +172,16 @@ public class Controller {
 
         } else {
 
-            if ((this = (this = paramMessageContext.getResponse()).getStatus()) < 200) {
+            int status = paramMessageContext.getResponse().getStatus();
+            if (status < 200) {
                 paramHandler.doProvisionalResponse(paramMessageContext);
                 return;
             }
-            if (this < 300) {
+            if (status < 300) {
                 paramHandler.doSuccessResponse(paramMessageContext);
                 return;
             }
-            if (this < 400) {
+            if (status < 400) {
                 paramHandler.doRedirectResponse(paramMessageContext);
                 return;
             }

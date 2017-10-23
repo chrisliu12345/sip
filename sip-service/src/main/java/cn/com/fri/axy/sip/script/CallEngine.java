@@ -2,7 +2,10 @@ package cn.com.fri.axy.sip.script;
 
 import cn.com.fri.axy.sip.core.asyn.AsyncServiceDispatcher;
 
+import java.util.Iterator;
 import java.util.Vector;
+
+import static org.apache.commons.collections.CollectionUtils.isEmpty;
 
 
 public class CallEngine {
@@ -18,24 +21,19 @@ public class CallEngine {
 
 
     public void launch(String paramString) {
-        if (((this = XMLParseHelper.readXMLFile(paramString)) == null) || (isEmpty())) {
+        Vector content = XMLParseHelper.readXMLFile(paramString);
+        if ((content == null) || (isEmpty(content))) {
             throw new IllegalStateException("hava no element to start.");
         }
+        Iterator i = content.iterator();
 
+        for (; i.hasNext(); ) {
+            CallBean c = (CallBean) i.next();
 
-        for (paramString = iterator(); paramString.hasNext(); ) {
-            this = (CallBean) paramString.next();
-
-            new AsyncServiceDispatcher().callService(new CallService(this));
+            new AsyncServiceDispatcher().callService(new CallService(c));
         }
     }
 
     public static void main(String[] paramArrayOfString) {
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/script/CallEngine.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

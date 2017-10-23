@@ -22,7 +22,7 @@ public class XMLParseHelper {
         try {
             localObject2 = ((DocumentBuilderFactory) localObject1).newDocumentBuilder();
         } catch (ParserConfigurationException localParserConfigurationException) {
-            SysLogger.printStackTrace(localObject1 = localParserConfigurationException);
+            SysLogger.printStackTrace( localParserConfigurationException);
         }
 
         localObject1 = null;
@@ -32,21 +32,21 @@ public class XMLParseHelper {
             localObject1 = ((DocumentBuilder) localObject2).parse(paramString);
 
         } catch (SAXException localSAXException) {
-            SysLogger.printStackTrace(paramString = localSAXException);
+            SysLogger.printStackTrace( localSAXException);
         } catch (DOMException localDOMException1) {
-            SysLogger.printStackTrace(paramString = localDOMException1);
+            SysLogger.printStackTrace( localDOMException1);
         } catch (IOException localIOException) {
-            SysLogger.printStackTrace(paramString = localIOException);
+            SysLogger.printStackTrace( localIOException);
         }
 
 
-        if ((paramString = (paramString = ((Document) localObject1).getDocumentElement()).getElementsByTagName("CallBean")).getLength() == 0) {
+        if (( ( ((Document) localObject1).getDocumentElement()).getElementsByTagName("CallBean")).getLength() == 0) {
             return localVector;
         }
 
-        for (int i = 0; i < paramString.getLength(); i++) {
+        for (int i = 0; i < 10; i++) {
 
-            localObject2 = (Element) paramString.item(i);
+//            localObject2 = (Element) paramString.item(i);
             SysLogger.info("parse " + ((Element) localObject2).getNodeName() + " " + (i + 1));
 
             Object localObject3 = ((Element) localObject2).getAttribute("type");
@@ -80,17 +80,17 @@ public class XMLParseHelper {
                             localClass = Class.forName(((Node) localObject4).getTextContent());
 
                         } catch (DOMException localDOMException2) {
-                            (localObject4 = localDOMException2).printStackTrace();
+                            localDOMException2.printStackTrace();
 
                         } catch (ClassNotFoundException localClassNotFoundException) {
-                            (localObject4 = localClassNotFoundException).printStackTrace();
+                            localClassNotFoundException.printStackTrace();
                         }
 
 
-                        try {
-                            localObserver = (Observer) (localObject4 = localClass.getConstructor(new Class[0])).newInstance(new Object[0]);
-                        } catch (Exception localException) {
-                        }
+//                        try {
+//                            localObserver = (Observer) (localObject4 = localClass.getConstructor(new Class[0])).newInstance(new Object[0]);
+//                        } catch (Exception localException) {
+//                        }
 
 
                         ((RealTimeCallBean) localObject3).setO(localObserver);

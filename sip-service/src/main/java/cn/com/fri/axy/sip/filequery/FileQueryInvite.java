@@ -13,6 +13,7 @@ import cn.com.fri.axy.sip.location.LocationService;
 import cn.com.fri.axy.sip.util.ServletContextHelper;
 
 import javax.servlet.sip.*;
+import java.io.IOException;
 import java.util.Observer;
 import java.util.Vector;
 
@@ -30,48 +31,48 @@ public class FileQueryInvite
     }
 
 
-    public void sendInvite() {
-        String str = this.a.getDeviceID();
-
-        if (!LocationService.getInstance().isLocalDomainDeviceOnline(str)) {
-            throw new DeviceStateException();
-        }
-
-
-        try {
-            Object localObject2 = (localObject1 = ServletContextHelper.getSipFactory()).createApplicationSession();
-
-            Address localAddress = ServletContextHelper.getSipFactory().createAddress(LocationService.getInstance().getDomainURI(str));
-
-
-            Object localObject3 = LocationService.getInstance().getLocalDomainURI();
-
-
-            (
-
-                    localObject1 = ((SipFactory) localObject1).createRequest((SipApplicationSession) localObject2, "INVITE", (Address) localObject3, localAddress)).setContent(this.a.getXmlContent().getBytes(), "application/MANSCDP+xml");
-
-
-            (
-                    localObject2 = new HandlerList()).add(this);
-            (
-                    localObject3 = ((SipServletRequest) localObject1).getSession(true)).setHandler("accessservlet");
-            ((SipSession) localObject3).setAttribute("handlerList", localObject2);
-
-
-            ((SipServletRequest) localObject1).pushRoute(LocationService.getInstance().getFullURIByID(str));
-
-            SysLogger.info(getClass() + "\nSending INVITE:" + "\n" + localObject1.toString());
-            ((SipServletRequest) localObject1).send();
-
-
-            MessageSender.getInstance().send(localObject1.toString());
-            return;
-        } catch (Exception localException) {
-            Object localObject1;
-            SysLogger.printStackTrace(localObject1 = localException);
-            throw new DeviceStateException((Throwable) localObject1);
-        }
+    public void sendInvite() throws DeviceStateException {
+//        String str = this.a.getDeviceID();
+//
+//        if (!LocationService.getInstance().isLocalDomainDeviceOnline(str)) {
+//            throw new DeviceStateException();
+//        }
+//
+//
+//        try {
+//            Object localObject2 = ( ServletContextHelper.getSipFactory()).createApplicationSession();
+//
+//            Address localAddress = ServletContextHelper.getSipFactory().createAddress(LocationService.getInstance().getDomainURI(str));
+//
+//
+//            Object localObject3 = LocationService.getInstance().getLocalDomainURI();
+//
+//
+//            (
+//
+//                    localObject1 = ((SipFactory) localObject1).createRequest((SipApplicationSession) localObject2, "INVITE", (Address) localObject3, localAddress)).setContent(this.a.getXmlContent().getBytes(), "application/MANSCDP+xml");
+//
+//
+//            (
+//                    localObject2 = new HandlerList()).add(this);
+//            (
+//                    localObject3 = ((SipServletRequest) localObject1).getSession(true)).setHandler("accessservlet");
+//            ((SipSession) localObject3).setAttribute("handlerList", localObject2);
+//
+//
+//            ((SipServletRequest) localObject1).pushRoute(LocationService.getInstance().getFullURIByID(str));
+//
+//            SysLogger.info(getClass() + "\nSending INVITE:" + "\n" + localObject1.toString());
+//            ((SipServletRequest) localObject1).send();
+//
+//
+//            MessageSender.getInstance().send(localObject1.toString());
+//            return;
+//        } catch (Exception localException) {
+//            Object localObject1;
+//            SysLogger.printStackTrace(localObject1 = localException);
+//            throw new DeviceStateException((Throwable) localObject1);
+//        }
     }
 
 
@@ -104,11 +105,15 @@ public class FileQueryInvite
                 getClass() + "\nGetting SuccessResponse:" + "\n" + paramMessageContext.getResponse().toString());
         if (paramMessageContext.isMethod("Invite")) {
 
-            paramMessageContext = paramMessageContext.getResponse().createAck();
+            SipServletRequest req = paramMessageContext.getResponse().createAck();
 
             SysLogger.info(getClass() + "\nSend ACK:" + "\n" +
                     paramMessageContext.toString());
-            paramMessageContext.send();
+            try {
+                req.send();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
             MessageSender.getInstance().send(paramMessageContext.toString());
@@ -123,56 +128,56 @@ public class FileQueryInvite
 
 
     public void doInfo(MessageContext paramMessageContext) {
-        SysLogger.info("do info");
-
-        (
-                localObject = paramMessageContext.getRequest().createResponse(200)).send();
-
-
-        MessageSender.getInstance().send(localObject.toString());
-
-        paramMessageContext = new String(paramMessageContext.getRawContent());
-
-        Object localObject = new Vector();
-        if (paramMessageContext.indexOf("</file>") > -1) {
-            String[] arrayOfString;
-            int j = (arrayOfString = paramMessageContext = paramMessageContext.split("</file>")).length;
-            for (int i = 0; i < j; i++) {
-
-                if ((paramMessageContext = arrayOfString[i]).indexOf("<file>") > -1) {
-                    paramMessageContext = new VideoSegmentBean(paramMessageContext);
-                    try {
-                        paramMessageContext.parseMessageSegment();
-                    } catch (Exception localException) {
-                        SysLogger.printStackTrace(paramMessageContext = localException);
-                        continue;
-                    }
-
-
-                    ((Vector) localObject).add(paramMessageContext);
-                }
-            }
-
-
-            a((Vector) localObject);
-            return;
-        }
-
-
-        SysLogger.info("error info message.");
+//        SysLogger.info("do info");
+//
+//        (
+//                localObject = paramMessageContext.getRequest().createResponse(200)).send();
+//
+//
+//        MessageSender.getInstance().send(localObject.toString());
+//
+//        paramMessageContext = new String(paramMessageContext.getRawContent());
+//
+//        Object localObject = new Vector();
+//        if (paramMessageContext.indexOf("</file>") > -1) {
+//            String[] arrayOfString;
+//            int j = (arrayOfString = paramMessageContext = paramMessageContext.split("</file>")).length;
+//            for (int i = 0; i < j; i++) {
+//
+//                if ((paramMessageContext = arrayOfString[i]).indexOf("<file>") > -1) {
+//                    paramMessageContext = new VideoSegmentBean(paramMessageContext);
+//                    try {
+//                        paramMessageContext.parseMessageSegment();
+//                    } catch (Exception localException) {
+//                        SysLogger.printStackTrace(paramMessageContext = localException);
+//                        continue;
+//                    }
+//
+//
+//                    ((Vector) localObject).add(paramMessageContext);
+//                }
+//            }
+//
+//
+//            a((Vector) localObject);
+//            return;
+//        }
+//
+//
+//        SysLogger.info("error info message.");
     }
 
 
     public void doBye(MessageContext paramMessageContext) {
-        SipServletResponse localSipServletResponse;
-
-        (localSipServletResponse = paramMessageContext.getRequest().createResponse(200)).send();
-        paramMessageContext.getApplicationSession().invalidate();
-
-
-        MessageSender.getInstance().send(localSipServletResponse.toString());
-
-        a(212);
+//        SipServletResponse localSipServletResponse;
+//
+//        (localSipServletResponse = paramMessageContext.getRequest().createResponse(200)).send();
+//        paramMessageContext.getApplicationSession().invalidate();
+//
+//
+//        MessageSender.getInstance().send(localSipServletResponse.toString());
+//
+//        a(212);
     }
 
 
@@ -199,9 +204,3 @@ public class FileQueryInvite
         new AsyncServiceDispatcher().callService(new AsynObserverService(this.c, localNotifyObject));
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/filequery/FileQueryInvite.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

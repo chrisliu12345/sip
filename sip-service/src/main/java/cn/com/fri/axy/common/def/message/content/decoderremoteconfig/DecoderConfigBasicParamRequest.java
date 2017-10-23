@@ -29,29 +29,30 @@ public class DecoderConfigBasicParamRequest
 
 
     public void genXmlContent() {
-        (localObject = new StringBuffer()).append("<?xml version=\"1.0\"?>\n");
-        ((StringBuffer) localObject).append("<Query>\n");
+        StringBuffer sb = new StringBuffer();
+                sb.append("<?xml version=\"1.0\"?>\n");
+        sb.append("<Query>\n");
 
-        ((StringBuffer) localObject).append("<CmdType>" + getCmdType() + "</CmdType>\n");
+        sb.append("<CmdType>" + getCmdType() + "</CmdType>\n");
 
-        ((StringBuffer) localObject).append("<SN>" + getSn() + "</SN>\n");
+        sb.append("<SN>" + getSn() + "</SN>\n");
 
-        ((StringBuffer) localObject).append("<DeviceID>" + getDestDeviceID() + "</DeviceID>\n");
+        sb.append("<DeviceID>" + getDestDeviceID() + "</DeviceID>\n");
 
 
-        ((StringBuffer) localObject).append("<BasicParam>\n");
+        sb.append("<BasicParam>\n");
 
-        ((StringBuffer) localObject).append("<Name>" + (getDeviceName() != null ? getDeviceName() : "") + "</Name>\n");
+        sb.append("<Name>" + (getDeviceName() != null ? getDeviceName() : "") + "</Name>\n");
 
-        ((StringBuffer) localObject).append("<DeviceID>" + (getDeviceID() != null ? getDeviceID() : "") + "</DeviceID>\n");
+        sb.append("<DeviceID>" + (getDeviceID() != null ? getDeviceID() : "") + "</DeviceID>\n");
 
-        ((StringBuffer) localObject).append("<Description>" + (getDescription() != null ? getDescription() : "") + "</Description>\n");
+        sb.append("<Description>" + (getDescription() != null ? getDescription() : "") + "</Description>\n");
 
-        ((StringBuffer) localObject).append("<Outputs>" + (getOutputs() != null ? getOutputs() : "") + "</Outputs>\n");
-        ((StringBuffer) localObject).append("</BasicParam>\n");
-        ((StringBuffer) localObject).append("</Query>\n");
+        sb.append("<Outputs>" + (getOutputs() != null ? getOutputs() : "") + "</Outputs>\n");
+        sb.append("</BasicParam>\n");
+        sb.append("</Query>\n");
 
-        Object localObject = ((StringBuffer) localObject).toString();
+        Object localObject = sb.toString();
         try {
             localObject = new String(((String) localObject).getBytes(), "gb2312");
 
@@ -103,9 +104,3 @@ public class DecoderConfigBasicParamRequest
         this.e = paramString;
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/message/content/decoderremoteconfig/DecoderConfigBasicParamRequest.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

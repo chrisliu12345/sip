@@ -76,13 +76,13 @@ public class AlarmAlarmParamConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>摄像机ID</DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><AlarmParam><Month><Seq=\"9\"><Time Day=\"31\"><Item><Begin>开始时间1</Begin><End>结束时间1</End></Item><Item><Begin>开始时间2</Begin><End>结束时间2</End></Item><Item><Begin>开始时间3</Begin><End>结束时间3</End></Item><Item><Begin>开始时间4</Begin><End>结束时间4</End></Item></Time></Seq></Month></AlarmParam></Response>";
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>摄像机ID</DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><AlarmParam><Month><Seq=\"9\"><Time Day=\"31\"><Item><Begin>开始时间1</Begin><End>结束时间1</End></Item><Item><Begin>开始时间2</Begin><End>结束时间2</End></Item><Item><Begin>开始时间3</Begin><End>结束时间3</End></Item><Item><Begin>开始时间4</Begin><End>结束时间4</End></Item></Time></Seq></Month></AlarmParam></Response>";
 
 
         AlarmAlarmParamConfigDownloadResponse localAlarmAlarmParamConfigDownloadResponse;
 
 
-        (localAlarmAlarmParamConfigDownloadResponse = new AlarmAlarmParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localAlarmAlarmParamConfigDownloadResponse = new AlarmAlarmParamConfigDownloadResponse("")).setXmlContent(s);
         localAlarmAlarmParamConfigDownloadResponse.genParameters();
         System.out.println(localAlarmAlarmParamConfigDownloadResponse.toString());
     }

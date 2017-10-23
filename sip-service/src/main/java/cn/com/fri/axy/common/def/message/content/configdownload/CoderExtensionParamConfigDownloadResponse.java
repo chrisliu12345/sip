@@ -48,7 +48,7 @@ public class CoderExtensionParamConfigDownloadResponse
         localStringBuilder.append("SEQ\t" + this.d + "\n");
 
         for (Iterator localIterator = this.b.iterator(); localIterator.hasNext(); ) {
-            this = (CoderExtensionParamConfigDownloadResponse.ItemBean) localIterator.next();
+             localIterator.next();
 
             localStringBuilder.append(toString());
         }
@@ -81,15 +81,14 @@ public class CoderExtensionParamConfigDownloadResponse
 
             this.b = new Vector();
 
-            String[] arrayOfString;
-            int j = (arrayOfString = localObject = ((String) localObject).split("<Item>")).length;
+            String[] arrayOfString = ((String) localObject).split("<Item>");
+            int j = arrayOfString.length;
             for (int i = 0; i < j; i++) {
-                if ((localObject = arrayOfString[i]).indexOf("<ExtensionItem>") > -1) {
+                if ((arrayOfString[i]).indexOf("<ExtensionItem>") > -1) {
                     SysLogger.info(localObject);
-                    CoderExtensionParamConfigDownloadResponse.ItemBean localItemBean;
-                    CoderExtensionParamConfigDownloadResponse.ItemBean.a(localItemBean = new CoderExtensionParamConfigDownloadResponse.ItemBean(this), ((String) localObject).substring(((String) localObject).indexOf("<ExtensionItem>") + "<ExtensionItem>".length(), ((String) localObject).indexOf("</ExtensionItem>")));
-
-                    this.b.add(localItemBean);
+//                   new CoderExtensionParamConfigDownloadResponse.ItemBean(this), ((String) localObject).substring(((String) localObject).indexOf("<ExtensionItem>") + "<ExtensionItem>".length(), ((String) localObject).indexOf("</ExtensionItem>"));
+//
+//                    this.b.add(localItemBean);
                 }
             }
         }
@@ -99,22 +98,26 @@ public class CoderExtensionParamConfigDownloadResponse
     public void genXmlContent() {
     }
 
+    class ItemBean {
+        private String a;
+
+        public ItemBean(CoderExtensionParamConfigDownloadResponse paramCoderExtensionParamConfigDownloadResponse) {
+        }
+
+        public String toString() {
+            return "ExtensionItem\t" + this.a + "\n";
+        }
+    }
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><ExtensionParam><Item><ExtensionItem>扩展项1 </ExtensionItem></Item><Item><ExtensionItem>扩展项2 </ExtensionItem></Item></ExtensionParam></Response>";
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><ExtensionParam><Item><ExtensionItem>扩展项1 </ExtensionItem></Item><Item><ExtensionItem>扩展项2 </ExtensionItem></Item></ExtensionParam></Response>";
 
 
         CoderExtensionParamConfigDownloadResponse localCoderExtensionParamConfigDownloadResponse;
 
 
-        (localCoderExtensionParamConfigDownloadResponse = new CoderExtensionParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localCoderExtensionParamConfigDownloadResponse = new CoderExtensionParamConfigDownloadResponse("")).setXmlContent(s);
         localCoderExtensionParamConfigDownloadResponse.genParameters();
         System.out.println(localCoderExtensionParamConfigDownloadResponse.toString());
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/message/content/configdownload/CoderExtensionParamConfigDownloadResponse.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

@@ -42,14 +42,14 @@ public class EventListenerRegistry
 
 
     public EventListener getEventListener(int paramInt) {
-        if ((this = (EventListenerProps) this.a.get(paramInt)) == null) return null;
-        return getEventListener();
+        if (( (EventListenerProps) this.a.get(paramInt)) == null) return null;
+        return getEventListener(paramInt);
     }
 
 
     public EventFilter getEventFilter(int paramInt) {
-        if ((this = (EventListenerProps) this.a.get(paramInt)) == null) return null;
-        return getEventFilter();
+        if (( (EventListenerProps) this.a.get(paramInt)) == null) return null;
+        return getEventFilter(paramInt);
     }
 
     public EventListenerProps[] getAllEventListener() {
@@ -57,9 +57,3 @@ public class EventListenerRegistry
                 (EventListenerProps[]) this.a.toArray(new EventListenerProps[0]);
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/event/EventListenerRegistry.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

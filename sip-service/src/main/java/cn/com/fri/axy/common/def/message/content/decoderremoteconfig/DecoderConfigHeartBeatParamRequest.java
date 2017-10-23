@@ -24,22 +24,23 @@ public class DecoderConfigHeartBeatParamRequest
 
 
     public void genXmlContent() {
-        (localObject = new StringBuffer()).append("<?xml version=\"1.0\"?>\n");
-        ((StringBuffer) localObject).append("<Query>\n");
+        StringBuffer sb = new StringBuffer();
+        sb.append("<?xml version=\"1.0\"?>\n");
+        sb.append("<Query>\n");
 
-        ((StringBuffer) localObject).append("<CmdType>" + getCmdType() + "</CmdType>\n");
+        sb.append("<CmdType>" + getCmdType() + "</CmdType>\n");
 
-        ((StringBuffer) localObject).append("<SN>" + getSn() + "</SN>\n");
+        sb.append("<SN>" + getSn() + "</SN>\n");
 
-        ((StringBuffer) localObject).append("<DeviceID>" + getDeviceID() + "</DeviceID>\n");
+        sb.append("<DeviceID>" + getDeviceID() + "</DeviceID>\n");
 
-        ((StringBuffer) localObject).append("<HeartBeatParam>\n");
+        sb.append("<HeartBeatParam>\n");
 
-        ((StringBuffer) localObject).append("<Interval>" + (getInterval() != null ? getInterval() : "") + "</Interval>\n");
-        ((StringBuffer) localObject).append("</HeartBeatParam>\n");
-        ((StringBuffer) localObject).append("</Query>\n");
+        sb.append("<Interval>" + (getInterval() != null ? getInterval() : "") + "</Interval>\n");
+        sb.append("</HeartBeatParam>\n");
+        sb.append("</Query>\n");
 
-        Object localObject = ((StringBuffer) localObject).toString();
+        Object localObject = sb.toString();
         try {
             localObject = new String(((String) localObject).getBytes(), "gb2312");
 

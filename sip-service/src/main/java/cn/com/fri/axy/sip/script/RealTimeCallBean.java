@@ -26,7 +26,7 @@ public class RealTimeCallBean
         try {
             return new ScriptInviteHandler().sendInvite(this.sourceID, this.resolution, this.destID, this.wID);
         } catch (Exception localException) {
-            SysLogger.printStackTrace(this = localException);
+            SysLogger.printStackTrace(localException);
         }
         return null;
     }
@@ -72,9 +72,3 @@ public class RealTimeCallBean
         this.o = paramObserver;
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/script/RealTimeCallBean.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

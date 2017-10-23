@@ -23,15 +23,12 @@ public class SysLogger {
             localProperties.load(localInputStream);
 
             PropertyConfigurator.configure(localProperties);
-            return;
         } catch (FileNotFoundException localFileNotFoundException) {
             System.out.println(
                     "FileLogger.java - FileNotFoundException : " + localFileNotFoundException.toString());
-            return;
         } catch (IOException localIOException) {
             System.out.println(
                     "FileLogger.java - IOException : " + localIOException.toString());
-            return;
         } catch (Exception localException) {
             System.out.println("FileLogger.java - Exception : " + localException.toString());
             localException.printStackTrace();
@@ -76,7 +73,7 @@ public class SysLogger {
 
         try {
             paramThrowable.printStackTrace(localPrintWriter);
-            paramThrowable = str1 + localStringWriter.toString() + str2;
+            String s = str1 + localStringWriter.toString() + str2;
 
             switch (i) {
                 case 10000:

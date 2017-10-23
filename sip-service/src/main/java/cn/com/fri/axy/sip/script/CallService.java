@@ -15,7 +15,7 @@ public class CallService extends Service {
             this.a.link();
             return;
         } catch (Exception localException) {
-            SysLogger.printStackTrace(this = localException);
+            SysLogger.printStackTrace( localException);
         }
     }
 }

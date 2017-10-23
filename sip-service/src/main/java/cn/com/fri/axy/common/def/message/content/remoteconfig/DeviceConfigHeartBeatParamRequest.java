@@ -24,22 +24,24 @@ public class DeviceConfigHeartBeatParamRequest
 
 
     public void genXmlContent() {
-        (localObject = new StringBuffer()).append("<?xml version=\"1.0\"?>\n");
-        ((StringBuffer) localObject).append("<Query>\n");
 
-        ((StringBuffer) localObject).append("<CmdType>" + getCmdType() + "</CmdType>\n");
+        StringBuffer sb = new StringBuffer();
+        sb.append("<?xml version=\"1.0\"?>\n");
+        sb.append("<Query>\n");
 
-        ((StringBuffer) localObject).append("<SN>" + getSn() + "</SN>\n");
+        sb.append("<CmdType>" + getCmdType() + "</CmdType>\n");
 
-        ((StringBuffer) localObject).append("<DeviceID>" + getDeviceID() + "</DeviceID>\n");
+        sb.append("<SN>" + getSn() + "</SN>\n");
 
-        ((StringBuffer) localObject).append("<HeartBeatParam>\n");
+        sb.append("<DeviceID>" + getDeviceID() + "</DeviceID>\n");
 
-        ((StringBuffer) localObject).append("<Interval>" + (getInterval() != null ? getInterval() : "") + "</Interval>\n");
-        ((StringBuffer) localObject).append("</HeartBeatParam>\n");
-        ((StringBuffer) localObject).append("</Query>\n");
+        sb.append("<HeartBeatParam>\n");
 
-        Object localObject = ((StringBuffer) localObject).toString();
+        sb.append("<Interval>" + (getInterval() != null ? getInterval() : "") + "</Interval>\n");
+        sb.append("</HeartBeatParam>\n");
+        sb.append("</Query>\n");
+
+        Object localObject = sb.toString();
         try {
             localObject = new String(((String) localObject).getBytes(), "gb2312");
 
@@ -68,9 +70,3 @@ public class DeviceConfigHeartBeatParamRequest
         this.b = paramLong;
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/message/content/remoteconfig/DeviceConfigHeartBeatParamRequest.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

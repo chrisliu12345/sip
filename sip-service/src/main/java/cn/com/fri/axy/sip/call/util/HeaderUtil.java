@@ -23,9 +23,9 @@ public final class HeaderUtil {
     private static final List a;
 
     public static boolean containsSupported100rel(SipServletMessage paramSipServletMessage) {
-        paramSipServletMessage = paramSipServletMessage.getHeaders("Supported");
-        while (paramSipServletMessage.hasNext()) {
-            if (((String) paramSipServletMessage.next()).indexOf("100rel") >= 0) {
+        ListIterator<String> s = paramSipServletMessage.getHeaders("Supported");
+        while (s.hasNext()) {
+            if (((String) s.next()).indexOf("100rel") >= 0) {
                 return true;
             }
         }
@@ -33,9 +33,9 @@ public final class HeaderUtil {
     }
 
     public static boolean containsRequire100rel(SipServletMessage paramSipServletMessage) {
-        paramSipServletMessage = paramSipServletMessage.getHeaders("Require");
-        while (paramSipServletMessage.hasNext()) {
-            if (((String) paramSipServletMessage.next()).indexOf("100rel") >= 0) {
+        ListIterator<String> s = paramSipServletMessage.getHeaders("Require");
+        while (s.hasNext()) {
+            if (((String) s.next()).indexOf("100rel") >= 0) {
                 return true;
             }
         }
@@ -53,7 +53,7 @@ public final class HeaderUtil {
 
 
     public static void removeHeadersItem(SipServletMessage paramSipServletMessage, String paramString1, String paramString2) {
-        a(paramSipServletMessage = paramSipServletMessage.getHeaders(paramString1), paramString2);
+        a(paramSipServletMessage.getHeaders(paramString1), paramString2);
     }
 
     private static void a(ListIterator paramListIterator, String paramString) {
@@ -80,8 +80,8 @@ public final class HeaderUtil {
             ListIterator localListIterator = paramSipServletMessage.getAddressHeaders("P-Asserted-Identity");
 
             while (localListIterator.hasNext()) {
-                if ((paramSipServletMessage = (Address) localListIterator.next()).getURI().isSipURI()) {
-                    return paramSipServletMessage;
+                if (((Address) localListIterator.next()).getURI().isSipURI()) {
+                    return ((Address) localListIterator.next());
                 }
             }
         } catch (ServletParseException localServletParseException) {
@@ -93,8 +93,9 @@ public final class HeaderUtil {
     public static String[] getHeaderValues(String paramString1, String paramString2) {
         if (paramString1.indexOf(paramString2) == -1) {
 
-            (paramString2 = new String[1])[0] = paramString1;
-            return paramString2;
+//            (new String[1])[0] = paramString1;
+//            return paramString2;
+            return null;
         }
 
         return paramString1.split(paramString2);
@@ -175,19 +176,17 @@ public final class HeaderUtil {
             }
 
             localListIterator = paramSipServletResponse1.getHeaders(str);
-
-
             continue;
-            paramSipServletResponse2.addHeader(str, (String) localListIterator.next());
+//            paramSipServletResponse2.addHeader(str, (String) localListIterator.next());
         }
     }
 
 
     public static void copyHeaders(SipServletMessage paramSipServletMessage1, SipServletMessage paramSipServletMessage2, String paramString) {
-        paramSipServletMessage1 = paramSipServletMessage1.getHeaders(paramString);
+        ListIterator<String> s = paramSipServletMessage1.getHeaders(paramString);
 
-        while (paramSipServletMessage1.hasNext()) {
-            paramSipServletMessage2.addHeader(paramString, (String) paramSipServletMessage1.next());
+        while (s.hasNext()) {
+            paramSipServletMessage2.addHeader(paramString, (String) s.next());
         }
     }
 
@@ -208,8 +207,8 @@ public final class HeaderUtil {
         }
 
         while (localListIterator.hasPrevious()) {
-            paramSipServletMessage = (Address) localListIterator.previous();
-            paramSipServletRequest.pushRoute((SipURI) paramSipServletMessage.getURI());
+            Address s = (Address) localListIterator.previous();
+            paramSipServletRequest.pushRoute((SipURI) s.getURI());
         }
     }
 
@@ -231,26 +230,20 @@ public final class HeaderUtil {
     }
 
     public static void main(String[] paramArrayOfString) {
-        (paramArrayOfString = new ArrayList()).add(" 100rel ,yy");
-
-        paramArrayOfString.add(" 100rel , 200rel, prack");
-        a(paramArrayOfString.listIterator(), "100rel");
-        System.out.println(paramArrayOfString.size());
-        paramArrayOfString = paramArrayOfString.iterator();
-        while (paramArrayOfString.hasNext()) {
-            System.out.println(paramArrayOfString.next());
+        ArrayList l = new ArrayList();
+        l.add(" 100rel ,yy");
+        l.add(" 100rel , 200rel, prack");
+        a(l.listIterator(), "100rel");
+        System.out.println(l.size());
+        Iterator i = l.iterator();
+        while (i.hasNext()) {
+            System.out.println(i.next());
         }
 
-        paramArrayOfString = (paramArrayOfString = ",").substring(1);
+//        paramArrayOfString = (paramArrayOfString = ",").substring(1);
         System.out.println("test:" + paramArrayOfString);
     }
 
     public static void replacesAllPAI(SipServletMessage paramSipServletMessage, String paramString) {
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/call/util/HeaderUtil.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

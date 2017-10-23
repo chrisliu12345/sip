@@ -72,13 +72,9 @@ public class DecoderTimeParamConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><TimeParam><Date>日期</Date><Time>时间</Time><AdjustTime>校时方式</AdjustTime></TimeParam></Response>";
-
-
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><TimeParam><Date>日期</Date><Time>时间</Time><AdjustTime>校时方式</AdjustTime></TimeParam></Response>";
         DecoderTimeParamConfigDownloadResponse localDecoderTimeParamConfigDownloadResponse;
-
-
-        (localDecoderTimeParamConfigDownloadResponse = new DecoderTimeParamConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localDecoderTimeParamConfigDownloadResponse = new DecoderTimeParamConfigDownloadResponse("")).setXmlContent(s);
         localDecoderTimeParamConfigDownloadResponse.genParameters();
         System.out.println(localDecoderTimeParamConfigDownloadResponse.toString());
     }

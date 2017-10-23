@@ -103,13 +103,13 @@ public class AlarmActiveOndutyTimeConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><ActiveOndutyTime><Day>TRUE</Day><Week>TRUE</Week><Month>TRUE</Month><SpecialDate>TRUE</SpecialDate></ActiveOndutyTime></Response>";
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><ActiveOndutyTime><Day>TRUE</Day><Week>TRUE</Week><Month>TRUE</Month><SpecialDate>TRUE</SpecialDate></ActiveOndutyTime></Response>";
 
 
         AlarmActiveOndutyTimeConfigDownloadResponse localAlarmActiveOndutyTimeConfigDownloadResponse;
 
 
-        (localAlarmActiveOndutyTimeConfigDownloadResponse = new AlarmActiveOndutyTimeConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localAlarmActiveOndutyTimeConfigDownloadResponse = new AlarmActiveOndutyTimeConfigDownloadResponse("")).setXmlContent(s);
         localAlarmActiveOndutyTimeConfigDownloadResponse.genParameters();
         System.out.println(localAlarmActiveOndutyTimeConfigDownloadResponse.toString());
     }

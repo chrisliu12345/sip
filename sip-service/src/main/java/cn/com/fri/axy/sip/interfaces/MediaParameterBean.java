@@ -120,64 +120,60 @@ public class MediaParameterBean {
         }
 
 
-        (paramString = new StringBuilder(paramString)).insert(paramString.indexOf("a"), "/");
-        paramString.append("/");
+        StringBuilder sb = new StringBuilder(paramString);
+                sb.insert(paramString.indexOf("a"), "/");
+        sb.append("/");
         while (paramString.indexOf("//") > -1) {
-            paramString.insert(paramString.indexOf("//") + 1, '0');
+            sb.insert(paramString.indexOf("//") + 1, '0');
         }
 
         SysLogger.info(paramString.toString());
-        paramString = paramString.toString().split("[/]");
+        String[] xx = sb.toString().split("[/]");
 
 
-        this.a = Integer.parseInt(paramString[1]);
-        this.b = Integer.parseInt(paramString[2]);
-        this.c = Integer.parseInt(paramString[3]);
-        this.d = Integer.parseInt(paramString[4]);
-        this.e = Integer.parseInt(paramString[5]);
+        this.a = Integer.parseInt(xx[1]);
+        this.b = Integer.parseInt(xx[2]);
+        this.c = Integer.parseInt(xx[3]);
+        this.d = Integer.parseInt(xx[4]);
+        this.e = Integer.parseInt(xx[5]);
 
-        this.f = Integer.parseInt(paramString[7]);
-        this.g = Integer.parseInt(paramString[8]);
-        this.h = Integer.parseInt(paramString[9]);
+        this.f = Integer.parseInt(xx[7]);
+        this.g = Integer.parseInt(xx[8]);
+        this.h = Integer.parseInt(xx[9]);
     }
 
 
     public static void main2(String[] paramArrayOfString) {
-        (paramArrayOfString = new MediaParameterBean()).setA_EnCodingFormat(1);
-        paramArrayOfString.setA_SamplingRate(2);
-        paramArrayOfString.setA_StreamAmount(3);
-        paramArrayOfString.setV_EnCodingFormat(4);
-        paramArrayOfString.setV_FrameRate(5);
-        paramArrayOfString.setV_Resolution(6);
-        paramArrayOfString.setV_StreamAmount(7);
-        paramArrayOfString.setV_StreamType(8);
+        MediaParameterBean m = new MediaParameterBean();
+                m.setA_EnCodingFormat(1);
+        m.setA_SamplingRate(2);
+        m.setA_StreamAmount(3);
+        m.setV_EnCodingFormat(4);
+        m.setV_FrameRate(5);
+        m.setV_Resolution(6);
+        m.setV_StreamAmount(7);
+        m.setV_StreamType(8);
 
-        paramArrayOfString = paramArrayOfString.getMediaParameter();
+        String x = m.getMediaParameter();
         System.out.println(paramArrayOfString);
-        System.out.println(Pattern.matches("v/\\d*/\\d*/\\d*/\\d*/\\d*a/\\d*/\\d*/\\d*", paramArrayOfString));
+        //System.out.println(Pattern.matches("v/\\d*/\\d*/\\d*/\\d*/\\d*a/\\d*/\\d*/\\d*", paramArrayOfString));
 
-        paramArrayOfString = paramArrayOfString.split("[va/]");
+        paramArrayOfString = x.split("[va/]");
         System.out.println(paramArrayOfString.length);
         String[] arrayOfString = paramArrayOfString;
         int j = paramArrayOfString.length;
         for (int i = 0; i < j; i++) {
-            paramArrayOfString = arrayOfString[i];
+            String a = arrayOfString[i];
 
-            System.out.println(paramArrayOfString);
+            System.out.println(a);
         }
     }
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "v/1/2/3/4/5a/6/7/8";
+        String ab = "v/1/2/3/4/5a/6/7/8";
         MediaParameterBean localMediaParameterBean;
-        (localMediaParameterBean = new MediaParameterBean()).parseMediaParameter(paramArrayOfString);
+        (localMediaParameterBean = new MediaParameterBean()).parseMediaParameter(ab);
         SysLogger.info(localMediaParameterBean.toString());
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/interfaces/MediaParameterBean.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

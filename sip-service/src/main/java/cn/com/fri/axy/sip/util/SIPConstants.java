@@ -26,30 +26,21 @@ public class SIPConstants {
 
 
     public static String getMediaFileType(String paramString) {
+        Integer result=null;
         if ((paramString == null) || (paramString.length() == 0)) {
-
-
-            paramString = 1;
+            result = 1;
         } else if (!"manual".equalsIgnoreCase(paramString)) {
             if ("alarm".equalsIgnoreCase(paramString)) {
 
 
-                paramString = 2;
+                result = 2;
             } else if ("time".equalsIgnoreCase(paramString)) {
-                paramString = 3;
+                result = 3;
             } else
                 "all".equalsIgnoreCase(paramString);
         } else {
-            paramString = 1;
+            result = 1;
         }
-
-
-        return Integer.toString(paramString);
+        return Integer.toString(result);
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/util/SIPConstants.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

@@ -24,9 +24,9 @@ public class SipUtil {
         try {
             paramSipServletMessage.send();
             return;
-        } catch (IOException paramSipServletMessage) {
-            SysLogger.error(SipUtil.class + "->sendSipMessage(SipServletMessage msg):" + paramSipServletMessage.getMessage());
-            SysLogger.printStackTrace(paramSipServletMessage);
+        } catch (IOException e) {
+            SysLogger.error(SipUtil.class + "->sendSipMessage(SipServletMessage msg):" + e.getMessage());
+            SysLogger.printStackTrace(e);
         }
     }
 
@@ -46,33 +46,25 @@ public class SipUtil {
             paramSipServletResponse.sendReliably();
             return;
 
-        } catch (Rel100Exception localRel100Exception) {
-            SysLogger.printStackTrace(paramSipServletResponse = localRel100Exception);
+        } catch (Rel100Exception e) {
+            SysLogger.printStackTrace(e);
             return;
-        } catch (Exception localException) {
-            SysLogger.printStackTrace(paramSipServletResponse = localException);
+        } catch (Exception e) {
+            SysLogger.printStackTrace(e);
         }
     }
 
 
     public static int getByeReasonCode(MessageContext paramMessageContext) {
-        paramMessageContext = paramMessageContext.getHeader("Reason");
+        String h = paramMessageContext.getHeader("Reason");
         int i = 120;
         if (paramMessageContext != null) {
             try {
-                i = Integer.parseInt(paramMessageContext);
-            } catch (Exception localException) {
-                SysLogger.printStackTrace(paramMessageContext = localException);
+                i = Integer.parseInt(h);
+            } catch (Exception e) {
+                SysLogger.printStackTrace(e);
             }
         }
-
-
         return i;
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/util/SipUtil.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

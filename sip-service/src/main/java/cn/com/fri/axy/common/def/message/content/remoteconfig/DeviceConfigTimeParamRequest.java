@@ -28,27 +28,28 @@ public class DeviceConfigTimeParamRequest
 
 
     public void genXmlContent() {
-        (localObject = new StringBuffer()).append("<?xml version=\"1.0\"?>\n");
-        ((StringBuffer) localObject).append("<Query>\n");
+        StringBuffer sb = new StringBuffer();
+        sb.append("<?xml version=\"1.0\"?>\n");
+        sb.append("<Query>\n");
 
-        ((StringBuffer) localObject).append("<CmdType>" + getCmdType() + "</CmdType>\n");
+        sb.append("<CmdType>" + getCmdType() + "</CmdType>\n");
 
-        ((StringBuffer) localObject).append("<SN>" + getSn() + "</SN>\n");
+        sb.append("<SN>" + getSn() + "</SN>\n");
 
-        ((StringBuffer) localObject).append("<DeviceID>" + getDeviceID() + "</DeviceID>\n");
+        sb.append("<DeviceID>" + getDeviceID() + "</DeviceID>\n");
 
 
-        ((StringBuffer) localObject).append("<TimeParam>\n");
+        sb.append("<TimeParam>\n");
 
-        ((StringBuffer) localObject).append("<Date>" + (getDate() != null ? getDate() : "") + "</Date>\n");
+        sb.append("<Date>" + (getDate() != null ? getDate() : "") + "</Date>\n");
 
-        ((StringBuffer) localObject).append("<Time>" + (getTime() != null ? getTime() : "") + "</Time>\n");
+        sb.append("<Time>" + (getTime() != null ? getTime() : "") + "</Time>\n");
 
-        ((StringBuffer) localObject).append("<AdjustTime>" + (getAdjustTime() != null ? getAdjustTime() : "") + "</AdjustTime>\n");
-        ((StringBuffer) localObject).append("</TimeParam>\n");
-        ((StringBuffer) localObject).append("</Query>\n");
+        sb.append("<AdjustTime>" + (getAdjustTime() != null ? getAdjustTime() : "") + "</AdjustTime>\n");
+        sb.append("</TimeParam>\n");
+        sb.append("</Query>\n");
 
-        Object localObject = ((StringBuffer) localObject).toString();
+        Object localObject = sb.toString();
         try {
             localObject = new String(((String) localObject).getBytes(), "gb2312");
 

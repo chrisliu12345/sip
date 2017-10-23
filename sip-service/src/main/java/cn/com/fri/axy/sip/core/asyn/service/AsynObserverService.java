@@ -22,7 +22,7 @@ public class AsynObserverService
             this.a.update(null, this.b);
             return;
         } catch (Exception localException) {
-            SysLogger.printStackTrace(this = localException);
+            SysLogger.printStackTrace( localException);
         }
     }
 }

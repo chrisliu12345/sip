@@ -13,21 +13,16 @@ import javax.servlet.sip.SipFactory;
 import javax.servlet.sip.SipURI;
 import java.util.Iterator;
 
+import static gov.nist.javax.sip.header.ParameterNames.URI;
+
 
 public class LocationService {
     private static LocationService a = new LocationService();
 
-
     private Address b;
-
-
     private String c;
-
-
     private String d;
-
     private SipFactory e;
-
 
     public static synchronized LocationService getInstance() {
         return a;
@@ -43,24 +38,21 @@ public class LocationService {
             return;
 
         } catch (Exception localException) {
-            SysLogger.printStackTrace(this = localException);
+            SysLogger.printStackTrace(localException);
             System.exit(0);
         }
     }
-
 
     public String getSIPServerID() {
         return this.d;
     }
 
-
     public String getRegionID() {
         return this.c;
     }
 
-
     public String getDomainURI(String paramString) {
-        this = paramString.substring(0, 8);
+        paramString.substring(0, 8);
         return "sip:" + paramString + "@" + this;
     }
 
@@ -68,13 +60,11 @@ public class LocationService {
     public SipURI getFullURIByID(String paramString) {
         SysLogger.info(getClass() + "\ngetFullURIByID DeviceID:" + paramString);
 
-
-        if ((this = getAddressByID(paramString)) == null) {
-            this = null;
+        if ((getAddressByID(paramString)) == null) {
+            return null;
         } else {
-            this = (SipURI) getURI();
+            return (SipURI) getURI();
         }
-        return this;
     }
 
 
@@ -92,13 +82,10 @@ public class LocationService {
         SysLogger.info(getClass() + "\nisLocalDomainDeviceOnline:" + paramString);
         if (isLocalDomainDevice(paramString)) {
             if (RegExUtil.isUserDevice(paramString)) {
-
-
                 return true;
             }
 
-
-            this = SSDConfig.getInstance().getParentDeviceID(paramString);
+            SSDConfig.getInstance().getParentDeviceID(paramString);
 
             if (RegistrationService.getInstance().getAllRegistrations().containsKey(this)) {
                 return true;
@@ -106,7 +93,6 @@ public class LocationService {
 
             return false;
         }
-
 
         return true;
     }
@@ -120,10 +106,11 @@ public class LocationService {
         if (isLocalDomainDevice(paramString)) {
             SysLogger.info(getClass() + "\nisLocalDomainDevice");
 
-            this = SSDConfig.getInstance().getParentDeviceID(paramString);
+            SSDConfig.getInstance().getParentDeviceID(paramString);
 
 
-            ((SipURI) (localAddress = (this = RegistrationService.getInstance().getByDeviceID(this)) != null ? (Address) getContacts().get(0) : null).getURI()).setUser(paramString);
+//            SipURI uri =  RegistrationService.getInstance().getByDeviceID(this)) != null ? (Address) getContacts().get(0) : null);
+//                    .getURI()).setUser(paramString);
 
         } else {
             SysLogger.info(getClass() + "\nisOutBoundDomainDevice");
@@ -131,7 +118,7 @@ public class LocationService {
                 localAddress = ServletContextHelper.getSipFactory().createAddress("sip:" + paramString + "@" +
                         SSDConfig.getInstance().getOtherSystemIP() + ":" + SSDConfig.getInstance().getOtherSystemPort());
             } catch (ServletParseException localServletParseException) {
-                SysLogger.printStackTrace(this = localServletParseException);
+                SysLogger.printStackTrace(localServletParseException);
             }
         }
         return localAddress;
@@ -154,11 +141,12 @@ public class LocationService {
 
 
     public String getDevicePassword(String paramString) {
-        if ((this = SSDConfig.getInstance().getSipDevicePassword(paramString)) == null) {
-            this = "12345678";
+        String password = SSDConfig.getInstance().getSipDevicePassword(paramString);
+        if (password == null) {
+            password = "12345678";
         }
 
-        return this;
+        return password;
     }
 
 
@@ -176,7 +164,7 @@ public class LocationService {
 
     public boolean isUAExist(String paramString) {
         for (Iterator localIterator = SSDConfig.getInstance().getAllDeviceID().iterator(); localIterator.hasNext(); ) {
-            if ((this = (String) localIterator.next()).equalsIgnoreCase(paramString)) {
+            if (((String) localIterator.next()).equalsIgnoreCase(paramString)) {
                 return true;
             }
         }
@@ -186,10 +174,8 @@ public class LocationService {
 
     public static void main(String[] paramArrayOfString) {
     }
+
+    public Object getURI() {
+        return URI;
+    }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/location/LocationService.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

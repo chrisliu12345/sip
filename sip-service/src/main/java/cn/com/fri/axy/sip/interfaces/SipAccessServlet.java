@@ -23,21 +23,19 @@ public class SipAccessServlet
     private Controller a;
 
     public void init(ServletConfig paramServletConfig) {
-        super.init(paramServletConfig);
-
+        init(paramServletConfig);
 
         try {
-            localObject = new Properties();
-
-
-            localObject = (SipFactory) (localObject = (Context) (localObject = new InitialContext((Hashtable) localObject)).lookup("java:comp/env")).lookup("sip/SIPStandardDebug/SipFactory");
-            SysLogger.info("Sip Factory ref from JNDI : " + localObject);
-
-
-            ServletContextHelper.setSipFactory((SipFactory) localObject);
+            Properties properties = new Properties();
+            InitialContext context= new InitialContext((Hashtable) properties);
+//            localObject = (SipFactory) ( (context.lookup("java:comp/env")).lookup("sip/SIPStandardDebug/SipFactory");
+//            SysLogger.info("Sip Factory ref from JNDI : " + localObject);
+//
+//
+//            ServletContextHelper.setSipFactory((SipFactory) localObject);
         } catch (Exception localException) {
             Object localObject;
-            SysLogger.printStackTrace(localObject = localException);
+            SysLogger.printStackTrace(localException);
         }
 
         SSDConfig.getInstance();
@@ -70,9 +68,3 @@ public class SipAccessServlet
     public static void main(String[] paramArrayOfString) {
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/interfaces/SipAccessServlet.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

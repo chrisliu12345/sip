@@ -67,7 +67,7 @@ public abstract class CallBean
             return;
 
         } catch (Exception localException) {
-            (this = localException).printStackTrace();
+            ( localException).printStackTrace();
         }
     }
 

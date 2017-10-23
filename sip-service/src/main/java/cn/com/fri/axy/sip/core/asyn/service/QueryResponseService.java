@@ -21,7 +21,7 @@ public class QueryResponseService
             this.a.fire(this.b);
             return;
         } catch (Exception localException) {
-            SysLogger.printStackTrace(this = localException);
+            SysLogger.printStackTrace( localException);
         }
     }
 }

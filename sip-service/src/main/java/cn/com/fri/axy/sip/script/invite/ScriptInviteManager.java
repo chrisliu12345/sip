@@ -59,16 +59,11 @@ public class ScriptInviteManager {
             localVector.add(str);
         }
 
-        for (localIterator = localVector.iterator(); localIterator.hasNext(); ) {
+        Iterator localIterator = localVector.iterator();
+        for (; localIterator.hasNext(); ) {
             str = (String) localIterator.next();
 
             endInviteSession(str);
         }
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/script/invite/ScriptInviteManager.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

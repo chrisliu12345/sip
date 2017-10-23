@@ -10,7 +10,7 @@ public class RegExUtil {
         try {
             return Pattern.matches("\\d{20}", paramString);
         } catch (Exception localException) {
-            SysLogger.printStackTrace(paramString = localException);
+            SysLogger.printStackTrace( localException);
         }
         return false;
     }
@@ -72,8 +72,8 @@ public class RegExUtil {
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = validateCode("13030000001310000001");
-        System.out.println(paramArrayOfString);
+        boolean s = validateCode("13030000001310000001");
+        System.out.println(s);
     }
 }
 
