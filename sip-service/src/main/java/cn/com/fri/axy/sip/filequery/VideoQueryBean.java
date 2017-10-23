@@ -58,14 +58,14 @@ public class VideoQueryBean {
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "11111111112222222222";
+        String s = "11111111112222222222";
         String str = "alarm";
         Date localDate1 = new DateUtil().TGS_StringToDate("20090610141000");
         Date localDate2 = new DateUtil().TGS_StringToDate("20090612141000");
 
-        paramArrayOfString = new VideoQueryBean(paramArrayOfString, str, localDate1.getTime(), localDate2.getTime());
+        VideoQueryBean v = new VideoQueryBean(s, str, localDate1.getTime(), localDate2.getTime());
 
-        System.out.println(paramArrayOfString.getXmlContent());
+        System.out.println(v.getXmlContent());
     }
 
     public String getDeviceID() {
@@ -73,8 +73,3 @@ public class VideoQueryBean {
     }
 }
 
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/filequery/VideoQueryBean.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

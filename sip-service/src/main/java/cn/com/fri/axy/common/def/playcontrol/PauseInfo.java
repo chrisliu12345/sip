@@ -22,13 +22,9 @@ public class PauseInfo
 
 
     public static void main(String[] paramArrayOfString) {
-        (paramArrayOfString = new PauseInfo()).setPauseTime(100);
-        System.out.println(paramArrayOfString.getInfoContent());
+        PauseInfo  s = new PauseInfo();
+        s.setPauseTime(100);
+        System.out.println(s.getInfoContent());
     }
 }
 
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/playcontrol/PauseInfo.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

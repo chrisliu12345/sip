@@ -67,18 +67,16 @@ public class SSRCManager {
         for (int i = 0; i < paramArrayOfBoolean.length; i++) {
             int j = (i + paramInt) % paramArrayOfBoolean.length;
 
-            if (paramArrayOfBoolean[j] == 0) {
-                paramArrayOfBoolean[j] = true;
-
-
-                paramArrayOfBoolean = Integer.toString(j);
-                paramInt = 4 - paramArrayOfBoolean.length();
-                for (i = 0; i < paramInt; i++) {
-                    paramArrayOfBoolean = "0" + paramArrayOfBoolean;
-                }
-
-                return paramArrayOfBoolean;
-            }
+//            if (paramArrayOfBoolean[j] == 0) {
+//                paramArrayOfBoolean[j] = true;
+//                paramArrayOfBoolean = Integer.toString(j);
+//                paramInt = 4 - paramArrayOfBoolean.length();
+//                for (i = 0; i < paramInt; i++) {
+//                    paramArrayOfBoolean = "0" + paramArrayOfBoolean;
+//                }
+//
+//                return paramArrayOfBoolean;
+//            }
         }
 
 
@@ -131,9 +129,9 @@ public class SSRCManager {
     private static int a(boolean[] paramArrayOfBoolean) {
         int i = 0;
         for (int j = 0; j < a; j++) {
-            if (paramArrayOfBoolean[j] == 0) {
-                i++;
-            }
+//            if (paramArrayOfBoolean[j] == 0) {
+//                i++;
+//            }
         }
 
         return i;
@@ -142,17 +140,17 @@ public class SSRCManager {
 
     public static void main(String[] paramArrayOfString) {
         System.out.println("lookupSSRC:" + getInstance().lookupSSRC(true));
-        for (paramArrayOfString = 0; paramArrayOfString < 1000; paramArrayOfString++) {
-            getInstance().getSSRC(true);
-        }
-
-        paramArrayOfString = getInstance().getSSRC(true);
-
-        for (int i = 0; i < 8998; i++) {
-            getInstance().getSSRC(true);
-        }
-
-        getInstance().releaseSSRC(paramArrayOfString);
+//        for (paramArrayOfString = 0; paramArrayOfString < 1000; paramArrayOfString++) {
+//            getInstance().getSSRC(true);
+//        }
+//
+//        paramArrayOfString = getInstance().getSSRC(true);
+//
+//        for (int i = 0; i < 8998; i++) {
+//            getInstance().getSSRC(true);
+//        }
+//
+//        getInstance().releaseSSRC(paramArrayOfString);
         String str = getInstance().getSSRC(true);
         System.out.println("ssrc1:" + paramArrayOfString);
         System.out.println("ssrc2:" + str);

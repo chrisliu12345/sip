@@ -36,11 +36,12 @@ public class AlarmResponse extends ResMessage {
 
 
     public static void main(String[] paramArrayOfString) {
-        (paramArrayOfString = new AlarmResponse("sss")).setDeviceID("sss");
-        paramArrayOfString.setResult("OK");
-        paramArrayOfString.setSn("111");
-        paramArrayOfString.genXmlContent();
-        System.out.println(paramArrayOfString.getXmlContent());
+        AlarmResponse s = new AlarmResponse("sss");
+        s.setDeviceID("sss");
+        s.setResult("OK");
+        s.setSn("111");
+        s.genXmlContent();
+        System.out.println(s.getXmlContent());
     }
 
     public String getDeviceID() {

@@ -2,9 +2,6 @@ package cn.com.fri.axy.sip.event;
 
 import cn.com.fri.axy.common.util.SysLogger;
 
-import javax.servlet.ServletException;
-import java.io.IOException;
-
 
 public final class EventDispatcher {
     public static void fireEvent(Event paramEvent, EventListener paramEventListener) {
@@ -17,15 +14,9 @@ public final class EventDispatcher {
             SysLogger.info("event filter is false");
             return;
         }
+        paramEventListener.handleEvent(paramEvent);
+        return;
 
-        try {
-            paramEventListener.handleEvent(paramEvent);
-            return;
-        } catch (ServletException paramEvent) {
-            throw new EventException(paramEvent);
-        } catch (IOException paramEvent) {
-            throw new EventException(paramEvent);
-        }
     }
 }
 

@@ -141,13 +141,13 @@ public class AlarmRequest
     }
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString =
+        String s =
                 "<?xml version=\"1.0\" encoding=\"gb2312\" standalone=\"yes\" ?>\n<Notify>\n\t\t<CmdType>Alarm</CmdType>\n\t\t<SN>111111</SN>\n\t\t<DeviceID>a001</DeviceID>\n\t\t<AlarmPriority>high</AlarmPriority>\n\t\t<AlarmMethod>110</AlarmMethod>\n\t\t<AlarmTime>2007-07-01T09:30:10.5</AlarmTime>\n\t\t<Latitude>47</Latitude>\n<Info><AlarmType>1</AlarmType></Info>\t</Notify>\n";
 
 
         System.out.println(paramArrayOfString);
         AlarmRequest localAlarmRequest;
-        (localAlarmRequest = new AlarmRequest("a001", null)).setXmlContent(paramArrayOfString);
+        (localAlarmRequest = new AlarmRequest("a001", null)).setXmlContent(s);
         localAlarmRequest.genParameters();
         System.out.println(localAlarmRequest.getAlarmMethod());
         System.out.println(localAlarmRequest.getAlarmPriority());

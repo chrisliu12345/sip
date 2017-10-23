@@ -27,13 +27,13 @@ public class KeepaliveRequest
             this.c = new Vector();
 
             String[] arrayOfString;
-            int j = (arrayOfString = localObject = (localObject = ((String) localObject).substring(((String) localObject).indexOf("<Info>"))).split("<DeviceID>")).length;
-            for (int i = 0; i < j; i++) {
-                if ((localObject = arrayOfString[i]).indexOf("</DeviceID>") > -1) {
-
-                    this.c.add(((String) localObject).substring(0, ((String) localObject).indexOf("</DeviceID>")));
-                }
-            }
+//            int j =  (localObject = ((String) localObject).substring(((String) localObject).indexOf("<Info>"))).split("<DeviceID>").length;
+//            for (int i = 0; i < j; i++) {
+//                if ((arrayOfString[i]).indexOf("</DeviceID>") > -1) {
+//
+//                    this.c.add(((String) localObject).substring(0, ((String) localObject).indexOf("</DeviceID>")));
+//                }
+//            }
         }
     }
 
@@ -67,13 +67,13 @@ public class KeepaliveRequest
     }
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Notify><CmdType>Keepalive</CmdType><SN>命令序列号</SN>< DeviceID > 设备编码</ DeviceID ><Status> ERROR</Status><Info><DeviceID> 故障设备编码1</DeviceID><DeviceID> 故障设备编码n</DeviceID></Info></Notify>";
+        String s = "<?xml version=\"1.0\"?><Notify><CmdType>Keepalive</CmdType><SN>命令序列号</SN>< DeviceID > 设备编码</ DeviceID ><Status> ERROR</Status><Info><DeviceID> 故障设备编码1</DeviceID><DeviceID> 故障设备编码n</DeviceID></Info></Notify>";
 
 
         KeepaliveRequest localKeepaliveRequest;
 
 
-        (localKeepaliveRequest = new KeepaliveRequest(null)).setXmlContent(paramArrayOfString);
+        (localKeepaliveRequest = new KeepaliveRequest(null)).setXmlContent(s);
         localKeepaliveRequest.genParameters();
         SysLogger.info("");
         SysLogger.info(localKeepaliveRequest.getDeviceID());

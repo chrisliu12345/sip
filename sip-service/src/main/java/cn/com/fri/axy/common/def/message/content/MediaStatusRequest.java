@@ -49,13 +49,13 @@ public class MediaStatusRequest
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Notify><CmdType>Keepalive</CmdType><SN>命令序列号</SN>< DeviceID > 设备编码</ DeviceID ><Status> ERROR</Status><Info><DeviceID> 故障设备编码1</DeviceID><DeviceID> 故障设备编码n</DeviceID></Info></Notify>";
+        String s = "<?xml version=\"1.0\"?><Notify><CmdType>Keepalive</CmdType><SN>命令序列号</SN>< DeviceID > 设备编码</ DeviceID ><Status> ERROR</Status><Info><DeviceID> 故障设备编码1</DeviceID><DeviceID> 故障设备编码n</DeviceID></Info></Notify>";
 
 
         KeepaliveRequest localKeepaliveRequest;
 
 
-        (localKeepaliveRequest = new KeepaliveRequest(null)).setXmlContent(paramArrayOfString);
+        (localKeepaliveRequest = new KeepaliveRequest(null)).setXmlContent(s);
         localKeepaliveRequest.genParameters();
         SysLogger.info("");
         SysLogger.info(localKeepaliveRequest.getDeviceID());

@@ -3,7 +3,9 @@ package cn.com.fri.axy.sip.core;
 import cn.com.fri.axy.sip.util.ServletContextHelper;
 
 import javax.servlet.sip.*;
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.ListIterator;
 
@@ -160,9 +162,9 @@ public abstract class SipMessageContext
 
 
     public boolean containsRequire100rel() {
-        this = this.sipMessage.getHeaders("Require");
-        while (hasNext()) {
-            if (((String) next()).indexOf("100rel") >= 0) {
+       ListIterator<String> r= sipMessage.getHeaders("Require");
+        while (r.hasNext()) {
+            if ((r.next()).indexOf("100rel") >= 0) {
                 return true;
             }
         }
@@ -171,9 +173,9 @@ public abstract class SipMessageContext
 
 
     public boolean containsSupported100rel() {
-        this = this.sipMessage.getHeaders("Supported");
-        while (hasNext()) {
-            if (((String) next()).indexOf("100rel") >= 0) {
+        ListIterator<String> s=sipMessage.getHeaders("Supported");
+        while (s.hasNext()) {
+            if ((s.next()).indexOf("100rel") >= 0) {
                 return true;
             }
         }
@@ -184,12 +186,22 @@ public abstract class SipMessageContext
         this.sipMessage.addAddressHeader(paramString, paramAddress, paramBoolean);
     }
 
-    public ListIterator getAddressHeaders(String paramString) {
-        return this.sipMessage.getAddressHeaders(paramString);
+    public ListIterator getAddressHeaders(String paramString)  {
+        try {
+            return sipMessage.getAddressHeaders(paramString);
+        } catch (ServletParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public Object getContent() {
-        return this.sipMessage.getContent();
+        try {
+            return sipMessage.getContent();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String getContentType() {
@@ -201,7 +213,12 @@ public abstract class SipMessageContext
     }
 
     public byte[] getRawContent() {
-        return this.sipMessage.getRawContent();
+        try {
+            return sipMessage.getRawContent();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void setAddressHeader(String paramString, Address paramAddress) {
@@ -209,7 +226,11 @@ public abstract class SipMessageContext
     }
 
     public void setContent(Object paramObject, String paramString) {
-        this.sipMessage.setContent(paramObject, paramString);
+        try {
+            sipMessage.setContent(paramObject, paramString);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setContentLength(int paramInt) {

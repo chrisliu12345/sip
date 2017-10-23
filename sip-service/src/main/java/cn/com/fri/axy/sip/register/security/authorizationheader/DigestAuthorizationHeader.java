@@ -19,10 +19,10 @@ public class DigestAuthorizationHeader
 
 
     public void parse(String paramString) {
-        paramString = paramString.split("[ ,]");
-        for (int i = 0; i < paramString.length; i++) {
+        String[] s = paramString.split("[ ,]");
+        for (int i = 0; i < s.length; i++) {
             Object localObject;
-            SysLogger.info(localObject = paramString[i]);
+            SysLogger.info(localObject = s[i]);
             int j;
             if (((String) localObject).indexOf("username") != -1) {
                 j = ((String) localObject).indexOf("\"") + 1;
@@ -57,7 +57,7 @@ public class DigestAuthorizationHeader
             setPassword("12345678");
         }
 
-        paramCapabilityAuthorizationHeader = DigestUtils.getDigest(DigestUtils.getHA1(getUsername(), getRealm(), getPassword()),
+        DigestUtils.getDigest(DigestUtils.getHA1(getUsername(), getRealm(), getPassword()),
                 getNonce(), null, null, null, "REGISTER", getUri());
 
         SysLogger.info(getClass() + "\nresult=" + paramCapabilityAuthorizationHeader);
@@ -122,15 +122,7 @@ public class DigestAuthorizationHeader
     }
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "Digest username=\"xlite22\",realm=\"192.168.3.215\",nonce=\"24f4d7b39ef64c0db42739ba903248e0ad\",uri=\"sip:192.168.3.215\",response=\"3374a7c897f8c51dc23f53580295d0ab\",algorithm=MD5";
-        (
-
-                paramArrayOfString = new DigestAuthorizationHeader(paramArrayOfString)).validate();
+        String s = "Digest username=\"xlite22\",realm=\"192.168.3.215\",nonce=\"24f4d7b39ef64c0db42739ba903248e0ad\",uri=\"sip:192.168.3.215\",response=\"3374a7c897f8c51dc23f53580295d0ab\",algorithm=MD5";
+        new DigestAuthorizationHeader(s).validate();
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/register/security/authorizationheader/DigestAuthorizationHeader.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

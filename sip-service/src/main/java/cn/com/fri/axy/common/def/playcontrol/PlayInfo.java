@@ -33,10 +33,11 @@ public class PlayInfo
 
 
     public static void main(String[] paramArrayOfString) {
-        (paramArrayOfString = new PlayInfo()).setScale(0.5F);
-        paramArrayOfString.setStartRange(100);
-        paramArrayOfString.setStopRange(200);
-        System.out.println(paramArrayOfString.getInfoContent());
+        PlayInfo s = new PlayInfo();
+        s.setScale(0.5F);
+        s.setStartRange(100);
+        s.setStopRange(200);
+        System.out.println(s.getInfoContent());
     }
 
     public void setScale(float paramFloat) {

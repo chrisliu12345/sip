@@ -16,11 +16,11 @@ public class EventHandlerAdapter
 
 
     public void postEvent(Event paramEvent) {
-        if ((this = this.a.getAllEventListener()) != null) {
+        if ((a.getAllEventListener()) != null) {
             int i = 0;
-            for (int j = this.length; i < j; i++) {
-                EventDispatcher.fireEvent(paramEvent, this[i].getEventListener(),
-                        this[i].getEventFilter());
+            for (int j = a.getAllEventListener().length; i < j; i++) {
+//                EventDispatcher.fireEvent(paramEvent, a.getAllEventListener()。[i].getEventListener(),
+//                        this[i].getEventFilter());
             }
         }
     }

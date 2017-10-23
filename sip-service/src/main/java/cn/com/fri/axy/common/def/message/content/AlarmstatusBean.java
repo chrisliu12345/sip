@@ -1,14 +1,14 @@
 package cn.com.fri.axy.common.def.message.content;
 
 
-public class DeviceStatusResponse$AlarmstatusBean {
+public class AlarmstatusBean {
     private String a;
 
 
     private String b;
 
 
-    public DeviceStatusResponse$AlarmstatusBean(DeviceStatusResponse paramDeviceStatusResponse) {
+    public AlarmstatusBean(DeviceStatusResponse paramDeviceStatusResponse) {
     }
 
 

@@ -23,7 +23,7 @@ public class TollgateCarRecordResponse
         localStringBuilder.append("SendRecordNum\t" + this.c + "\n");
 
         for (Iterator localIterator = this.d.iterator(); localIterator.hasNext(); ) {
-            this = (TollgateCarRecordResponse.CarrecordBean) localIterator.next();
+             localIterator.next();
 
             localStringBuilder.append(toString());
         }
@@ -54,22 +54,22 @@ public class TollgateCarRecordResponse
             return;
         }
 
-        Object localObject2;
-        int j = (localObject2 = localObject1).length;
-        for (int i = 0; i < j; i++) {
-            if ((localObject1 = localObject2[i]).indexOf("<TollgateID>") > -1) {
-                SysLogger.info(localObject1);
-                TollgateCarRecordResponse.CarrecordBean localCarrecordBean;
-                TollgateCarRecordResponse.CarrecordBean.a(localCarrecordBean = new TollgateCarRecordResponse.CarrecordBean(this), ((String) localObject1).substring(((String) localObject1).indexOf("<TollgateID>") + "<TollgateID>".length(), ((String) localObject1).indexOf("</TollgateID>")));
-                TollgateCarRecordResponse.CarrecordBean.b(localCarrecordBean, ((String) localObject1).substring(((String) localObject1).indexOf("<CarPlate>") + "<CarPlate>".length(), ((String) localObject1).indexOf("</CarPlate>")));
-                TollgateCarRecordResponse.CarrecordBean.c(localCarrecordBean, ((String) localObject1).substring(((String) localObject1).indexOf("<PlateType>") + "<PlateType>".length(), ((String) localObject1).indexOf("</PlateType>")));
-                TollgateCarRecordResponse.CarrecordBean.d(localCarrecordBean, ((String) localObject1).substring(((String) localObject1).indexOf("<ImageURL>") + "<ImageURL>".length(), ((String) localObject1).indexOf("</ImageURL>")));
-                TollgateCarRecordResponse.CarrecordBean.e(localCarrecordBean, ((String) localObject1).substring(((String) localObject1).indexOf("<Direction>") + "<Direction>".length(), ((String) localObject1).indexOf("</Direction>")));
-                TollgateCarRecordResponse.CarrecordBean.f(localCarrecordBean, ((String) localObject1).substring(((String) localObject1).indexOf("<VehicleSpeed>") + "<VehicleSpeed>".length(), ((String) localObject1).indexOf("</VehicleSpeed>")));
-                TollgateCarRecordResponse.CarrecordBean.g(localCarrecordBean, ((String) localObject1).substring(((String) localObject1).indexOf("<PassTime>") + "<PassTime>".length(), ((String) localObject1).indexOf("</PassTime>")));
-                this.d.add(localCarrecordBean);
-            }
-        }
+//        Object localObject2;
+//        int j = ( localObject1).length;
+//        for (int i = 0; i < j; i++) {
+//            if ((localObject1 = localObject2[i]).indexOf("<TollgateID>") > -1) {
+//                SysLogger.info(localObject1);
+//                TollgateCarRecordResponse.CarrecordBean localCarrecordBean;
+//                TollgateCarRecordResponse.CarrecordBean.a(localCarrecordBean = new TollgateCarRecordResponse.CarrecordBean(this), ((String) localObject1).substring(((String) localObject1).indexOf("<TollgateID>") + "<TollgateID>".length(), ((String) localObject1).indexOf("</TollgateID>")));
+//                TollgateCarRecordResponse.CarrecordBean.b(localCarrecordBean, ((String) localObject1).substring(((String) localObject1).indexOf("<CarPlate>") + "<CarPlate>".length(), ((String) localObject1).indexOf("</CarPlate>")));
+//                TollgateCarRecordResponse.CarrecordBean.c(localCarrecordBean, ((String) localObject1).substring(((String) localObject1).indexOf("<PlateType>") + "<PlateType>".length(), ((String) localObject1).indexOf("</PlateType>")));
+//                TollgateCarRecordResponse.CarrecordBean.d(localCarrecordBean, ((String) localObject1).substring(((String) localObject1).indexOf("<ImageURL>") + "<ImageURL>".length(), ((String) localObject1).indexOf("</ImageURL>")));
+//                TollgateCarRecordResponse.CarrecordBean.e(localCarrecordBean, ((String) localObject1).substring(((String) localObject1).indexOf("<Direction>") + "<Direction>".length(), ((String) localObject1).indexOf("</Direction>")));
+//                TollgateCarRecordResponse.CarrecordBean.f(localCarrecordBean, ((String) localObject1).substring(((String) localObject1).indexOf("<VehicleSpeed>") + "<VehicleSpeed>".length(), ((String) localObject1).indexOf("</VehicleSpeed>")));
+//                TollgateCarRecordResponse.CarrecordBean.g(localCarrecordBean, ((String) localObject1).substring(((String) localObject1).indexOf("<PassTime>") + "<PassTime>".length(), ((String) localObject1).indexOf("</PassTime>")));
+//                this.d.add(localCarrecordBean);
+//            }
+//        }
     }
 
 
@@ -78,14 +78,14 @@ public class TollgateCarRecordResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString =
+        String s =
                 "<?xml version=\"1.0\" encoding=\"gb2312\" standalone=\"yes\"?><Response><CmdType>TGSCarRecordList</CmdType><SN>221</SN><Result>OK</Result><RealRecordNum>757383</RealRecordNum><SendRecordNum>200</SendRecordNum><RecordList><CarRecord><TollgateID>113</TollgateID><CarPlate>粤S6G882</CarPlate><PlateType>02</PlateType><ImageURL>http://213.150.54.8/pic/07031907031136/070319135341021130L047b黑色粤S6G882.jpg</ImageURL><Direction>往虎门方向</Direction><VehicleSpeed>-1</VehicleSpeed><PassTime>20070319135341</PassTime></CarRecord><CarRecord><TollgateID>127</TollgateID><CarPlate>粤S10511</CarPlate><PlateType>02</PlateType><ImageURL>http://213.150.40.7/pic/07031907024067/070319135348011270L053b白色粤S10511.jpg</ImageURL><Direction>出东莞方向</Direction><VehicleSpeed>-1</VehicleSpeed><PassTime>20070319135348</PassTime></CarRecord><CarRecord><TollgateID>113</TollgateID><CarPlate>粤S34248</CarPlate><PlateType>02</PlateType><ImageURL>http://213.150.54.8/pic/07031907031136/070319135355021130L041b黑色粤S34248.jpg</ImageURL><Direction>往虎门方向</Direction><VehicleSpeed>-1</VehicleSpeed><PassTime>20070319135355</PassTime></CarRecord></RecordList></Response>";
 
 
         TollgateCarRecordResponse localTollgateCarRecordResponse;
 
 
-        (localTollgateCarRecordResponse = new TollgateCarRecordResponse(null)).setXmlContent(paramArrayOfString);
+        (localTollgateCarRecordResponse = new TollgateCarRecordResponse(null)).setXmlContent(s);
         localTollgateCarRecordResponse.genParameters();
         System.out.println(localTollgateCarRecordResponse.toString());
     }
@@ -122,9 +122,9 @@ public class TollgateCarRecordResponse
 
     public int getRecordSum() {
         try {
-            return this = Integer.parseInt(this.b);
+            return  Integer.parseInt(this.b);
         } catch (Exception localException) {
-            SysLogger.printStackTrace(this = localException);
+            SysLogger.printStackTrace( localException);
         }
         return 0;
     }
@@ -132,9 +132,9 @@ public class TollgateCarRecordResponse
 
     public int getRecordCurrent() {
         try {
-            return this = Integer.parseInt(this.c);
+            return  Integer.parseInt(this.c);
         } catch (Exception localException) {
-            SysLogger.printStackTrace(this = localException);
+            SysLogger.printStackTrace( localException);
         }
         return 0;
     }

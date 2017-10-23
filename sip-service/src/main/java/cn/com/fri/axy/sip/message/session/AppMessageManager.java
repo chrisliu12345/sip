@@ -113,19 +113,20 @@ public class AppMessageManager {
                 try {
 
                     localObject2 = (AlarmRequest) paramReqResMessage;
-                    (
-                            localObject3 = new AlarmResponse(((AlarmRequest) localObject2).getDestid())).setSn(((AlarmRequest) localObject2).getSn());
-                    ((AlarmResponse) localObject3).setDeviceID(((AlarmRequest) localObject2).getDeviceID());
-                    ((AlarmResponse) localObject3).setResult("OK");
-                    ((AlarmResponse) localObject3).genXmlContent();
+
+                    AlarmResponse a = new AlarmResponse(((AlarmRequest) localObject2).getDestid());
+                    a.setSn(((AlarmRequest) localObject2).getSn());
+                    ((AlarmResponse) a).setDeviceID(((AlarmRequest) localObject2).getDeviceID());
+                    ((AlarmResponse) a).setResult("OK");
+                    ((AlarmResponse) a).genXmlContent();
                     SysLogger.info(getClass() + "\nsend alarm response.");
-                    new MessageHandler().sendMessage((Message) localObject3);
+                    new MessageHandler().sendMessage((Message) a);
 
                     new AsyncServiceDispatcher().callService(new AlarmService((AlarmRequest) localObject2));
                     return;
 
                 } catch (Exception localException1) {
-                    SysLogger.printStackTrace(localObject2 = localException1);
+                    SysLogger.printStackTrace(localException1);
                     return;
                 }
             }
@@ -135,17 +136,18 @@ public class AppMessageManager {
             }
             try {
                 localObject2 = (TollgateAlarmRequest) paramReqResMessage;
-                (
-                        localObject3 = new TollgateAlarmResponse(((TollgateAlarmRequest) localObject2).getDestid())).setDeviceID(((TollgateAlarmRequest) localObject2).getDestid());
-                ((TollgateAlarmResponse) localObject3).setSn(((TollgateAlarmRequest) localObject2).getSn());
-                ((TollgateAlarmResponse) localObject3).setResult("OK");
-                new MessageHandler().sendMessage((Message) localObject3);
+
+                TollgateAlarmResponse t = new TollgateAlarmResponse(((TollgateAlarmRequest) localObject2).getDestid());
+                t.setDeviceID(((TollgateAlarmRequest) localObject2).getDestid());
+                t.setSn(((TollgateAlarmRequest) localObject2).getSn());
+                t.setResult("OK");
+                new MessageHandler().sendMessage((Message) t);
 
                 new AsyncServiceDispatcher().callService(new TGSAlarmService((TollgateAlarmRequest) localObject2));
                 return;
 
             } catch (Exception localException2) {
-                SysLogger.printStackTrace(localObject2 = localException2);
+                SysLogger.printStackTrace(localException2);
                 return;
             }
         }
@@ -163,26 +165,26 @@ public class AppMessageManager {
                     this.b.remove(((ReqMessage) localObject1).getSn());
 
 
-                    ((ReqMessage) localObject1).sendOK();
+//                    ((ReqMessage) localObject1).sendOK();
+//
+//
+//
+//                            new NotifyObject().setCode(212);
+//                    ((NotifyObject) localObject3).setRequset(localObject1);
+//                    ((NotifyObject) localObject3).setResponse(paramReqResMessage);
 
 
-                    (
-                            localObject3 = new NotifyObject()).setCode(212);
-                    ((NotifyObject) localObject3).setRequset(localObject1);
-                    ((NotifyObject) localObject3).setResponse(paramReqResMessage);
-
-
-                    ((ReqMessage) localObject1).fire((NotifyObject) localObject3);
+//                    ((ReqMessage) localObject1).fire((NotifyObject) localObject3);
                     return;
                 }
 
 
-                (localObject3 = new NotifyObject()).setCode(212);
-                ((NotifyObject) localObject3).setRequset(localObject1);
-                ((NotifyObject) localObject3).setResponse(paramReqResMessage);
+                new NotifyObject().setCode(212);
+//                setRequset(localObject1);
+//                ((NotifyObject) localObject3).setResponse(paramReqResMessage);
 
 
-                ((ReqMessage) localObject1).fire((NotifyObject) localObject3);
+//                ((ReqMessage) localObject1).fire((NotifyObject) localObject3);
                 return;
             }
 
@@ -225,10 +227,10 @@ public class AppMessageManager {
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = Integer.MAX_VALUE;
+        Integer i = Integer.MAX_VALUE;
         System.out.println(paramArrayOfString);
 
-        paramArrayOfString++;
+        i++;
         System.out.println(paramArrayOfString);
     }
 }

@@ -33,9 +33,3 @@ public class OndutyTimeBean$ItemBean {
                 "Begin\t" + this.a + "\n" + "End\t" + this.b + "\n";
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/message/content/configdownload/OndutyTimeBean$ItemBean.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

@@ -45,7 +45,8 @@ public class DeviceInfoQuery
 
 
     public static void main(String[] paramArrayOfString) {
-        (paramArrayOfString = new DeviceInfoQuery("ssss", null)).fire(null);
+        DeviceInfoQuery s = new DeviceInfoQuery("ssss", null);
+        s.fire(null);
     }
 }
 

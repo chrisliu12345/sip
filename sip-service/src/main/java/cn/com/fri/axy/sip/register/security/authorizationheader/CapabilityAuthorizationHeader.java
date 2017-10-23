@@ -40,10 +40,9 @@ public class CapabilityAuthorizationHeader
         String[] arrayOfString;
 
 
-        int j = (arrayOfString = paramString = paramString.split("[;\"]")).length;
+        int j =  paramString.split("[;\"]").length;
         for (int i = 0; i < j; i++) {
 
-            SysLogger.info(paramString = (paramString = arrayOfString[i]).trim());
             if (paramString.startsWith("A:")) {
                 a(this.a, paramString.substring("A:".length()).split("[,]"));
             } else if (paramString.startsWith("S:")) {
@@ -64,7 +63,7 @@ public class CapabilityAuthorizationHeader
         int j = (arrayOfString = paramArrayOfString).length;
         for (int i = 0; i < j; i++) {
 
-            SysLogger.info(paramArrayOfString = (paramArrayOfString = arrayOfString[i]).trim());
+            SysLogger.info( (paramArrayOfString [i]).trim());
             paramVector.add(paramArrayOfString);
         }
     }
@@ -127,8 +126,8 @@ public class CapabilityAuthorizationHeader
         StringBuffer localStringBuffer = new StringBuffer("");
         Random localRandom = new Random();
         while (i < 8) {
-            this = localRandom.nextInt(j);
-            localStringBuffer.append(arrayOfChar[this]);
+            localRandom.nextInt(j);
+            localStringBuffer.append(arrayOfChar[i]);
             i++;
         }
 
@@ -136,13 +135,7 @@ public class CapabilityAuthorizationHeader
     }
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = " Capability algorithm=\"A:RSA/ECB/PKCS1, RSA/CBC/PKCS1;H:SHA1,MD5,SHA256;S:DES/ECB/PKCS5,DES/CBC/PKCS5,3DES/ECB/PKCS5,3DES/CBC/PKCS5,SCB2\"";
-        new CapabilityAuthorizationHeader(paramArrayOfString);
+        String s = " Capability algorithm=\"A:RSA/ECB/PKCS1, RSA/CBC/PKCS1;H:SHA1,MD5,SHA256;S:DES/ECB/PKCS5,DES/CBC/PKCS5,3DES/ECB/PKCS5,3DES/CBC/PKCS5,SCB2\"";
+        new CapabilityAuthorizationHeader(s);
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/register/security/authorizationheader/CapabilityAuthorizationHeader.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

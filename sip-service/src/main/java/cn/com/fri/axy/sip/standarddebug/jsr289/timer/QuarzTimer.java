@@ -3,6 +3,7 @@ package cn.com.fri.axy.sip.standarddebug.jsr289.timer;
 import cn.com.fri.axy.common.util.SysLogger;
 import commonj.timers.Timer;
 import commonj.timers.TimerListener;
+import org.quartz.Scheduler;
 import org.quartz.impl.StdSchedulerFactory;
 
 
@@ -19,12 +20,13 @@ public class QuarzTimer
 
     public boolean cancel() {
         try {
-            (localObject = StdSchedulerFactory.getDefaultScheduler()).deleteJob(this.a, this.b);
+            Scheduler s = StdSchedulerFactory.getDefaultScheduler();
+//                    s.deleteJob(a, b);
             SysLogger.info("deleteJob " + this.a + " " + this.b);
             return true;
         } catch (Exception localException) {
             Object localObject;
-            SysLogger.printStackTrace(localObject = localException);
+            SysLogger.printStackTrace( localException);
         }
 
         return false;

@@ -75,20 +75,11 @@ public class CameraMediaSecurityConfigDownloadResponse
 
 
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><MediaSecurity> COMMON </MediaSecurity></Response>";
-
+        String s = "<?xml version=\"1.0\"?><Response><CmdType>ConfigDownload</CmdType><SN>命令序列号</SN><DeviceID>编码器ID </DeviceID><ConfigType> 配置参数类型 </ConfigType><SEQ>配置项序号 </SEQ><MediaSecurity> COMMON </MediaSecurity></Response>";
 
         CameraMediaSecurityConfigDownloadResponse localCameraMediaSecurityConfigDownloadResponse;
-
-
-        (localCameraMediaSecurityConfigDownloadResponse = new CameraMediaSecurityConfigDownloadResponse("")).setXmlContent(paramArrayOfString);
+        (localCameraMediaSecurityConfigDownloadResponse = new CameraMediaSecurityConfigDownloadResponse("")).setXmlContent(s);
         localCameraMediaSecurityConfigDownloadResponse.genParameters();
         System.out.println(localCameraMediaSecurityConfigDownloadResponse.toString());
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/message/content/configdownload/CameraMediaSecurityConfigDownloadResponse.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

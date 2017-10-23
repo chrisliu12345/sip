@@ -1,14 +1,14 @@
 package cn.com.fri.axy.common.def.message.content.configdownload;
 
 
-public class AlarmAlarmRecordTableConfigDownloadResponse$ItemBean {
+public class ItemBean {
     private String a;
 
 
     private String b;
 
 
-    public AlarmAlarmRecordTableConfigDownloadResponse$ItemBean(AlarmAlarmRecordTableConfigDownloadResponse paramAlarmAlarmRecordTableConfigDownloadResponse) {
+    public ItemBean(AlarmAlarmRecordTableConfigDownloadResponse paramAlarmAlarmRecordTableConfigDownloadResponse) {
     }
 
 

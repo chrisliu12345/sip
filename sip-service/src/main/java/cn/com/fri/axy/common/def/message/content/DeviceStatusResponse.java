@@ -38,7 +38,7 @@ public class DeviceStatusResponse
         localStringBuilder.append("num\t" + this.j + "\n");
         if ((this.k != null) && (this.k.size() > 0)) {
             for (Iterator localIterator = this.k.iterator(); localIterator.hasNext(); ) {
-                this = (DeviceStatusResponse.AlarmstatusBean) localIterator.next();
+                localIterator.next();
 
                 localStringBuilder.append(toString());
             }
@@ -83,14 +83,14 @@ public class DeviceStatusResponse
 
             this.k = new Vector();
             String[] arrayOfString;
-            int n = (arrayOfString = localObject = ((String) localObject).split("<Item>")).length;
+            int n = (arrayOfString = ((String) localObject).split("<Item>")).length;
             for (int m = 0; m < n; m++) {
-                if ((localObject = arrayOfString[m]).indexOf("<DutyStatus>") > -1) {
+                if (( arrayOfString[m]).indexOf("<DutyStatus>") > -1) {
                     SysLogger.info(localObject);
                     DeviceStatusResponse.AlarmstatusBean localAlarmstatusBean;
-                    DeviceStatusResponse.AlarmstatusBean.a(localAlarmstatusBean = new DeviceStatusResponse.AlarmstatusBean(this), ((String) localObject).substring(((String) localObject).indexOf("<DeviceID>") + "<DeviceID>".length(), ((String) localObject).indexOf("</DeviceID>")));
-                    DeviceStatusResponse.AlarmstatusBean.b(localAlarmstatusBean, ((String) localObject).substring(((String) localObject).indexOf("<DutyStatus>") + "<DutyStatus>".length(), ((String) localObject).indexOf("</DutyStatus>")));
-                    this.k.add(localAlarmstatusBean);
+//                    AlarmstatusBean alarmstatusBean = new DeviceStatusResponse.AlarmstatusBean(this), ((String) localObject).substring(((String) localObject).indexOf("<DeviceID>") + "<DeviceID>".length(), ((String) localObject).indexOf("</DeviceID>")));
+//                    alarmstatusBean(localAlarmstatusBean, ((String) localObject).substring(((String) localObject).indexOf("<DutyStatus>") + "<DutyStatus>".length(), ((String) localObject).indexOf("</DutyStatus>")));
+//                    this.k.add(localAlarmstatusBean);
                 }
             }
         }
@@ -181,14 +181,41 @@ public class DeviceStatusResponse
         this.k = paramVector;
     }
 
+    class AlarmstatusBean {
+        private String a;
+        private String b;
+
+        public AlarmstatusBean(DeviceStatusResponse paramDeviceStatusResponse) {
+        }
+
+
+        public String getDeviceID() {
+            return this.a;
+        }
+
+        public void setDeviceID(String paramString) {
+            this.a = paramString;
+        }
+
+        public String getDutyStatus() {
+            return this.b;
+        }
+
+        public void setDutyStatus(String paramString) {
+            this.b = paramString;
+        }
+
+        public String toString() {
+            return
+                    "DeviceID\t" + this.a + "\n" + "DutyStatus\t" + this.b + "\n";
+        }
+    }
+
     public static void main(String[] paramArrayOfString) {
-        paramArrayOfString = "<Response><CmdType>DeviceStatus</CmdType><SN>2</SN><DeviceID>13030000001130000002</DeviceID><Result>OK</Result><Online>ONLINE</Online><Status>OK</Status><Encode>ON</Encode><Record>OFF</Record><DeviceTime></DeviceTime><Alarmstatus Num=2><Item><DeviceID>13030000001340000003</DeviceID><DutyStatus>Onduty</DutyStatus></Item><Item><DeviceID>13030000001340000004</DeviceID><DutyStatus>Onduty</DutyStatus></Item></Alarmstatus></Response>";
-
-
+        String s = "<Response><CmdType>DeviceStatus</CmdType><SN>2</SN><DeviceID>13030000001130000002</DeviceID><Result>OK</Result><Online>ONLINE</Online><Status>OK</Status><Encode>ON</Encode><Record>OFF</Record><DeviceTime></DeviceTime><Alarmstatus Num=2><Item><DeviceID>13030000001340000003</DeviceID><DutyStatus>Onduty</DutyStatus></Item><Item><DeviceID>13030000001340000004</DeviceID><DutyStatus>Onduty</DutyStatus></Item></Alarmstatus></Response>";
         DeviceStatusResponse localDeviceStatusResponse;
 
-
-        (localDeviceStatusResponse = new DeviceStatusResponse("")).setXmlContent(paramArrayOfString);
+        (localDeviceStatusResponse = new DeviceStatusResponse("")).setXmlContent(s);
         localDeviceStatusResponse.genParameters();
         System.out.println(localDeviceStatusResponse.getDeviceTime());
         System.out.println();
@@ -196,8 +223,3 @@ public class DeviceStatusResponse
     }
 }
 
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/message/content/DeviceStatusResponse.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

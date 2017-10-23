@@ -133,14 +133,15 @@ public class RecordRequest
 
 
     public static void main(String[] paramArrayOfString) {
-        (paramArrayOfString = new RecordRequest("test", null)).setDeviceID("test");
-        paramArrayOfString.setRecordCmd("rec");
+        RecordRequest r = new RecordRequest("test", null);
+        r.setDeviceID("test");
+        r.setRecordCmd("rec");
 
-        paramArrayOfString.setSn("ff");
+        r.setSn("ff");
 
-        paramArrayOfString.setIType(100);
-        paramArrayOfString.genXmlContent();
-        System.out.println(paramArrayOfString.getXmlContent());
+        r.setIType(100);
+        r.genXmlContent();
+        System.out.println(r.getXmlContent());
     }
 }
 

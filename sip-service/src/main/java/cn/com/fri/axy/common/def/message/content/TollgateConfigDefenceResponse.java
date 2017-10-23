@@ -15,8 +15,3 @@ public class TollgateConfigDefenceResponse
     }
 }
 
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/message/content/TollgateConfigDefenceResponse.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

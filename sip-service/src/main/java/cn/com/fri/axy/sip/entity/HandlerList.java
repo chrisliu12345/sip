@@ -8,12 +8,12 @@ import java.util.Vector;
 
 public class HandlerList
         implements Serializable {
-    private Vector a;
+    private Vector<Handler> handlers;
     private final Vector b;
 
     public HandlerList() {
-        this.a = new Vector();
-        this.b = this.a;
+        this.handlers = new Vector();
+        this.b = this.handlers;
     }
 
     public Object getLock() {
@@ -21,127 +21,77 @@ public class HandlerList
     }
 
     public void removeAfters(Handler paramHandler) {
-        synchronized (this.b) {
-            if ((paramHandler = indexOf(paramHandler)) != -1) {
-                for (Handler localHandler = this.a.size() - 1; localHandler > paramHandler; localHandler--) {
-                    remove(localHandler);
-                }
-            }
-        }
+
     }
 
     public void add(int paramInt, Handler paramHandler) {
-        this.a.add(paramInt, paramHandler);
+        this.handlers.add(paramInt, paramHandler);
     }
 
     public boolean add(Handler paramHandler) {
-        return this.a.add(paramHandler);
+        return this.handlers.add(paramHandler);
     }
 
     public void clear() {
-        this.a.clear();
+        this.handlers.clear();
     }
 
     public boolean contains(Handler paramHandler) {
-        return this.a.contains(paramHandler);
+        return this.handlers.contains(paramHandler);
     }
 
     public Handler get(int paramInt) {
-        return (Handler) this.a.get(paramInt);
+        return (Handler) this.handlers.get(paramInt);
     }
 
     public int hashCode() {
-        return this.a.hashCode();
+        return this.handlers.hashCode();
     }
 
     public int indexOf(Handler paramHandler) {
-        return this.a.indexOf(paramHandler);
+        return this.handlers.indexOf(paramHandler);
     }
 
     public boolean isEmpty() {
-        return this.a.isEmpty();
+        return this.handlers.isEmpty();
     }
 
     public int lastIndexOf(Handler paramHandler) {
-        return this.a.lastIndexOf(paramHandler);
+        return this.handlers.lastIndexOf(paramHandler);
     }
 
-    /* Error */
-    public Handler remove(int paramInt) {
-        Byte code:
-        0:aload_0
-        1:getfield 7 cn / com / fri / axy / sip / entity / HandlerList:b Ljava/util / Vector;
-        4:dup
-        5:astore_2
-        6:monitorenter
-        7:aload_0
-        8:getfield 6 cn / com / fri / axy / sip / entity / HandlerList:a Ljava/util / Vector;
-        11:iload_1
-        12:invokevirtual 16 java / util / Vector:get(I) Ljava / lang / Object;
-        15:checkcast 1 cn / com / fri / axy / sip / entity / Handler
-        18:dup
-        19:astore_0
-        20:aload_2
-        21:monitorexit
-        22:areturn
-        23:aload_2
-        24:monitorexit
-        25:athrow
-        Line number table:
-        Java source line #87	->byte code offset #0
-        Java source line #89	->byte code offset #7
-        Java source line #91	->byte code offset #19
-        Java source line #87	->byte code offset #23
-        Local variable table:
-        start length slot name signature
-        0 26 0 this HandlerList
-        0 26 1 paramInt	int
-        5 19 2 Ljava / lang / Object;
-        Object
-        Exception table:
-        from to target type
-        7 22 23	finally
-        23 25 23	finally
-    }
+
 
     public boolean remove(Handler paramHandler) {
         synchronized (this.b) {
-            paramHandler = this.a.indexOf(paramHandler);
-
+             this.handlers.indexOf(0);
             remove(paramHandler);
-
-            return paramHandler == -1;
+            return false;
         }
     }
 
 
     public Handler set(int paramInt, Handler paramHandler) {
-        return (Handler) this.a.set(paramInt, paramHandler);
+        return (Handler) this.handlers.set(paramInt, paramHandler);
     }
 
     public int size() {
-        return this.a.size();
+        return this.handlers.size();
     }
 
     public List subList(int paramInt1, int paramInt2) {
-        return this.a.subList(paramInt1, paramInt2);
+        return this.handlers.subList(paramInt1, paramInt2);
     }
 
     public Object[] toArray() {
-        return this.a.toArray();
+        return this.handlers.toArray();
     }
 
     public Object[] toArray(Object[] paramArrayOfObject) {
-        return this.a.toArray(paramArrayOfObject);
+        return this.handlers.toArray(paramArrayOfObject);
     }
 
     public Iterator iterator() {
-        return this.a.iterator();
+        return this.handlers.iterator();
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/entity/HandlerList.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

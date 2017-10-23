@@ -24,7 +24,7 @@ public class Registration
     private final SipURI a;
     private final SipURI b;
     private final String c;
-    private final int d;
+    private  int d;
     private List e;
     private String f;
     private boolean g;
@@ -46,17 +46,17 @@ public class Registration
         this.c = paramSipServletRequest.getCallId();
         Object localObject1;
         int m;
-        this.d = Integer.parseInt((m = (localObject1 = (localObject1 = paramSipServletRequest).getHeader("CSeq")).indexOf(" ")) == -1 ? localObject1 : ((String) localObject1).substring(0, m));
+//        this.d = Integer.parseInt((m = (localObject1 = (localObject1 = paramSipServletRequest).getHeader("CSeq")).indexOf(" ")) == -1 ? localObject1 : ((String) localObject1).substring(0, m));
         this.e = resolveContacts(paramSipServletRequest);
 
         long l = paramSipServletRequest.getExpires();
 
-        for (Object localObject2 = paramSipServletRequest.getAddressHeaders("Contact"); ((Iterator) localObject2).hasNext(); ) {
-            Address localAddress = (Address) ((Iterator) localObject2).next();
-
-            getContacts().add(localAddress);
-            l = Math.max(l, localAddress.getExpires());
-        }
+//        for (Object localObject2 = paramSipServletRequest.getAddressHeaders("Contact"); ((Iterator) localObject2).hasNext(); ) {
+//            Address localAddress = (Address) ((Iterator) localObject2).next();
+//
+//            getContacts().add(localAddress);
+//            l = Math.max(l, localAddress.getExpires());
+//        }
 
 
         if (l == -1L) {
@@ -69,24 +69,24 @@ public class Registration
         this.b = ((SipURI) ((Address) this.e.get(0)).getURI());
 
 
-        if ((localObject2 = paramSipServletRequest.getHeader("Authorization".toUpperCase())) != null) {
-            SysLogger.info(getClass() + "\n" + "authorizationValue=" + (String) localObject2);
-            this.g = true;
-
-            if (((String) localObject2).indexOf("Capability") > -1) {
-                this.h = new CapabilityAuthorizationHeader((String) localObject2);
-                return;
-            }
-            if (((String) localObject2).indexOf("Digest") > -1) {
-                this.h = new DigestAuthorizationHeader((String) localObject2);
-                ((DigestAuthorizationHeader) this.h).setPassword(LocationService.getInstance().getDevicePassword(this.f));
-                return;
-            }
-
-
-            SysLogger.info(getClass() + "\n" + "improper header " + (String) localObject2);
-            return;
-        }
+//        if ((localObject2 = paramSipServletRequest.getHeader("Authorization".toUpperCase())) != null) {
+//            SysLogger.info(getClass() + "\n" + "authorizationValue=" + (String) localObject2);
+//            this.g = true;
+//
+//            if (((String) localObject2).indexOf("Capability") > -1) {
+//                this.h = new CapabilityAuthorizationHeader((String) localObject2);
+//                return;
+//            }
+//            if (((String) localObject2).indexOf("Digest") > -1) {
+//                this.h = new DigestAuthorizationHeader((String) localObject2);
+//                ((DigestAuthorizationHeader) this.h).setPassword(LocationService.getInstance().getDevicePassword(this.f));
+//                return;
+//            }
+//
+//
+//            SysLogger.info(getClass() + "\n" + "improper header " + (String) localObject2);
+//            return;
+//        }
 
 
         this.g = false;
@@ -95,18 +95,19 @@ public class Registration
 
 
     private static SipURI a(SipURI paramSipURI, SipFactory paramSipFactory) {
-        (paramSipFactory = paramSipFactory.createSipURI(paramSipURI.getUser(), paramSipURI.getHost())).setPort(paramSipURI.getPort());
-        for (paramSipURI = paramSipFactory.getParameterNames(); paramSipURI.hasNext(); ) {
-            paramSipFactory.removeParameter((String) paramSipURI.next());
-        }
+        SipURI s = paramSipFactory.createSipURI(paramSipURI.getUser(), paramSipURI.getHost());
+                s.setPort(paramSipURI.getPort());
+//        for (paramSipURI = paramSipFactory.getParameterNames(); paramSipURI.hasNext(); ) {
+//            paramSipFactory.removeParameter((String) paramSipURI.next());
+//        }
 
 
-        return paramSipFactory;
+        return s;
     }
 
     final boolean a() {
         for (Iterator localIterator = getContacts().iterator(); localIterator.hasNext(); ) {
-            if ((this = (Address) localIterator.next()).isWildcard()) {
+            if (( (Address) localIterator.next()).isWildcard()) {
                 return true;
             }
         }

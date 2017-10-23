@@ -55,19 +55,20 @@ public final class DigestUtils {
 
 
     public static String getHash(String paramString) {
-        try {
-            localObject = (MessageDigest) a.clone();
-        } catch (CloneNotSupportedException paramString) {
-            throw new AssertionError(paramString);
-        }
-        paramString = ((MessageDigest) localObject).digest(a(paramString));
-        Object localObject = new char[2 * paramString.length];
-        int i = 0;
-        for (int m : paramString) {
-            localObject[(i++)] = a(m >> 4 & 0xF);
-            localObject[(i++)] = a(m & 0xF);
-        }
-        return new String((char[]) localObject);
+//        try {
+//            localObject = (MessageDigest) a.clone();
+//        } catch (CloneNotSupportedException e) {
+//            throw new AssertionError(e);
+//        }
+//        paramString = ((MessageDigest) localObject).digest(a(paramString));
+//        Object localObject = new char[2 * paramString.length];
+//        int i = 0;
+//        for (int m : paramString) {
+//            localObject[(i++)] = a(m >> 4 & 0xF);
+//            localObject[(i++)] = a(m & 0xF);
+//        }
+//        return new String((char[]) paramString);
+        return null;
     }
 
     public static HashMap parseDigestChallenge(String paramString) {
@@ -75,9 +76,9 @@ public final class DigestUtils {
             paramString = paramString.substring("Digest ".length());
         }
         HashMap localHashMap = new HashMap();
-        paramString = new StringTokenizer(paramString, ",");
-        while (paramString.hasMoreTokens()) {
-            a(localHashMap, paramString.nextToken());
+        StringTokenizer s = new StringTokenizer(paramString, ",");
+        while (s.hasMoreTokens()) {
+            a(localHashMap, s.nextToken());
         }
         return localHashMap;
     }
@@ -98,17 +99,17 @@ public final class DigestUtils {
     public static String createDigestResponseWithHA1(String paramString1, String paramString2, Map paramMap, String paramString3, String paramString4, String paramString5, String paramString6, String paramString7, String paramString8) {
         String str1 = (String) paramMap.get("realm");
         String str2 = (String) paramMap.get("nonce");
-        paramMap = (String) paramMap.get("algorithm");
+        String s2 = (String) paramMap.get("algorithm");
 
         paramString2 = getDigest(paramString2, str2, paramString6, paramString7, paramString5, paramString3, paramString4, paramString8);
 
-        paramString1 = new StringBuffer("Digest username=\"").append(paramString1).append("\",realm=\"").append(str1).append("\",");
+        StringBuffer sb= new StringBuffer("Digest username=\"").append(paramString1).append("\",realm=\"").append(str1).append("\",");
 
         if (paramString5 != null) {
-            paramString1.append("cnonce=\"").append(paramString7).append("\",nc=").append(paramString6).append(",qop=\"").append(paramString5).append("\",");
+            sb.append("cnonce=\"").append(paramString7).append("\",nc=").append(paramString6).append(",qop=\"").append(paramString5).append("\",");
         }
 
-        paramString1.append("uri=\"").append(paramString4).append("\",nonce=\"").append(str2).append("\",response=\"").append(paramString2).append("\",algorithm=\"").append(paramMap).append("\"");
+        sb.append("uri=\"").append(paramString4).append("\",nonce=\"").append(str2).append("\",response=\"").append(paramString2).append("\",algorithm=\"").append(paramMap).append("\"");
 
         return paramString1.toString();
     }
@@ -137,10 +138,10 @@ public final class DigestUtils {
     public static String stringToHex(String paramString) {
         StringBuffer localStringBuffer = new StringBuffer();
 
-        int i = (paramString = paramString = a(paramString)).length;
+        int i = ( a(paramString)).length;
         for (int j = 0; j < i; j++) {
-            byte b = paramString[j];
-            localStringBuffer.append(byteToHex(b));
+//            byte b = paramStriang[j];
+//            localStringBuffer.append(byteToHex(b));
         }
         return localStringBuffer.toString();
     }
@@ -156,9 +157,3 @@ public final class DigestUtils {
         a = localMessageDigest;
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/util/DigestUtils.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

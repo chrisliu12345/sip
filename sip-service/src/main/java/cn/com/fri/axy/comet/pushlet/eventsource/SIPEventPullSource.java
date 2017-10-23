@@ -1,9 +1,9 @@
 package cn.com.fri.axy.comet.pushlet.eventsource;
 
 import cn.com.fri.axy.common.util.SysLogger;
-import com.git.wuqf.pushlet.core.Event;
-import com.git.wuqf.pushlet.core.EventPullSource;
-import com.git.wuqf.pushlet.util.Rand;
+import pushlet.core.Event;
+import pushlet.core.EventPullSource;
+import pushlet.util.Rand;
 
 import java.util.Date;
 

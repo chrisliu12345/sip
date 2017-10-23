@@ -5,6 +5,7 @@ import cn.com.fri.axy.common.util.SysLogger;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Properties;
@@ -18,30 +19,29 @@ public class SSDConfig {
 
     private SSDConfig() {
         try {
-            this =
-                    SysLogger.class.getResourceAsStream("/SSDConfig.properties");
-            b.load(this);
+            InputStream io=SysLogger.class.getResourceAsStream("/SSDConfig.properties");
+            b.load(io);
 
 
             for (Iterator localIterator = b.keySet().iterator(); localIterator.hasNext(); ) {
-                this = localIterator.next();
+                 localIterator.next();
 
                 SysLogger.info(this + ":\t" + b.get(this));
             }
             return;
 
-        } catch (FileNotFoundException this) {
+        } catch (FileNotFoundException e) {
 
             System.out.println(
                     "FileLogger.java - FileNotFoundException : " + toString());
             return;
-        } catch (IOException this) {
+        } catch (IOException e) {
             System.out.println(
                     "FileLogger.java - IOException : " + toString());
             return;
-        } catch (Exception this) {
+        } catch (Exception e) {
             System.out.println("FileLogger.java - Exception : " + toString());
-            printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -72,7 +72,7 @@ public class SSDConfig {
 
 
     public Vector getDVRCameraID() {
-        this = new Vector();
+        Vector v = new Vector();
 
         Object localObject;
         String[] arrayOfString;
@@ -80,15 +80,15 @@ public class SSDConfig {
         for (int i = 0; i < j; i++) {
             localObject = arrayOfString[i];
 
-            add(localObject);
+            v.add(localObject);
         }
 
-        return this;
+        return v;
     }
 
 
     public Vector getDVRAlarmID() {
-        this = new Vector();
+        Vector v = new Vector();
 
         Object localObject;
         String[] arrayOfString;
@@ -96,10 +96,10 @@ public class SSDConfig {
         for (int i = 0; i < j; i++) {
             localObject = arrayOfString[i];
 
-            add(localObject);
+            v.add(localObject);
         }
 
-        return this;
+        return v;
     }
 
 
@@ -113,7 +113,7 @@ public class SSDConfig {
 
 
     public Vector getIPCAlarmID() {
-        this = new Vector();
+        Vector v = new Vector();
 
         Object localObject;
         String[] arrayOfString;
@@ -121,10 +121,10 @@ public class SSDConfig {
         for (int i = 0; i < j; i++) {
             localObject = arrayOfString[i];
 
-            add(localObject);
+            v.add(localObject);
         }
 
-        return this;
+        return v;
     }
 
 
@@ -138,7 +138,7 @@ public class SSDConfig {
 
 
     public Vector getDecoderMonitorID() {
-        this = new Vector();
+        Vector v = new Vector();
 
         Object localObject;
         String[] arrayOfString;
@@ -146,10 +146,10 @@ public class SSDConfig {
         for (int i = 0; i < j; i++) {
             localObject = arrayOfString[i];
 
-            add(localObject);
+            v.add(localObject);
         }
 
-        return this;
+        return v;
     }
 
 
@@ -243,12 +243,12 @@ public class SSDConfig {
     }
 
     public String getHistoryTime() {
-        this = b.getProperty("history_starttime");
-        this = DateUtil.getInstance().TGS_StringToDate(this);
+        String s = b.getProperty("history_starttime");
+        Date a = DateUtil.getInstance().TGS_StringToDate(s);
         Object localObject = b.getProperty("history_endtime");
         localObject = DateUtil.getInstance().TGS_StringToDate((String) localObject);
 
-        return getTime() / 1000L + " " + ((Date) localObject).getTime() / 1000L;
+        return a.getTime() / 1000L + " " + ((Date) localObject).getTime() / 1000L;
     }
 
 

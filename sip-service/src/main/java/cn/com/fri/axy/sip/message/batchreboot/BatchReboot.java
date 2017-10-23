@@ -9,8 +9,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Vector;
+
+import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.iterator;
+import static sun.plugin2.os.windows.OSVERSIONINFOA.size;
 
 
 public class BatchReboot {
@@ -33,56 +37,55 @@ public class BatchReboot {
         try {
             localObject2 = ((DocumentBuilderFactory) localObject1).newDocumentBuilder();
         } catch (ParserConfigurationException localParserConfigurationException) {
-            SysLogger.printStackTrace(localObject1 = localParserConfigurationException);
+            SysLogger.printStackTrace(localParserConfigurationException);
         }
 
         localObject1 = null;
         try {
-            paramString = SysLogger.class.getResourceAsStream(paramString);
+            InputStream ip = SysLogger.class.getResourceAsStream(paramString);
             localObject1 = ((DocumentBuilder) localObject2).parse(paramString);
 
         } catch (SAXException localSAXException) {
-            SysLogger.printStackTrace(paramString = localSAXException);
+            SysLogger.printStackTrace(localSAXException);
         } catch (DOMException localDOMException) {
-            SysLogger.printStackTrace(paramString = localDOMException);
+            SysLogger.printStackTrace(localDOMException);
         } catch (IOException localIOException) {
-            SysLogger.printStackTrace(paramString = localIOException);
+            SysLogger.printStackTrace(localIOException);
         }
 
-
-        if ((paramString = (paramString = ((Document) localObject1).getDocumentElement()).getElementsByTagName("Device")).getLength() == 0) {
+        if (((((Document) localObject1).getDocumentElement()).getElementsByTagName("Device")).getLength() == 0) {
             return localVector;
         }
+//
+//        for (int i = 0; i < paramString.getLength(); i++) {
+//
+//            localObject2 = (Element) paramString.item(i);
+//            SysLogger.info("parse " + ((Element) localObject2).getNodeName() + " " + (i + 1));
+//
+//
+//            SysLogger.info("parse Device");
+//            BatchReboot.DeviceBean localDeviceBean = new BatchReboot.DeviceBean(this);
+//
+//
+//            localObject2 = ((Element) localObject2).getChildNodes();
+//            for (int j = 0; j < ((NodeList) localObject2).getLength(); j++) {
+//                Node localNode = ((NodeList) localObject2).item(j);
+//                SysLogger.info("NodeValue " + localNode.getTextContent());
+//                if ("DeviceID".equalsIgnoreCase(localNode.getNodeName())) {
+//                    localDeviceBean.setDeviceID(localNode.getTextContent());
+//                } else if ("IP".equalsIgnoreCase(localNode.getNodeName())) {
+//                    localDeviceBean.setIp(localNode.getTextContent());
+//                } else if ("Port".equalsIgnoreCase(localNode.getNodeName())) {
+//                    localDeviceBean.setPort(Integer.parseInt(localNode.getTextContent()));
+//                } else {
+//                    SysLogger.info("donothing.");
+//                }
+//            }
 
-        for (int i = 0; i < paramString.getLength(); i++) {
-
-            localObject2 = (Element) paramString.item(i);
-            SysLogger.info("parse " + ((Element) localObject2).getNodeName() + " " + (i + 1));
-
-
-            SysLogger.info("parse Device");
-            BatchReboot.DeviceBean localDeviceBean = new BatchReboot.DeviceBean(this);
-
-
-            localObject2 = ((Element) localObject2).getChildNodes();
-            for (int j = 0; j < ((NodeList) localObject2).getLength(); j++) {
-                Node localNode = ((NodeList) localObject2).item(j);
-                SysLogger.info("NodeValue " + localNode.getTextContent());
-                if ("DeviceID".equalsIgnoreCase(localNode.getNodeName())) {
-                    localDeviceBean.setDeviceID(localNode.getTextContent());
-                } else if ("IP".equalsIgnoreCase(localNode.getNodeName())) {
-                    localDeviceBean.setIp(localNode.getTextContent());
-                } else if ("Port".equalsIgnoreCase(localNode.getNodeName())) {
-                    localDeviceBean.setPort(Integer.parseInt(localNode.getTextContent()));
-                } else {
-                    SysLogger.info("donothing.");
-                }
-            }
-
-
-            SysLogger.info(localDeviceBean.toString());
-            localVector.add(localDeviceBean);
-        }
+//
+//            SysLogger.info(localDeviceBean.toString());
+//            localVector.add(localDeviceBean);
+//        }
 
 
         return localVector;
@@ -90,28 +93,62 @@ public class BatchReboot {
 
 
     public void sendRebootMessage() {
-        if (((this = readXMLFile(b)) == null) || (size() == 0)) {
+        if (((readXMLFile(b)) == null) || (size() == 0)) {
             SysLogger.info("v is empty.");
             return;
         }
         Object localObject1;
         SipFactory localSipFactory;
         Object localObject2;
-        for (Iterator localIterator = iterator(); localIterator.hasNext();
-
-                ) {
-            this = this = (BatchReboot.DeviceBean) localIterator.next();
+        for (Iterator localIterator = iterator(); localIterator.hasNext(); ) {
+            localIterator.next();
         }
     }
 
+    class DeviceBean {
+        public String deviceID;
+
+
+        public String ip;
+
+
+        public int port;
+
+
+        public DeviceBean(BatchReboot paramBatchReboot) {
+        }
+
+
+        public String getDeviceID() {
+            return this.deviceID;
+        }
+
+        public void setDeviceID(String paramString) {
+            this.deviceID = paramString;
+        }
+
+        public String getIp() {
+            return this.ip;
+        }
+
+        public void setIp(String paramString) {
+            this.ip = paramString;
+        }
+
+        public int getPort() {
+            return this.port;
+        }
+
+        public void setPort(int paramInt) {
+            this.port = paramInt;
+        }
+
+        public String toString() {
+            return "deviceID\t" + this.deviceID + "\n" + "ip\t" + this.ip + "\n" + "port\t" + this.port + "\n";
+        }
+    }
 
     public static void main(String[] paramArrayOfString) {
         getInstance().sendRebootMessage();
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/message/batchreboot/BatchReboot.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

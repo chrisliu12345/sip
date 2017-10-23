@@ -10,6 +10,7 @@ import cn.com.fri.axy.sip.location.LocationService;
 import cn.com.fri.axy.sip.util.ServletContextHelper;
 
 import javax.servlet.sip.*;
+import java.io.IOException;
 
 
 public class ScriptInviteHandler
@@ -25,80 +26,79 @@ public class ScriptInviteHandler
 
 
     public String sendInvite(String paramString1, int paramInt1, String paramString2, int paramInt2) {
-        try {
-            paramInt1 = paramString1 + ":" + paramInt1 + "-" + 0;
-            Object localObject = paramString2 + ":" + paramInt2;
-            this.b = (paramInt1 + "," + (String) localObject);
+//        try {
+//            String s = paramString1 + ":" + paramInt1 + "-" + 0;
+//            Object localObject = paramString2 + ":" + paramInt2;
+//            this.b = (paramInt1 + "," + (String) localObject);
+//
+//
+//            localObject = ( ServletContextHelper.getSipFactory()).createApplicationSession();
 
 
-            localObject = (paramInt1 = ServletContextHelper.getSipFactory()).createApplicationSession();
+//            Address localAddress2 = ServletContextHelper.getSipFactory().createAddress(
+//                    LocationService.getInstance().getDomainURI(paramString1));
+//            Address localAddress1 = ServletContextHelper.getSipFactory().createAddress(
+//                    LocationService.getInstance().getDomainURI(paramString2));
+//
+//
 
 
-            Address localAddress2 = ServletContextHelper.getSipFactory().createAddress(
-                    LocationService.getInstance().getDomainURI(paramString1));
-            Address localAddress1 = ServletContextHelper.getSipFactory().createAddress(
-                    LocationService.getInstance().getDomainURI(paramString2));
-
-            (
+//                    paramInt1 = createRequest((SipApplicationSession) localObject, "INVITE", localAddress1, localAddress2);
+//            .setHeader("Subject", this.b);
 
 
-                    paramInt1 = paramInt1.createRequest((SipApplicationSession) localObject, "INVITE", localAddress1, localAddress2)).setHeader("Subject", this.b);
+//            paramString2 = "v=0\no=" +
+//                    paramString2 + " 0 0 IN IP4 " + SSDConfig.getInstance().getMediaDestIP() + "\n" +
+//                    "s=Play\n" +
+//                    "c=IN IP4 " + SSDConfig.getInstance().getMediaDestIP() + "\n" +
+//                    "t=0 0\n" +
+//                    "m=video " + paramInt2 + " RTP/AVP 96\n" +
+//                    "a=recvonly\n" +
+//                    "a=rtpmap:96 H264/90000\n";
 
-
-            paramString2 = "v=0\no=" +
-                    paramString2 + " 0 0 IN IP4 " + SSDConfig.getInstance().getMediaDestIP() + "\n" +
-                    "s=Play\n" +
-                    "c=IN IP4 " + SSDConfig.getInstance().getMediaDestIP() + "\n" +
-                    "t=0 0\n" +
-                    "m=video " + paramInt2 + " RTP/AVP 96\n" +
-                    "a=recvonly\n" +
-                    "a=rtpmap:96 H264/90000\n";
-
-            paramInt1.setContent(paramString2.getBytes(), "application/sdp");
-
-
-            (
-                    paramString2 = new HandlerList()).add(this);
-            (
-                    paramInt2 = paramInt1.getSession(true)).setHandler("accessservlet");
-            paramInt2.setAttribute("handlerList", paramString2);
-
-
-            paramString1 = ServletContextHelper.getSipFactory().createAddress("sip:" + paramString1 + "@" +
-                    SSDConfig.getInstance().getOtherSystemIP() + ":" + SSDConfig.getInstance().getOtherSystemPort());
-
-            paramInt1.pushRoute((SipURI) paramString1.getURI());
-
-
-            SysLogger.info(getClass() + "\nSending INVITE:" + "\n" + paramInt1.toString());
-            this.c = paramInt1;
-            paramInt1.send();
-
-
-            this.a = paramInt2;
-            ScriptInviteManager.getInstance().addInviteSession(this.b, this);
-
-            this.d = 1;
-
-            return this.b;
-        } catch (Exception localException) {
-            SysLogger.printStackTrace(paramInt1 = localException);
-        }
+//            paramInt1.setContent(paramString2.getBytes(), "application/sdp");
+//
+//
+//            (
+//                    paramString2 = new HandlerList()).add(this);
+//            (
+//                    paramInt2 = paramInt1.getSession(true)).setHandler("accessservlet");
+//            paramInt2.setAttribute("handlerList", paramString2);
+//
+//
+//            paramString1 = ServletContextHelper.getSipFactory().createAddress("sip:" + paramString1 + "@" +
+//                    SSDConfig.getInstance().getOtherSystemIP() + ":" + SSDConfig.getInstance().getOtherSystemPort());
+//
+//            paramInt1.pushRoute((SipURI) paramString1.getURI());
+//
+//
+//            SysLogger.info(getClass() + "\nSending INVITE:" + "\n" + paramInt1.toString());
+//            this.c = paramInt1;
+//            paramInt1.send();
+//
+//
+//            this.a = paramInt2;
+//            ScriptInviteManager.getInstance().addInviteSession(this.b, this);
+//
+//            this.d = 1;
+//
+//            return this.b;
+//        } catch (Exception localException) {
+//            SysLogger.printStackTrace(paramInt1 = localException);
+//        }
         return this.b;
     }
 
 
     public String getState() {
-        if (this.d == 2) {
+        if (d == 2) {
 
-            this = "已建立";
-        } else if (this.d == 1) {
-            this = "建立中";
+            return  "已建立";
+        } else if (d == 1) {
+            return "建立中";
         } else {
-            this = "未知";
+            return "未知";
         }
-
-        return this;
     }
 
 
@@ -110,12 +110,12 @@ public class ScriptInviteHandler
         try {
             if (this.d == 2) {
 
-                (this = this.a.createRequest("BYE")).send();
+                (a.createRequest("BYE")).send();
                 return;
             }
 
 
-            (this = this.c.createCancel()).send();
+            (c.createCancel()).send();
 
 
             MessageSender.getInstance().send(toString());
@@ -125,13 +125,18 @@ public class ScriptInviteHandler
         } catch (Exception localException) {
 
 
-            SysLogger.printStackTrace(this = localException);
+            SysLogger.printStackTrace( localException);
         }
     }
 
 
     public void doBye(MessageContext paramMessageContext) {
-        (paramMessageContext = paramMessageContext.getRequest().createResponse(200)).send();
+        SipServletResponse s = paramMessageContext.getRequest().createResponse(200);
+        try {
+            s.send();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         MessageSender.getInstance().send(paramMessageContext.toString());
@@ -167,12 +172,16 @@ public class ScriptInviteHandler
         SysLogger.info(getClass() + "\nGetting SuccessResponse:" + "\n" + paramMessageContext.getResponse().toString());
         if (paramMessageContext.isMethod("Invite")) {
 
-            paramMessageContext = paramMessageContext.getResponse().createAck();
+            SipServletRequest s = paramMessageContext.getResponse().createAck();
 
             SysLogger.info(getClass() + "\nSend ACK:" + "\n" + paramMessageContext.toString());
-            paramMessageContext.send();
+            try {
+                s.send();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            this.d = 2;
+            d = 2;
             return;
         }
 
@@ -189,9 +198,3 @@ public class ScriptInviteHandler
     public static void main(String[] paramArrayOfString) {
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/script/invite/ScriptInviteHandler.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

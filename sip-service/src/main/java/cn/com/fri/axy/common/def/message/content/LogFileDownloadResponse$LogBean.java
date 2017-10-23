@@ -72,7 +72,7 @@ public class LogFileDownloadResponse$LogBean {
     public void parse(String paramString) {
         SysLogger.info("parse " + paramString);
         String[] arrayOfString;
-        int j = (arrayOfString = paramString = paramString.split("\" ")).length;
+        int j = (arrayOfString  = paramString.split("\" ")).length;
         for (int i = 0; i < j; i++) {
             if ((paramString = arrayOfString[i]).indexOf("id=\"") > -1) {
 

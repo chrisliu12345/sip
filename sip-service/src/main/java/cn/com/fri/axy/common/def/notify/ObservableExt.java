@@ -11,8 +11,3 @@ public class ObservableExt
     }
 }
 
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/notify/ObservableExt.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

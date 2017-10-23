@@ -43,7 +43,7 @@ public class RegistrationService {
 
 
     public Registration removeByDeviceID(String paramString) {
-        return this = (Registration) this.b.remove(paramString);
+        return  (Registration) this.b.remove(paramString);
     }
 
 
@@ -81,8 +81,8 @@ public class RegistrationService {
         save(paramRegistration);
 
 
-        this = SIPTimerService.getInstance().getTimerManager().schedule(new RegistrationTimerListener(paramRegistration), paramRegistration.getExpire());
-        paramRegistration.timer = this;
+        SIPTimerService.getInstance().getTimerManager().schedule(new RegistrationTimerListener(paramRegistration), paramRegistration.getExpire());
+//        paramRegistration.timer = this;
 
 
         LocationService.getInstance().deviceOnline(paramRegistration);
@@ -99,17 +99,12 @@ public class RegistrationService {
         try {
             paramRegistration1.timer.cancel();
 
-            this = SIPTimerService.getInstance().getTimerManager().schedule(new RegistrationTimerListener(paramRegistration2), paramRegistration2.getExpire());
-            paramRegistration2.timer = this;
+            SIPTimerService.getInstance().getTimerManager().schedule(new RegistrationTimerListener(paramRegistration2), paramRegistration2.getExpire());
+//            paramRegistration2.timer = this;
             return;
         } catch (Exception localException) {
-            SysLogger.printStackTrace(this = localException);
+            SysLogger.printStackTrace(localException);
         }
     }
 }
 
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/register/entity/RegistrationService.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

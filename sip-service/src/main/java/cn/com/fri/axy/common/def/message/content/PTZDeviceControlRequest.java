@@ -86,10 +86,11 @@ public class PTZDeviceControlRequest
 
 
     public static void main(String[] paramArrayOfString) {
-        (paramArrayOfString = new PTZDeviceControlRequest("123")).setPtzCmd("111");
-        paramArrayOfString.setControlPriority("10");
-        paramArrayOfString.genXmlContent();
-        System.out.println(paramArrayOfString.getXmlContent());
+        PTZDeviceControlRequest s = new PTZDeviceControlRequest("123");
+        s.setPtzCmd("111");
+        s.setControlPriority("10");
+        s.genXmlContent();
+        System.out.println(s.getXmlContent());
     }
 }
 
