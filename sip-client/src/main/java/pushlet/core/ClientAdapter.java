@@ -1,4 +1,4 @@
-package com.git.wuqf.pushlet.core;
+package pushlet.core;
 
 import java.io.IOException;
 

@@ -1,9 +1,9 @@
-package com.git.wuqf.pushlet.client;
+package pushlet.client;
 
-import com.git.wuqf.pushlet.util.PushletException;
-import com.git.wuqf.pushlet.core.Event;
-import com.git.wuqf.pushlet.core.EventParser;
-import com.git.wuqf.pushlet.core.Protocol;
+import pushlet.util.PushletException;
+import pushlet.core.Event;
+import pushlet.core.EventParser;
+import pushlet.core.Protocol;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

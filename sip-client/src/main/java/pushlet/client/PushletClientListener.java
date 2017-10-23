@@ -1,7 +1,7 @@
-package com.git.wuqf.pushlet.client;
+package pushlet.client;
 
-import com.git.wuqf.pushlet.core.Event;
-import com.git.wuqf.pushlet.core.Protocol;
+import pushlet.core.Event;
+import pushlet.core.Protocol;
 
 public abstract interface PushletClientListener
         extends Protocol {

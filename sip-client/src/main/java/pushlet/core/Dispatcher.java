@@ -1,7 +1,7 @@
-package com.git.wuqf.pushlet.core;
+package pushlet.core;
 
-import com.git.wuqf.pushlet.util.PushletException;
-import com.git.wuqf.pushlet.util.Log;
+import pushlet.util.PushletException;
+import pushlet.util.Log;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;

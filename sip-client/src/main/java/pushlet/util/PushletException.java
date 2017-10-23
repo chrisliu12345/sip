@@ -1,4 +1,4 @@
-package com.git.wuqf.pushlet.util;
+package pushlet.util;
 
 
 public class PushletException

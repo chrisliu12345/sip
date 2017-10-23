@@ -1,4 +1,4 @@
-package com.git.wuqf.pushlet.core;
+package pushlet.core;
 
 public abstract interface ConfigDefs {
     public static final String CONTROLLER_CLASS = "controller.class";

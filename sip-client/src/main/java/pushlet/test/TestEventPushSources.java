@@ -1,9 +1,9 @@
-package com.git.wuqf.pushlet.test;
+package pushlet.test;
 
-import com.git.wuqf.pushlet.core.Dispatcher;
-import com.git.wuqf.pushlet.core.Event;
-import com.git.wuqf.pushlet.core.EventSource;
-import com.git.wuqf.pushlet.util.Rand;
+import pushlet.core.Dispatcher;
+import pushlet.core.Event;
+import pushlet.core.EventSource;
+import pushlet.util.Rand;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,8 +1,8 @@
-package com.git.wuqf.pushlet.core;
+package pushlet.core;
 
-import com.git.wuqf.pushlet.util.PushletException;
-import com.git.wuqf.pushlet.util.Rand;
-import com.git.wuqf.pushlet.util.Sys;
+import pushlet.util.PushletException;
+import pushlet.util.Rand;
+import pushlet.util.Sys;
 
 import java.util.Collections;
 import java.util.HashMap;

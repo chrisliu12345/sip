@@ -1,4 +1,4 @@
-package com.git.wuqf.pushlet.core;
+package pushlet.core;
 
 public class EventQueue {
     private int capacity = 8;

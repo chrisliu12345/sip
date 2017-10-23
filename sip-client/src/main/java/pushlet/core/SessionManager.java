@@ -1,9 +1,9 @@
-package com.git.wuqf.pushlet.core;
+package pushlet.core;
 
-import com.git.wuqf.pushlet.util.PushletException;
-import com.git.wuqf.pushlet.util.Log;
-import com.git.wuqf.pushlet.util.Rand;
-import com.git.wuqf.pushlet.util.Sys;
+import pushlet.util.PushletException;
+import pushlet.util.Log;
+import pushlet.util.Rand;
+import pushlet.util.Sys;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

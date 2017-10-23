@@ -1,4 +1,4 @@
-package com.git.wuqf.pushlet;
+package pushlet;
 
 
 public class Version {

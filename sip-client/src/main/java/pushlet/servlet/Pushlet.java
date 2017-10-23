@@ -1,10 +1,10 @@
-package com.git.wuqf.pushlet.servlet;
+package pushlet.servlet;
 
-import com.git.wuqf.pushlet.core.*;
-import com.git.wuqf.pushlet.Version;
+import pushlet.core.*;
+import pushlet.Version;
 
-import com.git.wuqf.pushlet.util.Log;
-import com.git.wuqf.pushlet.util.Servlets;
+import pushlet.util.Log;
+import pushlet.util.Servlets;
 
 
 import javax.servlet.ServletException;

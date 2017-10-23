@@ -1,10 +1,10 @@
-package com.git.wuqf.pushlet.test;
+package pushlet.test;
 
-import com.git.wuqf.pushlet.client.PushletClient;
-import com.git.wuqf.pushlet.core.Event;
-import com.git.wuqf.pushlet.util.PushletException;
-import com.git.wuqf.pushlet.client.PushletClientListener;
-import com.git.wuqf.pushlet.core.Protocol;
+import pushlet.client.PushletClient;
+import pushlet.core.Event;
+import pushlet.util.PushletException;
+import pushlet.client.PushletClientListener;
+import pushlet.core.Protocol;
 
 import java.util.HashMap;
 import java.util.Map;

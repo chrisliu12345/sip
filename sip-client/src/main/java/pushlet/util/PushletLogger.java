@@ -1,6 +1,6 @@
-package com.git.wuqf.pushlet.util;
+package pushlet.util;
 
-import com.git.wuqf.pushlet.core.ConfigDefs;
+import pushlet.core.ConfigDefs;
 
 public abstract interface PushletLogger
         extends ConfigDefs {

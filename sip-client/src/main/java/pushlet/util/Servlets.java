@@ -1,4 +1,4 @@
-package com.git.wuqf.pushlet.util;
+package pushlet.util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

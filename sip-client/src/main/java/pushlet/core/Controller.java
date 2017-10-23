@@ -1,6 +1,6 @@
-package com.git.wuqf.pushlet.core;
+package pushlet.core;
 
-import com.git.wuqf.pushlet.util.PushletException;
+import pushlet.util.PushletException;
 
 import java.io.IOException;
 

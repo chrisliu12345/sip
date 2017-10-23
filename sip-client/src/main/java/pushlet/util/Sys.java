@@ -1,4 +1,4 @@
-package com.git.wuqf.pushlet.util;
+package pushlet.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;

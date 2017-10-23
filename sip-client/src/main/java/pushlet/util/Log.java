@@ -1,7 +1,7 @@
-package com.git.wuqf.pushlet.util;
+package pushlet.util;
 
-import com.git.wuqf.pushlet.core.Config;
-import com.git.wuqf.pushlet.core.ConfigDefs;
+import pushlet.core.Config;
+import pushlet.core.ConfigDefs;
 
 
 public class Log

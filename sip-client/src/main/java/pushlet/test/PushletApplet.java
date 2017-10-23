@@ -1,10 +1,10 @@
-package com.git.wuqf.pushlet.test;
+package pushlet.test;
 
-import com.git.wuqf.pushlet.client.PushletClient;
-import com.git.wuqf.pushlet.core.Event;
-import com.git.wuqf.pushlet.core.Protocol;
-import com.git.wuqf.pushlet.util.PushletException;
-import com.git.wuqf.pushlet.client.PushletClientListener;
+import pushlet.client.PushletClient;
+import pushlet.core.Event;
+import pushlet.core.Protocol;
+import pushlet.util.PushletException;
+import pushlet.client.PushletClientListener;
 
 import java.applet.Applet;
 import java.awt.*;
@@ -68,12 +68,12 @@ public class PushletApplet
         bailout();
     }
 
-    public void onAbort(com.git.wuqf.pushlet.core.Event theEvent) {
+    public void onAbort(pushlet.core.Event theEvent) {
         p(theEvent.toXML());
         bailout();
     }
 
-    public void onData(com.git.wuqf.pushlet.core.Event theEvent) {
+    public void onData(pushlet.core.Event theEvent) {
         p(theEvent.toXML());
     }
 

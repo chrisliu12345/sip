@@ -1,9 +1,9 @@
-package com.git.wuqf.pushlet.core;
+package pushlet.core;
 
 import java.io.IOException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import com.git.wuqf.pushlet.util.Log;
+import pushlet.util.Log;
 
 class XMLAdapter
         implements ClientAdapter

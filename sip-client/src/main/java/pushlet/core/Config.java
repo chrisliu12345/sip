@@ -1,8 +1,8 @@
-package com.git.wuqf.pushlet.core;
+package pushlet.core;
 
-import com.git.wuqf.pushlet.util.PushletException;
-import com.git.wuqf.pushlet.util.Log;
-import com.git.wuqf.pushlet.util.Sys;
+import pushlet.util.PushletException;
+import pushlet.util.Log;
+import pushlet.util.Sys;
 
 import java.io.File;
 import java.util.Properties;

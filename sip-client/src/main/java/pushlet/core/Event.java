@@ -1,6 +1,6 @@
-package com.git.wuqf.pushlet.core;
+package pushlet.core;
 
-import com.git.wuqf.pushlet.util.Sys;
+import pushlet.util.Sys;
 
 import java.io.Serializable;
 import java.util.HashMap;

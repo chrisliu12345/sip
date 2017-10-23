@@ -1,4 +1,4 @@
-package com.git.wuqf.pushlet.core;
+package pushlet.core;
 
 public abstract interface EventSource {
     public abstract void activate();

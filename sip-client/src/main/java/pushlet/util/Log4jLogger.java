@@ -1,4 +1,4 @@
-package com.git.wuqf.pushlet.util;
+package pushlet.util;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;

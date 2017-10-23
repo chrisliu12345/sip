@@ -1,4 +1,4 @@
-package com.git.wuqf.pushlet.core;
+package pushlet.core;
 
 public abstract interface Protocol {
     public static final String DEFAULT_SERVLET_URI = "pushlet.srv";

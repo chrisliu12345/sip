@@ -1,9 +1,9 @@
-package com.git.wuqf.pushlet.test;
+package pushlet.test;
 
-import com.git.wuqf.pushlet.core.Event;
-import com.git.wuqf.pushlet.core.EventPullSource;
-import com.git.wuqf.pushlet.core.SessionManager;
-import com.git.wuqf.pushlet.util.Rand;
+import pushlet.core.Event;
+import pushlet.core.EventPullSource;
+import pushlet.core.SessionManager;
+import pushlet.util.Rand;
 
 public class TestEventPullSources {
     public static class TemperatureEventPullSource
