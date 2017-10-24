@@ -1,5 +1,6 @@
 package com.git.wuqf.service.sip.location;
 
+
 import com.git.wuqf.service.common.util.SysLogger;
 import com.git.wuqf.service.sip.init.SSDConfig;
 import com.git.wuqf.service.sip.register.entity.Registration;
@@ -13,12 +14,8 @@ import javax.servlet.sip.SipFactory;
 import javax.servlet.sip.SipURI;
 import java.util.Iterator;
 
-import static gov.nist.javax.sip.header.ParameterNames.URI;
-
-
 public class LocationService {
     private static LocationService a = new LocationService();
-
     private Address b;
     private String c;
     private String d;
@@ -28,7 +25,6 @@ public class LocationService {
         return a;
     }
 
-
     public void centerinfoInit() {
         this.e = ServletContextHelper.getSipFactory();
         this.c = SSDConfig.getInstance().getDomainName();
@@ -36,9 +32,7 @@ public class LocationService {
         try {
             this.b = this.e.createAddress("sip:" + this.d + "@" + this.c);
             return;
-
         } catch (Exception localException) {
-            SysLogger.printStackTrace(localException);
             System.exit(0);
         }
     }
@@ -56,66 +50,50 @@ public class LocationService {
         return "sip:" + paramString + "@" + this;
     }
 
-
-    public SipURI getFullURIByID(String paramString) {
-        SysLogger.info(getClass() + "\ngetFullURIByID DeviceID:" + paramString);
-
-        if ((getAddressByID(paramString)) == null) {
+    public SipURI getFullURIByID(String id) {
+        Address address = getAddressByID(id);
+        if (address == null) {
             return null;
         } else {
-            return (SipURI) getURI();
+            return (SipURI) address.getURI();
         }
     }
-
 
     public boolean isLocalDomainDevice(String paramString) {
         if (paramString == null) {
             return true;
         }
-
-
         return paramString.matches(this.c + "\\d{12}");
     }
 
-
     public boolean isLocalDomainDeviceOnline(String paramString) {
-        SysLogger.info(getClass() + "\nisLocalDomainDeviceOnline:" + paramString);
         if (isLocalDomainDevice(paramString)) {
             if (RegExUtil.isUserDevice(paramString)) {
                 return true;
             }
-
             SSDConfig.getInstance().getParentDeviceID(paramString);
-
             if (RegistrationService.getInstance().getAllRegistrations().containsKey(this)) {
                 return true;
             }
-
             return false;
         }
-
         return true;
     }
 
-
-    public Address getAddressByID(String paramString) {
-        SysLogger.info(getClass() + "\ngetAddressByID DeviceID:" + paramString);
+    public Address getAddressByID(String id) {
 
         Address localAddress = null;
+        if (isLocalDomainDevice(id)) {
 
-        if (isLocalDomainDevice(paramString)) {
-            SysLogger.info(getClass() + "\nisLocalDomainDevice");
-
-            SSDConfig.getInstance().getParentDeviceID(paramString);
-
-
-//            SipURI uri =  RegistrationService.getInstance().getByDeviceID(this)) != null ? (Address) getContacts().get(0) : null);
-//                    .getURI()).setUser(paramString);
-
+            SSDConfig.getInstance().getParentDeviceID(id);
+            Registration registration=RegistrationService.getInstance().getByDeviceID(id);
+            SipURI sipURI = registration.getUri();
+            sipURI.setUser(id);
+//            localAddress=registration.getUri().get
         } else {
             SysLogger.info(getClass() + "\nisOutBoundDomainDevice");
             try {
-                localAddress = ServletContextHelper.getSipFactory().createAddress("sip:" + paramString + "@" +
+                localAddress = ServletContextHelper.getSipFactory().createAddress("sip:" + id + "@" +
                         SSDConfig.getInstance().getOtherSystemIP() + ":" + SSDConfig.getInstance().getOtherSystemPort());
             } catch (ServletParseException localServletParseException) {
                 SysLogger.printStackTrace(localServletParseException);
@@ -124,43 +102,34 @@ public class LocationService {
         return localAddress;
     }
 
-
     public Address getLocalAddress() {
         return this.b;
     }
-
 
     public Address getLocalDomainURI() {
         return this.b;
     }
 
-
     public Long getSecurityLevel(String paramString) {
         return SSDConfig.getInstance().getSipDeviceRegisterWay();
     }
-
 
     public String getDevicePassword(String paramString) {
         String password = SSDConfig.getInstance().getSipDevicePassword(paramString);
         if (password == null) {
             password = "12345678";
         }
-
         return password;
     }
-
 
     public void deviceOnline(Registration paramRegistration) {
     }
 
-
     public void deviceUpdate(Registration paramRegistration) {
     }
 
-
     public void deviceOffline(Registration paramRegistration) {
     }
-
 
     public boolean isUAExist(String paramString) {
         for (Iterator localIterator = SSDConfig.getInstance().getAllDeviceID().iterator(); localIterator.hasNext(); ) {
@@ -168,14 +137,9 @@ public class LocationService {
                 return true;
             }
         }
-
         return false;
     }
 
     public static void main(String[] paramArrayOfString) {
-    }
-
-    public Object getURI() {
-        return URI;
     }
 }

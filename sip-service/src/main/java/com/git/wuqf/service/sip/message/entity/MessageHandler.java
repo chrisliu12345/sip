@@ -1,8 +1,6 @@
 package com.git.wuqf.service.sip.message.entity;
 
 import com.git.wuqf.service.comet.pushlet.MessageSender;
-import cn.com.fri.axy.common.def.message.content.configdownload.*;
-import cn.com.fri.axy.common.def.message.content.decoderconfigdownload.*;
 import com.git.wuqf.service.common.util.SysLogger;
 import com.git.wuqf.service.sip.call.invite.InviteManager;
 import com.git.wuqf.service.sip.core.MessageContext;

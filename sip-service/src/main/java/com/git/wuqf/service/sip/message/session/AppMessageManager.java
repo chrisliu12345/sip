@@ -1,6 +1,5 @@
 package com.git.wuqf.service.sip.message.session;
 
-import cn.com.fri.axy.common.def.message.content.*;
 import com.git.wuqf.service.common.def.notify.NotifyObject;
 import com.git.wuqf.service.common.util.SysLogger;
 import com.git.wuqf.service.sip.core.asyn.AsyncServiceDispatcher;

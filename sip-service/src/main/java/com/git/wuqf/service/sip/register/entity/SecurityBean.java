@@ -41,9 +41,3 @@ public class SecurityBean {
         this.d = paramCapabilityAuthorizationHeader;
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/register/entity/SecurityBean.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

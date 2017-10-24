@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Registration implements Serializable {
-    private final SipURI sipURI;
+    private final SipURI uri;
     private final SipURI fullSipURI;
     private final String callId;
     private final int cseq;
@@ -29,16 +29,16 @@ public class Registration implements Serializable {
     private int securityLevel;
 
     Registration(SipServletRequest sipServletRequest) throws ServletParseException {
-        this.originalRegister = sipServletRequest.toString();
+        originalRegister = sipServletRequest.toString();
 
-        this.sipURI = createSipURI((SipURI) sipServletRequest.getTo().getURI(), ServletContextHelper.getSipFactory());
-        this.deviceId = this.sipURI.getUser();
-        this.callId = sipServletRequest.getCallId();
+        uri = createSipURI((SipURI) sipServletRequest.getTo().getURI(), ServletContextHelper.getSipFactory());
+        deviceId = uri.getUser();
+        callId = sipServletRequest.getCallId();
 
         String seq = sipServletRequest.getHeader("CSeq");
         int m = seq.indexOf(" ");
-        this.cseq = Integer.parseInt(m == -1 ? seq : seq.substring(0, m));
-        this.contacts = resolveContacts(sipServletRequest);
+        cseq = Integer.parseInt(m == -1 ? seq : seq.substring(0, m));
+        contacts = resolveContacts(sipServletRequest);
 
         long l = sipServletRequest.getExpires();
         ListIterator<Address> addresses = sipServletRequest.getAddressHeaders("Contact");
@@ -52,25 +52,25 @@ public class Registration implements Serializable {
         }
         setExpire(1000L * l);
 
-        this.fullSipURI = ((SipURI) ((Address) this.contacts.get(0)).getURI());
+        fullSipURI = (SipURI) ((Address) contacts.get(0)).getURI();
         String authHeader = sipServletRequest.getHeader("Authorization".toUpperCase());
         if (authHeader != null) {
             SysLogger.info(getClass() + "\n" + "authorizationValue=" +  authHeader);
-            this.hasAuthorization = true;
+            hasAuthorization = true;
             if (( authHeader).indexOf("Capability") > -1) {
-                this.authorizationHeader = new CapabilityAuthorizationHeader( authHeader);
+                authorizationHeader = new CapabilityAuthorizationHeader( authHeader);
                 return;
             }
             if (authHeader.indexOf("Digest") > -1) {
-                this.authorizationHeader = new DigestAuthorizationHeader( authHeader);
-                ((DigestAuthorizationHeader) this.authorizationHeader).setPassword(LocationService.getInstance().getDevicePassword(this.deviceId));
+                authorizationHeader = new DigestAuthorizationHeader( authHeader);
+                ((DigestAuthorizationHeader) authorizationHeader).setPassword(LocationService.getInstance().getDevicePassword(deviceId));
                 return;
             }
             SysLogger.info(getClass() + "\n" + "improper header " +  authHeader);
             return;
         }
-        this.hasAuthorization = false;
-        this.authorizationHeader = null;
+        hasAuthorization = false;
+        authorizationHeader = null;
     }
 
     private static SipURI createSipURI(SipURI uri, SipFactory sipFactory) {
@@ -88,79 +88,79 @@ public class Registration implements Serializable {
     }
 
     public SipURI getUri() {
-        return this.sipURI;
+        return uri;
     }
 
     public String getCallID() {
-        return this.callId;
+        return callId;
     }
 
     public int getCseq() {
-        return this.cseq;
+        return cseq;
     }
 
     public List getContacts() {
-        return this.contacts;
+        return contacts;
     }
 
     public void setContacts(List paramList) {
-        this.contacts = paramList;
+        contacts = paramList;
     }
 
     public Address getFirstContacts() {
-        return (Address) this.contacts.get(0);
+        return (Address) contacts.get(0);
     }
 
     public SipURI getFullSipURI() {
-        return this.fullSipURI;
+        return fullSipURI;
     }
 
     public long getExpiration() {
-        return this.currentDate.getTime() + this.expire;
+        return currentDate.getTime() + expire;
     }
 
     public String getDeviceID() {
-        return this.deviceId;
+        return deviceId;
     }
 
     public void setDeviceID(String paramString) {
-        this.deviceId = paramString;
+        deviceId = paramString;
     }
 
     public boolean getHasAuthorization() {
-        return this.hasAuthorization;
+        return hasAuthorization;
     }
 
     public void setHasAuthorization(boolean hasAuthorization) {
-        this.hasAuthorization = hasAuthorization;
+        hasAuthorization = hasAuthorization;
     }
 
     public AuthorizationHeader getAuthorizationHeader() {
-        return this.authorizationHeader;
+        return authorizationHeader;
     }
 
     public void setHasAuthorization(AuthorizationHeader authorizationHeader) {
-        this.authorizationHeader = authorizationHeader;
+        authorizationHeader = authorizationHeader;
     }
 
     public long getExpire() {
-        return this.expire;
+        return expire;
     }
 
     public void setExpire(long paramLong) {
-        this.expire = paramLong;
+        expire = paramLong;
     }
 
     public Date getCurrentDate() {
-        return this.currentDate;
+        return currentDate;
     }
 
     public String getSeed() {
-        return this.seed;
+        return seed;
     }
 
     public void setSeed(String seed) {
-        this.seed = seed;
+        seed = seed;
     }
 
     public List resolveContacts(SipServletRequest sipServletRequest) {
@@ -168,10 +168,10 @@ public class Registration implements Serializable {
     }
 
     public int getSecurityLevel() {
-        return this.securityLevel;
+        return securityLevel;
     }
 
     public void setSecurityLevel(int paramInt) {
-        this.securityLevel = paramInt;
+        securityLevel = paramInt;
     }
 }

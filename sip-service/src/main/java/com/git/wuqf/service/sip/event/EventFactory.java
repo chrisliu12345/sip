@@ -2,7 +2,6 @@ package com.git.wuqf.service.sip.event;
 
 import com.git.wuqf.service.sip.call.util.HeaderUtil;
 import com.git.wuqf.service.sip.core.MessageContext;
-import cn.com.fri.axy.sip.event.type.*;
 import com.git.wuqf.service.sip.event.type.*;
 
 import javax.servlet.sip.SipServletRequest;
