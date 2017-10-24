@@ -8,8 +8,7 @@ import com.git.wuqf.pushlet.util.Rand;
 import java.util.Date;
 
 
-public class SIPEventPullSource
-        extends EventPullSource {
+public class SIPEventPullSource extends EventPullSource {
     protected long getSleepTime() {
         return Rand.randomLong(2000L, 4000L);
     }
@@ -24,9 +23,3 @@ public class SIPEventPullSource
         return event;
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/comet/com.git.wuqf.pushlet/eventsource/SIPEventPullSource.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

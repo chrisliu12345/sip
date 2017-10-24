@@ -9,6 +9,7 @@
         <module>sip-service</module>
         <module>sip-web</module>
         <module>sip-client</module>
+        <module>sip-operations</module>
     </modules>
     <name>sip Maven Webapp</name>
     <url>http://maven.apache.org</url>

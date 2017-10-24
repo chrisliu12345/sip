@@ -6,8 +6,7 @@ import com.git.wuqf.pushlet.util.Servlets;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Command
-        implements Protocol {
+public class Command implements Protocol {
     public final Event reqEvent;
     private Event rspEvent;
     public final HttpServletRequest httpReq;

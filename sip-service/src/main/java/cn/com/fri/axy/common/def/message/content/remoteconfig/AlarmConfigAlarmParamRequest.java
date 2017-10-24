@@ -248,9 +248,3 @@ public class AlarmConfigAlarmParamRequest
         this.f = paramLong;
     }
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/common/def/message/content/remoteconfig/AlarmConfigAlarmParamRequest.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

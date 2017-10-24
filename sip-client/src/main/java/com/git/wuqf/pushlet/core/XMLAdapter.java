@@ -1,25 +1,23 @@
 package com.git.wuqf.pushlet.core;
 
-import java.io.IOException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 import com.git.wuqf.pushlet.util.Log;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 class XMLAdapter
-        implements ClientAdapter
-{
+        implements ClientAdapter {
     private String contentType = "text/plain;charset=UTF-8";
     private ServletOutputStream out = null;
     private HttpServletResponse servletRsp;
     private boolean strictXML;
 
-    public XMLAdapter(HttpServletResponse aServletResponse)
-    {
+    public XMLAdapter(HttpServletResponse aServletResponse) {
         this(aServletResponse, false);
     }
 
-    public XMLAdapter(HttpServletResponse aServletResponse, boolean useStrictXML)
-    {
+    public XMLAdapter(HttpServletResponse aServletResponse, boolean useStrictXML) {
         this.servletRsp = aServletResponse;
 
         this.strictXML = useStrictXML;
@@ -29,8 +27,7 @@ class XMLAdapter
     }
 
     public void start()
-            throws IOException
-    {
+            throws IOException {
         this.servletRsp.setContentType(this.contentType);
 
         this.out = this.servletRsp.getOutputStream();
@@ -42,8 +39,7 @@ class XMLAdapter
     }
 
     public void push(Event anEvent)
-            throws IOException
-    {
+            throws IOException {
         debug("event=" + anEvent);
 
         this.out.print(anEvent.toXML(this.strictXML));
@@ -51,17 +47,14 @@ class XMLAdapter
     }
 
     public void stop()
-            throws IOException
-    {
-        if (this.strictXML)
-        {
+            throws IOException {
+        if (this.strictXML) {
             this.out.print("</com.git.wuqf.pushlet>");
             this.out.flush();
         }
     }
 
-    private void debug(String s)
-    {
+    private void debug(String s) {
         Log.debug("[XMLAdapter]" + s);
     }
 }

@@ -7,8 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 
-public class BrowserAdapter
-        implements ClientAdapter, Protocol {
+public class BrowserAdapter implements ClientAdapter, Protocol {
     public static final String START_DOCUMENT = "<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\"><meta http-equiv=\"Expires\" content=\"Tue, 31 Dec 1997 23:59:59 GMT\"></head><body>\n<script language=\"JavaScript\"> var url=\" \"; \nfunction refresh() { document.location.href=url; }</script>";
     public static final String END_DOCUMENT = "</body></html>";
     private PrintWriter servletOut;

@@ -72,9 +72,3 @@ public abstract interface Event {
 
     public abstract boolean isRedirectResponse();
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/event/Event.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */
