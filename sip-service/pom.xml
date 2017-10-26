@@ -80,7 +80,6 @@
             <version>4.0.128</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.git.wuqf</groupId>
             <artifactId>sip-client</artifactId>

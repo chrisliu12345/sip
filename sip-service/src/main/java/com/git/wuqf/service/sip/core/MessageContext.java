@@ -131,9 +131,3 @@ public abstract interface MessageContext {
 
     public abstract boolean isDialFunctionKey();
 }
-
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/core/MessageContext.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

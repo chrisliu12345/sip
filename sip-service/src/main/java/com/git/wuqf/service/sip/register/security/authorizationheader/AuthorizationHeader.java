@@ -6,7 +6,7 @@ public class AuthorizationHeader {
     }
 
 
-    public boolean validate(CapabilityAuthorizationHeader paramCapabilityAuthorizationHeader, String paramString) {
+    public boolean validate(CapabilityAuthorizationHeader capabilityAuthorizationHeader, String paramString) {
         return false;
     }
 
@@ -15,8 +15,3 @@ public class AuthorizationHeader {
     }
 }
 
-
-/* Location:home/wuqf/Desktop/sip.jar!/cn/com/fri/axy/sip/register/security/authorizationheader/AuthorizationHeader.class
- * Java compiler version: 5 (49.0)
- * JD-Core Version:       0.7.1
- */

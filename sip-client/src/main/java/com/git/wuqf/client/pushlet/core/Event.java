@@ -7,8 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class Event
-        implements Protocol, Serializable {
+public class Event implements Protocol, Serializable {
     protected Map attributes = new HashMap(3);
 
     public Event(String anEventType) {

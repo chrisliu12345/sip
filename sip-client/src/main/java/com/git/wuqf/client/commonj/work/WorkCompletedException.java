@@ -3,8 +3,7 @@ package com.git.wuqf.client.commonj.work;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkCompletedException
-        extends WorkException {
+public class WorkCompletedException  extends WorkException {
     List exceptionList;
 
     public WorkCompletedException() {

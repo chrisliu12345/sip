@@ -52,7 +52,7 @@ public class DigestAuthorizationHeader
     }
 
 
-    public boolean validate(CapabilityAuthorizationHeader paramCapabilityAuthorizationHeader, String paramString) {
+    public boolean validate(CapabilityAuthorizationHeader capabilityAuthorizationHeader, String paramString) {
         if (getPassword() == null) {
             setPassword("12345678");
         }
@@ -60,9 +60,9 @@ public class DigestAuthorizationHeader
         DigestUtils.getDigest(DigestUtils.getHA1(getUsername(), getRealm(), getPassword()),
                 getNonce(), null, null, null, "REGISTER", getUri());
 
-        SysLogger.info(getClass() + "\nresult=" + paramCapabilityAuthorizationHeader);
+        SysLogger.info(getClass() + "\nresult=" + capabilityAuthorizationHeader);
 
-        return paramCapabilityAuthorizationHeader.equals(getResponse());
+        return capabilityAuthorizationHeader.equals(getResponse());
     }
 
     public String getAlgorithm() {

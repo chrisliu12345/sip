@@ -1,12 +1,12 @@
 package com.git.wuqf.service.sip.register.entity;
 
+import com.git.wuqf.client.commonj.timers.Timer;
 import com.git.wuqf.service.common.util.SysLogger;
 import com.git.wuqf.service.sip.location.LocationService;
 import com.git.wuqf.service.sip.register.security.authorizationheader.AuthorizationHeader;
 import com.git.wuqf.service.sip.register.security.authorizationheader.CapabilityAuthorizationHeader;
 import com.git.wuqf.service.sip.register.security.authorizationheader.DigestAuthorizationHeader;
 import com.git.wuqf.service.sip.util.ServletContextHelper;
-import com.git.wuqf.client.commonj.timers.Timer;
 
 import javax.servlet.sip.*;
 import java.io.Serializable;
@@ -55,18 +55,18 @@ public class Registration implements Serializable {
         fullSipURI = (SipURI) ((Address) contacts.get(0)).getURI();
         String authHeader = sipServletRequest.getHeader("Authorization".toUpperCase());
         if (authHeader != null) {
-            SysLogger.info(getClass() + "\n" + "authorizationValue=" +  authHeader);
+            SysLogger.info(getClass() + "\n" + "authorizationValue=" + authHeader);
             hasAuthorization = true;
-            if (( authHeader).indexOf("Capability") > -1) {
-                authorizationHeader = new CapabilityAuthorizationHeader( authHeader);
+            if ((authHeader).indexOf("Capability") > -1) {
+                authorizationHeader = new CapabilityAuthorizationHeader(authHeader);
                 return;
             }
             if (authHeader.indexOf("Digest") > -1) {
-                authorizationHeader = new DigestAuthorizationHeader( authHeader);
+                authorizationHeader = new DigestAuthorizationHeader(authHeader);
                 ((DigestAuthorizationHeader) authorizationHeader).setPassword(LocationService.getInstance().getDevicePassword(deviceId));
                 return;
             }
-            SysLogger.info(getClass() + "\n" + "improper header " +  authHeader);
+            SysLogger.info(getClass() + "\n" + "improper header " + authHeader);
             return;
         }
         hasAuthorization = false;
@@ -78,7 +78,7 @@ public class Registration implements Serializable {
         sipURI.setPort(uri.getPort());
         Iterator<String> it = sipURI.getParameterNames();
         for (; it.hasNext(); ) {
-            sipURI.removeParameter( it.next());
+            sipURI.removeParameter(it.next());
         }
         return sipURI;
     }

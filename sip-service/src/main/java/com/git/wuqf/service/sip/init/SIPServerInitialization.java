@@ -10,11 +10,11 @@ import javax.servlet.ServletContext;
 
 
 public class SIPServerInitialization {
-    private static SIPServerInitialization a = new SIPServerInitialization();
+    private static SIPServerInitialization sipServerInitialization = new SIPServerInitialization();
 
 
     public static synchronized SIPServerInitialization getInstance() {
-        return a;
+        return sipServerInitialization;
     }
 
 

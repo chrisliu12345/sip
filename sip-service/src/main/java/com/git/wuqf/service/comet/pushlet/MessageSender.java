@@ -1,8 +1,8 @@
 package com.git.wuqf.service.comet.pushlet;
 
-import com.git.wuqf.service.common.util.SysLogger;
 import com.git.wuqf.client.pushlet.core.Dispatcher;
 import com.git.wuqf.client.pushlet.core.Event;
+import com.git.wuqf.service.common.util.SysLogger;
 
 public class MessageSender {
     public static final String start = "start";
@@ -17,17 +17,17 @@ public class MessageSender {
     public synchronized void send(String paramString) {
         try {
             StringBuffer sb = new StringBuffer();
-            char[] arrayOfChar;
-            int j = (arrayOfChar = paramString.toCharArray()).length;
+            char[] arrayOfChar = paramString.toCharArray();
+            int j = arrayOfChar.length;
+
             for (int i = 0; i < j; i++) {
-                //paramString = (byte) (paramString = arrayOfChar[i]);
-                sb.append(paramString);
+
+                sb.append(Byte.toString((Byte)arrayOfChar[i]));
                 sb.append("|");
             }
-
-
-            Event.createDataEvent("/comet/sip").setField("sip_message", toString());
-            Dispatcher.getInstance().multicast(null);
+            Event event = Event.createDataEvent("/comet/sip");
+            event.setField("sip_message", toString());
+            Dispatcher.getInstance().multicast(event);
             return;
         } catch (Exception localException) {
             SysLogger.info(localException);
@@ -35,14 +35,14 @@ public class MessageSender {
     }
 
 
-    public synchronized void sendPlayNotify(String paramString1, String paramString2, int paramInt) {
+    public synchronized void sendPlayNotify(String action, String ip, int port) {
         try {
-            SysLogger.info("comet:\n" + paramString1 + "," + paramString2 + "," + paramInt);
+            SysLogger.info("comet:\n" + action + "," + ip + "," + port);
 
             Event event = Event.createDataEvent("/comet/play_notify");
-            event.setField("play_notify_action", paramString1);
-            event.setField("play_notify_ip", paramString2);
-            event.setField("play_notify_port", paramInt);
+            event.setField("play_notify_action", action);
+            event.setField("play_notify_ip", ip);
+            event.setField("play_notify_port", port);
             Dispatcher.getInstance().multicast(event);
             return;
         } catch (Exception localException) {

@@ -2,9 +2,8 @@ package com.git.wuqf.service.sip.standarddebug;
 
 public class Check {
     public boolean check(String paramString1, String paramString2) {
-/*  7 */
+
         if ((paramString1.endsWith("123")) && (paramString2.endsWith("123"))) {
-/*  8 */
             return true;
         }
         return false;

@@ -43,7 +43,7 @@ public class RegistrationService {
 
 
     public Registration removeByDeviceID(String paramString) {
-        return  (Registration) this.b.remove(paramString);
+        return (Registration) this.b.remove(paramString);
     }
 
 

@@ -1,5 +1,6 @@
 package com.git.wuqf.service.sip.register.entity;
 
+
 import com.git.wuqf.service.comet.pushlet.MessageSender;
 import com.git.wuqf.service.common.Const;
 import com.git.wuqf.service.common.util.DateUtil;
@@ -8,309 +9,257 @@ import com.git.wuqf.service.sip.core.MessageContext;
 import com.git.wuqf.service.sip.entity.Handler;
 import com.git.wuqf.service.sip.location.LocationService;
 import com.git.wuqf.service.sip.register.security.authorizationheader.CapabilityAuthorizationHeader;
+import com.git.wuqf.service.sip.register.security.wwwauthorizationheader.DigestWWWAuthorizationHeader;
 
+import javax.servlet.sip.Address;
 import javax.servlet.sip.SipServletRequest;
 import javax.servlet.sip.SipServletResponse;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.TimeZone;
 
+public class RegisterHandler extends Handler {
+    private Long secturityValue;
+    private String seed;
+    private String deviceId;
+    private CapabilityAuthorizationHeader capabilityAuthorizationHeader;
 
-public class RegisterHandler
-        extends Handler {
-    private Long a;
-    private String b;
-    private String c;
-    private CapabilityAuthorizationHeader d;
-
-    public void doRegister(MessageContext paramMessageContext) {
+    public void doRegister(MessageContext messageContext) {
         try {
-            SipServletRequest r = paramMessageContext.getRequest();
-            SysLogger.info("appSession id is " + paramMessageContext.getApplicationSession().getId());
+            SipServletRequest sipServletRequest = messageContext.getRequest();
+            SysLogger.info("appSession id is " + messageContext.getApplicationSession().getId());
 
+            Registration registration = new Registration(sipServletRequest);
 
-            Registration reg = new Registration(r);
+            String authHeader = sipServletRequest.getHeader("Authorization".toUpperCase());
 
-
-            Object localObject3 = r.getHeader("Authorization".toUpperCase());
-            SysLogger.info("isInitialRegister authorizationValue:" + (String) localObject3 + "?");
-            if (((localObject3 != null) && (((String) localObject3).indexOf("Capability") <= -1) ? 0 : 1) != 0) {
+            SysLogger.info("isInitialRegister authorizationValue:" + (String) authHeader + "?");
+            if (((authHeader != null) && ((authHeader).indexOf("Capability") <= -1) ? 0 : 1) != 0) {
                 SysLogger.info(
-                        getClass() + ":\n" + "is Initial request: " + (r).getApplicationSession().getId());
-
-
-                if (!LocationService.getInstance().isUAExist(reg.getDeviceID())) {
-                    a(r, 403, null, null);
+                        getClass() + ":\n" + "is Initial request: " + ((SipServletRequest) sipServletRequest).getApplicationSession().getId());
+                if (!LocationService.getInstance().isUAExist(registration.getDeviceID())) {
+                    createResponse((SipServletRequest) sipServletRequest, 403, null, null);
                     return;
                 }
-
-
-                this.a = LocationService.getInstance()
-                        .getSecurityLevel(reg.getDeviceID());
+                this.secturityValue = LocationService.getInstance()
+                        .getSecurityLevel(registration.getDeviceID());
                 SysLogger.info(getClass() + ":\nSecurityLevel:" +
-                        this.a);
-
-                if (this.a == null) {
-                    this.a = Const.METHOD_OF_REGISTERWAY_SIP3261;
+                        this.secturityValue);
+                if (this.secturityValue == null) {
+                    this.secturityValue = Const.METHOD_OF_REGISTERWAY_SIP3261;
                 }
-                if (this.a.longValue() !=
+                if (this.secturityValue.longValue() !=
                         Const.METHOD_OF_REGISTERWAY_SIP3261.longValue()) {
-                    if (this.a.longValue() !=
+                    if (this.secturityValue.longValue() !=
                             Const.METHOD_OF_REGISTERWAY_DIGITALCERTIFICATE.longValue()) {
-                        if (this.a.longValue() !=
+                        if (this.secturityValue.longValue() !=
                                 Const.METHOD_OF_REGISTERWAY_PASSWORD.longValue()) {
-                            this.a = Const.METHOD_OF_REGISTERWAY_SIP3261;
+                            this.secturityValue = Const.METHOD_OF_REGISTERWAY_SIP3261;
                         }
                     }
                 }
-
-                if ((reg.getAuthorizationHeader() != null) &&
-                        ((reg.getAuthorizationHeader() instanceof CapabilityAuthorizationHeader))) {
-                    this.d = ((CapabilityAuthorizationHeader)
-                            reg.getAuthorizationHeader());
+                if ((registration.getAuthorizationHeader() != null) &&
+                        ((registration.getAuthorizationHeader() instanceof CapabilityAuthorizationHeader))) {
+                    this.capabilityAuthorizationHeader = ((CapabilityAuthorizationHeader)
+                            registration.getAuthorizationHeader());
                 }
-
-
-                if (this.d == null) {
-                    if (this.a.longValue() !=
+                if (this.capabilityAuthorizationHeader == null) {
+                    if (this.secturityValue.longValue() !=
                             Const.METHOD_OF_REGISTERWAY_SIP3261.longValue()) {
-
                         SysLogger.info(
                                 getClass() + ":\ncapability is null and SIP3261 method not config in db.");
-                        a(r, 403, null, null);
+                        createResponse((SipServletRequest) sipServletRequest, 403, null, null);
                         return;
                     }
-
-                    this.d = new CapabilityAuthorizationHeader();
+                    this.capabilityAuthorizationHeader = new CapabilityAuthorizationHeader();
                 }
+                this.seed = getSeed();
+                this.deviceId = registration.getDeviceID();
 
+                createResponse(sipServletRequest, 401, null, null);
 
-                this.b = getSeed();
-                this.c = reg.getDeviceID();
-
-                a(r, 401, null, null);
-
-                RegisterSecurityManager.getInstance().saveSecurityParam(this.c, this.a, this.b, this.d);
+                RegisterSecurityManager.getInstance().saveSecurityParam(this.deviceId, this.secturityValue, this.seed, this.capabilityAuthorizationHeader);
 
                 return;
             }
-
-
             SysLogger.info(
-                    getClass() + ":\n" + "is Second request: " + (r).getApplicationSession().getId());
+                    getClass() + ":\n" + "is Second request: " + ((SipServletRequest) sipServletRequest).getApplicationSession().getId());
 
-            Object localObject2 = RegisterSecurityManager.getInstance().getSecurityParam(reg.getDeviceID());
-            this.a = ((SecurityBean) localObject2).getSecurityLevel();
-            this.b = ((SecurityBean) localObject2).getSeed();
-            this.c = ((SecurityBean) localObject2).getDeviceID();
-            this.d = ((SecurityBean) localObject2).getCapability();
-
-
-            if ((reg.getAuthorizationHeader() == null) || (!reg.getAuthorizationHeader().validate(this.d, this.b))) {
-                a(r, 403, null, null);
+            SecurityBean securityBean = RegisterSecurityManager.getInstance().getSecurityParam(registration.getDeviceID());
+            this.secturityValue = ((SecurityBean) securityBean).getSecurityLevel();
+            this.seed = ((SecurityBean) securityBean).getSeed();
+            this.deviceId = ((SecurityBean) securityBean).getDeviceID();
+            this.capabilityAuthorizationHeader = ((SecurityBean) securityBean).getCapability();
+            if ((registration.getAuthorizationHeader() == null) || (!registration.getAuthorizationHeader().validate(this.capabilityAuthorizationHeader, this.seed))) {
+                createResponse((SipServletRequest) sipServletRequest, 403, null, null);
                 return;
             }
+            Registration rg = RegistrationService.getInstance().getByDeviceID(registration.getDeviceID());
+            if (rg != null) {
+                SysLogger.info(getClass() + "\noldR " + rg.getDeviceID() + " is not null.");
+                if (!rg.getCallID().equals(registration.getCallID())) {
+                    SysLogger.info(getClass() + "\noldR callid:\t" + rg.getCallID());
+                    SysLogger.info(getClass() + "\nnewR callid:\t" + registration.getCallID());
 
+                    RegistrationService.getInstance().deviceOffline(rg);
 
-            if ((localObject2 = RegistrationService.getInstance().getByDeviceID(reg.getDeviceID())) != null) {
-                SysLogger.info(getClass() + "\noldR " + ((Registration) localObject2).getDeviceID() + " is not null.");
-                if (!((Registration) localObject2).getCallID().equals(reg.getCallID())) {
-
-                    SysLogger.info(getClass() + "\noldR callid:\t" + ((Registration) localObject2).getCallID());
-                    SysLogger.info(getClass() + "\nnewR callid:\t" + reg.getCallID());
-
-
-                    RegistrationService.getInstance().deviceOffline((Registration) localObject2);
-
-                    localObject2 = null;
+                    securityBean = null;
                 } else {
                     SysLogger.info(getClass() + "\nregister in same callid");
                 }
             } else {
-                SysLogger.info(getClass() + "\noldR " + reg.getDeviceID() + " is null. online start.");
+                SysLogger.info(getClass() + "\noldR " + registration.getDeviceID() + " is null. online start.");
             }
+            if (registration.getContacts().size() == 0) {
+                SysLogger.info("REGISTER: no contacts. reply contact list");
+                createResponse((SipServletRequest) sipServletRequest, 200, registration, null);
+                return;
+            }
+            int i;
+            if (messageContext.a()) {
 
-//
-//            if (reg.getContacts().size() == 0) {
-//                SysLogger.info("REGISTER: no contacts. reply contact list");
-//                a(r, 200, paramMessageContext, null);
-//                return;
-//            }
-//
-//            int i;
-//            if (reg.a()) {
-//                localObject3 = reg;
-//                localObject2 = this;
-//                if ((((Registration) localObject3).getContacts().size() > 1) || (((Registration) localObject3).getExpiration() > System.currentTimeMillis())) {
-//                    SysLogger.info(localObject2.getClass() + ":\n" + "REGISTER: illegal request. wildcard is used with other contacts," + " or expires != 0 is specified. aor=[" + ((Registration) localObject3).getUri() + "]");
-//                    i = 400;
-//                    (paramMessageContext = localObject2).a(r, i, null).send();
-//                    getApplicationSession().invalidate();
-//                    return;
-//                }
-//                if (((RegistrationService.getInstance().removeByDeviceID(((Registration) localObject3).getDeviceID())) != null) && (paramMessageContext.getCseq() > ((Registration) localObject3).getCseq())) {
-//                    RegistrationService.getInstance().save(reg);
-//                    return;
-//                }
-//                i.a(this, (Registration) localObject3);
-//                getApplicationSession().invalidate();
-//                return;
-//            }
-//
-//
-//            if ((i != null) && (i.getCseq() >= paramMessageContext.getCseq())) {
-//                a(r, 200, paramMessageContext, null);
-//                return;
-//            }
-//
-//            if (paramMessageContext.getExpiration() <= System.currentTimeMillis()) {
-//                a(r, 200, paramMessageContext, null);
-//
-//
-//                if (i != null) {
-//                    SysLogger.info(
-//                            getClass() + ":\n" + paramMessageContext.getDeviceID() + " off line normally");
-//                    RegistrationService.getInstance().deviceOffline(i);
-//                }
-//
-//                return;
-//            }
-//
-//            paramMessageContext.setSeed(this.b);
-//
-//            paramMessageContext.setSecurityLevel(this.a.intValue());
-//
-//            if (i == null) {
-//
-//                SysLogger.info(
-//                        getClass() + ":\n" + paramMessageContext.getDeviceID() + " on line");
-//                RegistrationService.getInstance().deviceOnline(paramMessageContext);
-//            } else {
-//                SysLogger.info(
-//                        getClass() + ":\n" + paramMessageContext.getDeviceID() + " update");
-//                RegistrationService.getInstance().deviceUpdate(i, reg);
-//            }
+                if ((rg.getContacts().size() > 1) || rg.getExpiration() > System.currentTimeMillis()) {
+                    SysLogger.info(securityBean.getClass() + ":\n" + "REGISTER: illegal request. wildcard is used with other contacts," + " or expires != 0 is specified. aor=[" + ((Registration) authHeader).getUri() + "]");
+                    i = 400;
+                    sipServletRequest = this;
+                    (messageContext = securityBean).a((SipServletRequest) sipServletRequest, i, null).send();
+                    getApplicationSession().invalidate();
+                    return;
+                }
+                if (((messageContext = RegistrationService.getInstance().removeByDeviceID(((Registration) authHeader).getDeviceID())) != null) && (messageContext.getCseq() > ((Registration) authHeader).getCseq())) {
+                    RegistrationService.getInstance().save(messageContext);
+                    return;
+                }
+                i.a(this, (Registration) authHeader);
+                getApplicationSession().invalidate();
+                return;
+            }
+            if ((i != null) && (i.getCseq() >= messageContext.getCseq())) {
+                createResponse((SipServletRequest) sipServletRequest, 200, messageContext, null);
+                return;
+            }
+            if (messageContext.getExpiration() <= System.currentTimeMillis()) {
+                createResponse((SipServletRequest) sipServletRequest, 200, messageContext, null);
+                if (i != null) {
+                    SysLogger.info(
+                            getClass() + ":\n" + messageContext.getDeviceID() + " off line normally");
+                    RegistrationService.getInstance().deviceOffline(i);
+                }
+                return;
+            }
+            messageContext.setSeed(this.seed);
 
-            a(r, 200, reg, null);
+            messageContext.setSecurityLevel(this.secturityValue.intValue());
+            if (i == null) {
+                SysLogger.info(
+                        getClass() + ":\n" + messageContext.getDeviceID() + " on line");
+                RegistrationService.getInstance().deviceOnline(messageContext);
+            } else {
+                SysLogger.info(
+                        getClass() + ":\n" + messageContext.getDeviceID() + " update");
+                RegistrationService.getInstance().deviceUpdate(i, messageContext);
+            }
+            createResponse((SipServletRequest) sipServletRequest, 200, messageContext, null);
             return;
         } catch (Exception localException) {
             Object localObject1;
-            SysLogger.printStackTrace(localException);
+            SysLogger.printStackTrace( localException);
         }
     }
 
-
-    private void a(SipServletRequest paramSipServletRequest, int paramInt, Registration paramRegistration, String paramString) {
-        if (paramInt == 200) {
-
-            a(paramSipServletRequest, paramRegistration);
+    private void createResponse(SipServletRequest sipServletRequest, int status, Registration registration, String paramString) throws IOException {
+        if (status == 200) {
+           createResponse(sipServletRequest, registration);
             SysLogger.info(
                     getClass() + ":SIPApplicationSession invalidate.");
-            paramSipServletRequest.getApplicationSession().invalidate();
+            sipServletRequest.getApplicationSession().invalidate();
             return;
         }
-//        if (paramInt == 401) {
-//            try {
-//                int i = 401;
-//                paramRegistration = (paramRegistration ).a(paramString, i, null);
-//                paramString = "WWW-Authenticate";
-//                String str;
-//                if (paramInt.a.longValue() == Const.METHOD_OF_REGISTERWAY_SIP3261.longValue()) {
-//                    str = new DigestWWWAuthorizationHeader(paramInt.d, paramInt.b, paramInt.c).toString();
-//                } else {
-//                    SysLogger.info(paramInt.getClass() + ":\n" + "imporper level " + paramInt.a);
-//                    str = "";
-//                }
-//                paramRegistration.addHeader(paramString, str);
-//                SysLogger.info(paramInt.getClass() + ":\n" + "401 response:\n" + paramRegistration.toString());
-//                (paramInt = paramRegistration).send();
-//
-//
-//                MessageSender.getInstance().send(paramInt.toString());
-//                return;
-//            } catch (Exception localException) {
-//                a(paramSipServletRequest, 500, null,
-//                        "interal error when genarate 401.");
-//                return;
-//            }
-//        }
-//        if ((paramInt == 400) || (paramInt > 401)) {
-//
-//            try {
-//                (paramInt = a(paramSipServletRequest, paramInt, paramString)).send();
-//
-//
-//                MessageSender.getInstance().send(paramInt.toString());
-//            } catch (IOException localIOException2) {
-//                SysLogger.printStackTrace(paramInt = localIOException2);
-//            }
-//
-//            SysLogger.info(
-//                    getClass() + ":SIPApplicationSession invalidate.");
-//            paramSipServletRequest.getApplicationSession().invalidate();
-//            return;
-//        }
+        if (status == 401) {
+            try {
 
+                int i = 401;
+                SipServletResponse response=sipServletRequest.createResponse(i);
+                String ah = "WWW-Authenticate";
+                String str;
+                if (status == Const.METHOD_OF_REGISTERWAY_SIP3261.longValue()) {
+                    str = new DigestWWWAuthorizationHeader(status.d, status.b, status.c).toString();
+                } else {
+                    SysLogger.info(status.getClass() + ":\n" + "imporper level " + status.a);
+                    str = "";
+                }
+                sipServletRequest.addHeader(paramString, str);
 
-        SysLogger.info(getClass() + ":\ndonothing for code " + paramInt);
+                MessageSender.getInstance().send(status.toString());
+                return;
+            } catch (Exception localException) {
+                createResponse(sipServletRequest, 500, null,
+                        "interal error when genarate 401.");
+                return;
+            }
+        }
+        if ((status == 400) || (status > 401)) {
+            try {
+                (status = createResponse(sipServletRequest, status, paramString)).send();
+
+                MessageSender.getInstance().send(status.toString());
+            } catch (IOException localIOException2) {
+                SysLogger.printStackTrace(status = localIOException2);
+            }
+            SysLogger.info(
+                    getClass() + ":SIPApplicationSession invalidate.");
+            sipServletRequest.getApplicationSession().invalidate();
+            return;
+        }
+        SysLogger.info(getClass() + ":\ndonothing for code " + status);
     }
 
-
-    private void a(SipServletRequest paramSipServletRequest, Registration paramRegistration) {
+    private void createResponse(SipServletRequest sipServletRequest, Registration registration) throws IOException {
         int i = 200;
-        a(paramSipServletRequest, i, null);
 
+        SipServletResponse response = createResponse(sipServletRequest, i, null);
+        Iterator it = registration.getContacts().iterator();
+        for (; it.hasNext(); ) {
+            Address address = (Address) it.next();
 
-//        for (( paramRegistration.getContacts()).iterator(); localIterator.hasNext(); ) {
-//            Address a = (Address) localIterator.next();
-//
-//            paramSipServletRequest.addAddressHeader("Contact", (Address) localObject, false);
-//        }
+            sipServletRequest.addAddressHeader("Contact", address, false);
+        }
+        sipServletRequest.setExpires((int) (registration.getExpire() / 1000L));
 
+        sipServletRequest.setHeader("Date", new DateUtil().XML_DateToString(new Date()));
 
-        paramSipServletRequest.setExpires((int) (paramRegistration.getExpire() / 1000L));
-
-
-        paramSipServletRequest.setHeader("Date", new DateUtil().XML_DateToString(new Date()));
-
-        paramSipServletRequest
+        sipServletRequest
                 .setHeader("TimeRevise",
                         new DateUtil().TGS_DateToString(new Date()));
-//        paramSipServletRequest.send();
+        sipServletRequest.send();
 
         SysLogger.info(getClass() + ":\n" + "send message:\n" +
-                paramSipServletRequest.toString());
+                sipServletRequest.toString());
 
-
-        MessageSender.getInstance().send(paramSipServletRequest.toString());
+        MessageSender.getInstance().send(sipServletRequest.toString());
     }
 
-
-    private SipServletResponse a(SipServletRequest paramSipServletRequest, int paramInt, String paramString) {
-        SysLogger.info(getClass() + ":\n" + "send response " + paramInt + " reason " + paramString);
-
-        if (paramString != null) {
-            paramSipServletRequest.createResponse(paramInt, paramString);
+    private SipServletResponse createResponse(SipServletRequest sipServletRequest, int status, String reason) {
+        SysLogger.info(
+                getClass() + ":\n" + "send response " + status + " reason " + reason);
+        SipServletResponse response = null;
+        if (reason != null) {
+            response = sipServletRequest.createResponse(status, reason);
         } else {
-            paramSipServletRequest.createResponse(paramInt);
+            response = sipServletRequest.createResponse(status);
         }
-
-//        if ((paramSipServletRequest.getHeader("Event")) != null) {
-//            setHeader("Event", paramSipServletRequest);
-//        }
-//        return this;
-        return null;
+        return response;
     }
-
 
     public String getSeed() {
         int j = 0;
 
-
         char[] arrayOfChar =
-                {'a', 'b', 'c', 'd', 'e', 'f', '0', '1', '2', '3', '4', '5', '6', '7',
+                {'createResponse', 'b', 'c', 'd', 'e', 'f', '0', '1', '2', '3', '4', '5', '6', '7',
                         '8', '9'};
 
         StringBuffer localStringBuffer = new StringBuffer("");
@@ -320,25 +269,22 @@ public class RegisterHandler
             localStringBuffer.append(arrayOfChar[i]);
             j++;
         }
-
         SysLogger.info(getClass() + "\n" + "seed:" + localStringBuffer.toString());
 
         return localStringBuffer.toString();
     }
 
-
     public static void main(String[] paramArrayOfString) {
-        SimpleDateFormat s = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z");
-        s.setTimeZone(TimeZone.getTimeZone("GMT"));
-        String str = s.format(new Date());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        String str = dateFormat.format(new Date());
         System.out.println(str);
-
         try {
-            Date date = s.parse(str);
-            System.out.println(date);
+            Date time = dateFormat.parse(str);
+            System.out.println(time);
             return;
         } catch (ParseException localParseException) {
-            (localParseException).printStackTrace();
+            localParseException.printStackTrace();
         }
     }
 }
